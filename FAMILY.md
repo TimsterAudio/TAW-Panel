@@ -60,4 +60,5 @@ The short name is on the panel; the full name is everywhere technical, so "Libra
 
 Ideas suggested along the way, kept here for review later. Nothing here is scheduled.
 
+- **TAW finishes (proposed 2026-10-13)**: a modern hi-fi look for the TAW apps (Anodised, Bronze, Cassette, Walnut, Porcelain, Studio, Spool; each light and dark), Simple/Detailed views, Separates/Now Playing/Mini layouts. The Jupiter look would stay with the Box family (Drone Box, Drum Box, and a Box EQ and Analyser). See `docs/finishes-review.html`.
 - **Panel skins**: 18 candidates reviewed 2026-10-13; see TAW-Panel's ROADMAP.md and `docs/skins-review.html`.
