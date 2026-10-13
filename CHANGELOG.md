@@ -4,6 +4,8 @@
 
 ## 0.2.0 – 2026-10-13
 
+Commit `41a95d4513d93dfbf18803508065a8c0a168ec95`.
+
 - `spectrum`: drawing a spectrum in a colour scheme (`Scheme`) and style (`Look`, `Style`), from the Equaliser.
 - `analyzer` (feature `analyser`): the 8192-point FFT with rise, fall and peak-hold ballistics, and `analyzer_channel` (the real-time-safe feed from an audio thread), from the Equaliser.
 - Nothing existing changed: 0.1.0 callers build unchanged.
