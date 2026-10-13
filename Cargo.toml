@@ -1,6 +1,6 @@
 [package]
 name = "taw-panel"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 description = "The Timster's Audio Works panel look, shared by its native apps"
 authors = ["Timster's Audio Works"]
@@ -9,6 +9,13 @@ publish = false
 [dependencies]
 egui = "0.36"
 serde = { version = "1", features = ["derive"] }
+rustfft = { version = "6.4", optional = true }
+rtrb = { version = "0.4", optional = true }
+
+[features]
+default = []
+# The FFT and ballistics behind spectrum displays (Equaliser, Analyser).
+analyser = ["dep:rustfft", "dep:rtrb"]
 
 [dev-dependencies]
 eframe = { version = "0.36", default-features = false, features = ["glow", "default_fonts", "wayland", "x11"] }

@@ -12,6 +12,8 @@ It draws Drone Box's panel language with egui's painter: Black and Silver panels
 | `widgets` | `key`, `lit_key`, `knob`, `fader`, `lcd`, `lcd_combo`, `readout`, `meter`, `ladder`, `section`, `frame_tab`, `stripe`, `led`, text helpers |
 | `lists` | `well`, `rows` (a scrolling list that only draws what's on screen), `row_bg`, `header`, `chip`, `light`, `fit`, `thousands`, `ago` |
 | `frame` | `draw_panel_bg` and `fit_to_window` |
+| `spectrum` | `draw` a spectrum in a `Scheme` (red, amber, green, ice, white, rainbow, heat) and `Look` (fill, line or both) |
+| `analyzer` | `Analyzer` and `Ballistics`: the FFT behind a spectrum display. Turn on with `features = ["analyser"]` |
 
 ## Using it
 
