@@ -17,7 +17,8 @@ It draws Drone Box's panel language with egui's painter: Black and Silver panels
 
 ```toml
 [dependencies]
-taw-panel = { git = "https://github.com/TimsterAudio/TAW-Panel", tag = "v0.1.0" }
+# 0.1.0
+taw-panel = { git = "https://github.com/TimsterAudio/TAW-Panel", rev = "29de12e21142d9f87ae85b708ed89ea18421621c" }
 ```
 
 ```rust
@@ -25,7 +26,7 @@ taw_panel::theme::install_fonts(&cc.egui_ctx);   // once, at start-up
 let th = taw_panel::theme::Theme::panel(PanelKind::Black);
 ```
 
-Apps pin a tag, so a new version of the panel only reaches an app when that app moves to it.
+Apps pin an exact commit (`rev`, with the version in a comment), so a new version of the panel only reaches an app when that app moves to it. CHANGELOG.md lists each version's commit.
 
 ## Seeing every piece
 
