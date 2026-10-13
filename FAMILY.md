@@ -26,7 +26,8 @@ Library ──(album or playlist)──► Player ──► system output ──
                                                                   └──► Analyser listens
 ```
 
-- **Library → Player:** today the Library's Play key writes an `.m3u8` playlist and opens it in the default player. When the Player exists, Play hands it the playlist directly (`taw-player --play <file>`), and the Player can read the Library's database (read-only) to browse the collection.
+- **Library → Player:** the Library's Play key writes an `.m3u8` playlist and runs `taw-player --play <file>` when it finds the Player (next to the Library, in a folder beside it named `taw-player…`, or on the PATH); otherwise it opens the playlist in the default player. A Player that's already open takes the playlist and the second launch exits (files in the Player's data folder, not a socket). Later, the Player may read the Library's database (read-only) to browse the collection.
+- **Player → the others:** the Player's Family keys start the Library, Equaliser and Analyser when they're found (the same places, plus `Program Files\Timster's Audio Works\<App>` on Windows); the LED over each key shows whether it was. Every app works on its own: none needs another installed.
 - **Equaliser:** works at the system level, so it sits after any player with no coupling.
 - **Analyser:** listens to an output or an input; needs nothing from the others.
 
@@ -46,12 +47,13 @@ The short name is on the panel; the full name is everywhere technical, so "Libra
 - Native Rust and egui; no web views. No network requests unless the user switches a feature on (only the Library's Lookups, so far).
 - Saved settings use `#[serde(default)]`: add fields with defaults, never rename one.
 - Each repo: feature branches, `main` always works, CHANGELOG.md with an Unreleased section, and a release workflow that publishes Windows and Linux downloads when `main` carries a new version.
+- The command line is part of an app's contract once another app uses it: `taw-player [--play] [FILE | FOLDER | PLAYLIST ...]`.
 - Checks before pushing: `cargo fmt --check`, `cargo clippy -- -D warnings`, `cargo test`, and a Windows cross-compile (`--target x86_64-pc-windows-gnu`).
 - Work across apps happens in the family session; deep work on one app in a session for that app. Only one session works in a repo at a time.
 
 ## Order of work
 
-1. Get each app to a usable state: the Equaliser tested on Windows (the EQ Box to TAW Equaliser switch), then the Player running.
+1. Get each app to a usable state: the Equaliser tested on Windows (the EQ Box to TAW Equaliser switch), then the Player running (first build 2026-10-13, on its branch for review).
 2. Then the look: skins (parked in TAW-Panel's ROADMAP.md).
 
 ## Parked ideas
