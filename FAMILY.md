@@ -48,3 +48,14 @@ The short name is on the panel; the full name is everywhere technical, so "Libra
 - Each repo: feature branches, `main` always works, CHANGELOG.md with an Unreleased section, and a release workflow that publishes Windows and Linux downloads when `main` carries a new version.
 - Checks before pushing: `cargo fmt --check`, `cargo clippy -- -D warnings`, `cargo test`, and a Windows cross-compile (`--target x86_64-pc-windows-gnu`).
 - Work across apps happens in the family session; deep work on one app in a session for that app. Only one session works in a repo at a time.
+
+## Order of work
+
+1. Get each app to a usable state: the Equaliser tested on Windows (the EQ Box to TAW Equaliser switch), then the Player running.
+2. Then the look: skins (parked in TAW-Panel's ROADMAP.md).
+
+## Parked ideas
+
+Ideas suggested along the way, kept here for review later. Nothing here is scheduled.
+
+- **Panel skins**: 18 candidates reviewed 2026-10-13; see TAW-Panel's ROADMAP.md and `docs/skins-review.html`.

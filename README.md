@@ -2,7 +2,7 @@
 
 The panel look shared by Timster's Audio Works' native apps: the **Library**, **Player**, **Equaliser** and **Analyser**. One crate, so a change to the look is made once.
 
-[FAMILY.md](FAMILY.md) describes the whole family: the apps, their names and model codes, and how they fit together.
+[FAMILY.md](FAMILY.md) describes the whole family: the apps, their names and model codes, how they fit together, and ideas parked for later. [ROADMAP.md](ROADMAP.md) is the panel's own plan, including the parked skins.
 
 ![The gallery example on the Black panel](docs/gallery.png)
 

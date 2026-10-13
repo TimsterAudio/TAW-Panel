@@ -1,0 +1,362 @@
+<title>TAW Panel Skins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Michroma&family=Share+Tech+Mono&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: a review sheet. One column of full-width "units", each the same
+   Equaliser strip rendered in a different skin, with notes beside it. The
+   page chrome follows the viewer's theme; the units keep their own paint. */
+:root {
+  --bg: #ece9e3;
+  --ink: #1d1c1a;
+  --ink-dim: #5f5b54;
+  --rule: rgba(29, 28, 26, .16);
+  --card: #f7f5f1;
+  --accent: #c2471f;
+  --f-legend: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif;
+  --f-logo: 'Michroma', 'Eurostile', 'Arial Black', sans-serif;
+  --f-mono: 'Share Tech Mono', ui-monospace, Consolas, monospace;
+  --f-maker: 'Space Grotesk', 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212; --ink: #ece8dd; --ink-dim: #9a958b; --rule: rgba(236, 232, 221, .14); --card: #1b1b1a; --accent: #ec7b24;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --ink: #ece8dd; --ink-dim: #9a958b; --rule: rgba(236, 232, 221, .14); --card: #1b1b1a; --accent: #ec7b24;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-legend); font-weight: 500; margin: 0; padding-inline: 16px; padding-block: 28px 48px; }
+.wrap { max-width: 1240px; margin-inline: auto; }
+header.top { display: grid; gap: 10px; margin-bottom: 26px; }
+.kicker { font-family: var(--f-maker); font-size: 13px; color: var(--ink-dim); }
+h1 { font-family: var(--f-logo); font-weight: 400; font-size: clamp(22px, 3.4vw, 34px); letter-spacing: .04em; margin: 0; text-wrap: balance; }
+.lede { font-size: 17px; line-height: 1.5; max-width: 72ch; color: var(--ink); margin: 0; }
+.lede b { font-weight: 700; }
+.rules { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--ink-dim); margin-top: 4px; }
+.rules span::before { content: "■ "; color: var(--accent); }
+
+.groups { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 18px; }
+.groups button { font: inherit; font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); background: var(--card); border: 1px solid var(--rule); border-radius: 3px; padding: 6px 12px; cursor: pointer; }
+.groups button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.groups button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.unit { display: grid; grid-template-columns: minmax(0, 1fr) 270px; gap: 18px; padding-block: 22px; border-top: 1px solid var(--rule); }
+.unit[hidden] { display: none; }
+@media (max-width: 900px) { .unit { grid-template-columns: minmax(0, 1fr); } }
+.notes h2 { font-family: var(--f-legend); font-weight: 700; font-size: 20px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 2px; }
+.notes .insp { font-family: var(--f-maker); font-size: 13px; color: var(--ink-dim); margin-bottom: 10px; }
+.notes p { font-size: 15px; line-height: 1.45; margin: 0 0 10px; }
+.notes .fit { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--ink-dim); }
+.notes .fit b { color: var(--ink); }
+.swatches { display: flex; gap: 6px; margin: 8px 0 12px; }
+.swatches i { width: 22px; height: 22px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); }
+.tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 2px 7px; border-radius: 2px; border: 1px solid currentColor; color: var(--accent); margin-bottom: 8px; }
+
+/* ---------- the unit itself (each skin sets the variables) ---------- */
+.stage { overflow-x: auto; border-radius: 6px; }
+.panel {
+  --legend: #ece8dd; --dim: #8e8a81; --frame: rgba(236,232,221,.3);
+  position: relative; min-width: 860px; padding: 16px 22px 18px; border-radius: 5px;
+  background: var(--face, #171717); color: var(--legend);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.7), 0 14px 30px rgba(0,0,0,.28);
+  display: grid; grid-template-columns: 230px 250px 1fr; grid-template-rows: auto auto; gap: 14px 22px; align-items: center;
+}
+.panel.cheeks { margin-inline: 26px; }
+.panel.cheeks::before, .panel.cheeks::after { content: ""; position: absolute; top: 0; bottom: 0; width: 26px; border-radius: 5px; background: var(--wood); box-shadow: inset 0 0 0 1px rgba(0,0,0,.5), inset 0 0 18px rgba(0,0,0,.35); }
+.panel.cheeks::before { left: -26px; } .panel.cheeks::after { right: -26px; }
+.screw { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #d9d9d4, #7a7a74 60%, #3c3c38); box-shadow: 0 1px 1px rgba(0,0,0,.6); }
+.screw::after { content: ""; position: absolute; left: 1px; right: 1px; top: 4px; height: 2px; background: rgba(0,0,0,.55); transform: rotate(35deg); }
+.brand .badge { display: inline-block; font-family: var(--f-maker); font-size: 11.5px; color: var(--dim); border: 1px solid var(--frame); border-radius: 3px; padding: 2px 8px; white-space: nowrap; }
+.brand .badge b { color: var(--legend); font-weight: 700; }
+.brand .logo { font-family: var(--logo-font, var(--f-logo)); font-size: 25px; letter-spacing: .04em; transform: skewX(var(--slant, -12deg)); transform-origin: left; margin: 7px 0 2px; white-space: nowrap; color: var(--logo-ink, var(--legend)); text-shadow: var(--logo-glow, none); }
+.brand .model { font-size: 9.5px; letter-spacing: .2em; color: var(--dim); text-transform: uppercase; white-space: nowrap; }
+
+/* displays */
+.disp { height: 54px; border-radius: 3px; padding: 9px 12px; font-family: var(--f-mono); font-size: 14px; line-height: 1.4; letter-spacing: .05em; text-transform: uppercase; display: grid; align-content: center; box-shadow: inset 0 0 0 1px #000, inset 0 2px 8px rgba(0,0,0,.7); }
+.disp .l { display: flex; justify-content: space-between; gap: 10px; white-space: nowrap; }
+.d-led { background: #110504; color: #ff5b36; text-shadow: 0 0 6px rgba(255,70,30,.55); }
+.d-vfd { background: #041312; color: #7ff6e4; text-shadow: 0 0 6px rgba(80,240,220,.75); }
+.d-vfdblue { background: #04070f; color: #8fc6ff; text-shadow: 0 0 7px rgba(90,160,255,.8); }
+.d-lcd { background: linear-gradient(#b9c77d, #a8b86c); color: #23291a; text-shadow: 1px 1px 0 rgba(0,0,0,.12); box-shadow: inset 0 0 0 1px #2c2a20, inset 0 2px 6px rgba(0,0,0,.35); }
+.d-amber { background: #120a02; color: #ffb347; text-shadow: 0 0 6px rgba(255,170,60,.6); }
+
+/* keys */
+.keys { display: flex; gap: 12px; align-items: flex-end; flex-wrap: nowrap; }
+.kw { display: grid; justify-items: center; gap: 5px; }
+.kw .lab { font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; color: var(--legend); }
+.led { width: 6px; height: 6px; border-radius: 50%; background: var(--led-off, #3a1611); }
+.led.on { background: var(--led-on, #ff3a24); box-shadow: 0 0 6px 1px var(--led-glow, rgba(255,58,36,.8)); }
+.key { width: 46px; height: 22px; border-radius: 2px; background: linear-gradient(var(--hi), var(--fc) 30%, var(--fc) 70%, var(--lo)); box-shadow: 0 2px 0 var(--sh), 0 3px 4px rgba(0,0,0,.4); }
+.key.sq { width: 26px; height: 26px; }
+.key.membrane { width: 40px; height: 18px; border-radius: 1px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.35); background: var(--fc); }
+.key.toggle { width: 14px; height: 30px; border-radius: 7px; background: linear-gradient(90deg, #6d6d68, #f2f2ee 45%, #8a8a84 60%, #4b4b47); box-shadow: 0 0 0 4px #1c1c1a, 0 0 0 5px rgba(255,255,255,.15); }
+.k-red { --fc:#d8432a; --hi:#ea6a50; --lo:#b5361f; --sh:#5e1a0f; } .k-orange { --fc:#ec7b24; --hi:#f8984d; --lo:#c9631a; --sh:#6b340b; }
+.k-yellow { --fc:#efc23b; --hi:#fad968; --lo:#cda129; --sh:#6d530f; } .k-cream { --fc:#e4dcc4; --hi:#f5f0e0; --lo:#c6bea3; --sh:#5f5a48; }
+.k-grey { --fc:#48463f; --hi:#63605a; --lo:#34322d; --sh:#0e0e0d; } .k-white { --fc:#e9eaec; --hi:#ffffff; --lo:#c3c6cb; --sh:#55585e; }
+.k-blue { --fc:#5f97cf; --hi:#86b3e0; --lo:#4878ad; --sh:#1d3552; } .k-black { --fc:#1f2023; --hi:#3a3c40; --lo:#131416; --sh:#000; }
+.k-sage { --fc:#6f9a85; } .k-burg { --fc:#7d3a46; } .k-beige { --fc:#d9cdb2; } .k-red2 { --fc:#b8352a; --hi:#d14f43; --lo:#912a21; --sh:#3d100c; }
+.k-alu { --fc:#bfc2c4; --hi:#e8eaeb; --lo:#9a9da0; --sh:#4a4c4e; }
+
+/* knobs */
+.knobs { display: flex; gap: 18px; align-items: center; }
+.kn { display: grid; justify-items: center; gap: 5px; }
+.knob { position: relative; width: 44px; height: 44px; border-radius: 50%; }
+.knob::after { content: ""; position: absolute; left: 50%; top: 4px; width: 3px; height: 13px; margin-left: -1.5px; border-radius: 2px; background: var(--ptr, #fff); transform-origin: 50% 18px; transform: rotate(var(--a, -40deg)); }
+.kb-knurl { background: radial-gradient(circle at 50% 45%, var(--cap, #2b2b2b) 0 52%, transparent 53%), repeating-conic-gradient(#0b0b0b 0 6deg, #2a2a2a 6deg 12deg); box-shadow: 0 2px 4px rgba(0,0,0,.6), 0 0 0 1px #000; }
+.kb-skirt { background: radial-gradient(circle at 45% 40%, #3a3b3e, #111 62%), #111; box-shadow: 0 0 0 5px #c9cdd3, 0 0 0 6px #2b2d31, 0 3px 6px rgba(0,0,0,.6); width: 34px; height: 34px; margin: 5px; }
+.kb-alucap { background: radial-gradient(circle at 50% 50%, #d9dadc 0 36%, #9fa2a6 37% 40%, #121212 41%), #121212; box-shadow: 0 0 0 1px #000, 0 3px 6px rgba(0,0,0,.55); }
+.kb-bakelite { width: 50px; height: 50px; background: radial-gradient(circle at 40% 35%, #4a4643, #141210 60%); box-shadow: 0 0 0 4px #1b1916, 0 4px 8px rgba(0,0,0,.6); }
+.kb-chrome { background: radial-gradient(circle at 35% 30%, #ffffff, #b9bcc0 30%, #6e7276 62%, #2c2e31); box-shadow: 0 0 0 1px #000, 0 3px 6px rgba(0,0,0,.6); }
+.kb-alu { background: repeating-radial-gradient(circle at 50% 50%, #cfd2d4 0 1px, #b7babd 1px 2px); box-shadow: 0 0 0 1px #6d7073, 0 2px 4px rgba(0,0,0,.45); }
+.kb-marconi { width: 34px; height: 34px; margin: 5px; background: radial-gradient(circle at 40% 35%, #e05a45, #a8291b 65%); box-shadow: 0 0 0 4px #2a2c30, 0 3px 5px rgba(0,0,0,.5); }
+.kb-gold { background: repeating-radial-gradient(circle at 50% 50%, #e6d6a8 0 1px, #c9b680 1px 2px); box-shadow: 0 0 0 1px #6e6141, 0 2px 4px rgba(0,0,0,.45); }
+.kn .lab { font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--legend); }
+.ro { font-family: var(--f-mono); font-size: 11px; padding: 1px 6px; border-radius: 2px; background: var(--ro-bg, #110504); color: var(--ro-ink, #ff5b36); text-shadow: 0 0 5px var(--ro-glow, rgba(255,70,30,.5)); box-shadow: inset 0 0 0 1px #000; }
+
+/* meters */
+.meter { grid-column: 3; display: flex; gap: 22px; align-items: center; justify-content: flex-end; }
+.ladder { display: flex; gap: 2px; padding: 3px; background: #0b0b0b; border-radius: 2px; box-shadow: inset 0 0 0 1px #000; }
+.ladder i { width: 5px; height: 12px; border-radius: 1px; background: var(--seg-off, #16301f); }
+.ladder i.on { background: var(--seg, #2fd27a); box-shadow: 0 0 4px var(--seg-glow, rgba(47,210,122,.6)); }
+.ladder i.hot.on { background: var(--seg-hot, #efc23b); } .ladder i.peak.on { background: var(--seg-peak, #ff3a24); }
+.vu { width: 150px; height: 82px; }
+.stripe { grid-column: 1 / -1; height: 5px; margin-inline: -22px; display: grid; grid-template-columns: repeat(4, 1fr); }
+.blueline { grid-column: 1 / -1; height: 7px; margin-inline: -22px; border-top: 2px solid var(--acc1); border-bottom: 2px solid var(--acc2); }
+.hairline { grid-column: 1 / -1; height: 1px; margin-inline: -22px; background: var(--acc1); }
+.lamp { width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #ffe7a8, #ff9d1c 45%, #8a4100); box-shadow: 0 0 10px 3px rgba(255,157,28,.55), 0 0 0 3px #2a2722, 0 0 0 4px #8d897f; }
+.tex-hammer { background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1.6px), radial-gradient(rgba(0,0,0,.12) 1.2px, transparent 2px); background-size: 7px 7px, 11px 11px; }
+.tex-brushed { background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 1px, rgba(0,0,0,.035) 1px 3px); }
+.tex-glass { background-image: linear-gradient(170deg, rgba(255,255,255,.09) 0 28%, transparent 28.5%); }
+
+/* added parts */
+.d-oled { background: #050505; color: #f4f4f2; text-shadow: 0 0 4px rgba(255,255,255,.45); }
+.d-vfdgreen { background: #030f0a; color: #8dffc4; text-shadow: 0 0 6px rgba(110,255,180,.7); }
+.d-glass { background: #0b0b0c; color: #d9d6cf; text-shadow: none; }
+.key.rocker { width: 18px; height: 30px; border-radius: 3px; background: linear-gradient(var(--hi) 0 8%, var(--fc) 8% 50%, var(--lo) 50% 100%); box-shadow: 0 0 0 3px #0e0e0e, 0 2px 3px rgba(0,0,0,.5); }
+.key.lit { width: 22px; height: 22px; border-radius: 2px; background: var(--fc); box-shadow: inset 0 0 0 2px rgba(0,0,0,.25), 0 1px 2px rgba(0,0,0,.5); }
+.key.transport { width: 40px; height: 20px; border-radius: 2px; }
+.key.small { width: 30px; height: 16px; }
+.k-moogorange { --fc:#e8772e; --hi:#f5a067; --lo:#b85a1f; --sh:#5a2a0c; } .k-moogblue { --fc:#2f6fb5; --hi:#5b93d0; --lo:#22528a; --sh:#0f2540; }
+.k-litw { --fc:#f1efe8; } .k-litg { --fc:#5ee08a; box-shadow: 0 0 8px rgba(94,224,138,.7), inset 0 0 0 2px rgba(0,0,0,.2); } .k-litr { --fc:#ff5a4a; box-shadow: 0 0 8px rgba(255,90,74,.7), inset 0 0 0 2px rgba(0,0,0,.2); }
+.k-green { --fc:#3c9a5a; --hi:#5bb978; --lo:#2c7543; --sh:#123a1f; } .k-otgrey { --fc:#8f8c84; --hi:#aaa79f; --lo:#76736b; --sh:#3a3833; }
+.k-brown { --fc:#4a3426; --hi:#6a4b37; --lo:#36251b; --sh:#150e09; } .k-champ { --fc:#cdbf9f; --hi:#e6dcc2; --lo:#a99b7b; --sh:#4c4433; }
+.kb-moog { background: radial-gradient(circle at 50% 50%, #1a1a1a 0 44%, #b9bcbf 45% 47%, #1a1a1a 48%), repeating-conic-gradient(#d6d8da 0 2deg, transparent 2deg 18deg), #111; box-shadow: 0 0 0 1px #000, 0 3px 5px rgba(0,0,0,.6); }
+.kb-cap { background: radial-gradient(circle at 50% 50%, var(--cap, #c33) 0 48%, #1b1b1b 50%), #1b1b1b; box-shadow: 0 0 0 2px #0c0c0c, 0 3px 5px rgba(0,0,0,.55); width: 38px; height: 38px; margin: 3px; }
+.kb-black { background: radial-gradient(circle at 40% 35%, #3c3c3c, #0d0d0d 65%); box-shadow: 0 0 0 3px #a9acaf, 0 0 0 4px #333, 0 3px 6px rgba(0,0,0,.55); width: 36px; height: 36px; margin: 4px; }
+.kb-brown { width: 30px; height: 30px; margin: 7px; background: radial-gradient(circle at 40% 35%, #6a4b37, #2a1c13 70%); box-shadow: 0 0 0 1px #140d08, 0 2px 4px rgba(0,0,0,.5); }
+.kb-alubig { width: 56px; height: 56px; background: repeating-radial-gradient(circle at 50% 50%, #d9dbdc 0 1px, #c3c6c8 1px 2px); box-shadow: 0 0 0 1px #77797b, 0 3px 6px rgba(0,0,0,.35); }
+.jacks { display: flex; gap: 9px; }
+.jacks i { width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle, #050505 0 34%, #9a9da0 36% 52%, #2a2a2a 54%); box-shadow: 0 1px 2px rgba(0,0,0,.6); }
+.cable { width: 54px; height: 16px; border-bottom: 4px solid #e8b02e; border-radius: 0 0 30px 30px; margin-left: -64px; margin-top: -10px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="kicker">Timster's Audio Works · TAW Panel · skins for review</div>
+    <h1>Panel skins</h1>
+    <p class="lede">The same Equaliser strip in eighteen paint jobs from the era's synths, studio gear, tape machines and hi-fi. <b>A skin changes materials, colours, knob style and display technology</b>. The type, the layout, the badge and the controls stay the same, so every skin still reads as the same family.</p>
+    <div class="rules"><span>Black and Silver become two of the skins</span><span>Skin names are generic: brand and model names stay in these notes only</span><span>Pick 2–4 to build for real in TAW-Panel</span></div>
+  </header>
+
+  <div class="groups" role="group" aria-label="Show">
+    <button type="button" data-g="all" aria-pressed="true">All eighteen</button>
+    <button type="button" data-g="synth" aria-pressed="false">Synths</button>
+    <button type="button" data-g="studio" aria-pressed="false">Studio</button>
+    <button type="button" data-g="tape" aria-pressed="false">Tape</button>
+    <button type="button" data-g="hifi" aria-pressed="false">Hi-fi</button>
+  </div>
+
+  <div id="units"></div>
+</div>
+
+<script>
+const SKINS = [
+  { id: 'panel', group: 'synth', name: 'Panel (now)', insp: 'Roland Jupiter-8, 1981', tag: 'Current',
+    note: 'What the family has today: black panel, the red, orange, yellow and cream stripe, coloured keys with red LEDs, knurled knobs and red LED displays.',
+    fit: 'All four', swatch: ['#171717', '#d8432a', '#ec7b24', '#efc23b', '#e7e0c9'],
+    face: '#171717', accent: 'stripe', disp: 'led', keys: ['k-cream', 'k-cream', 'k-yellow', 'k-red'], keyShape: '', knob: 'kb-knurl', capA: '#5aa86f', capB: '#e09a2a', meter: 'ladder' },
+  { id: 'blueline', group: 'synth', name: 'Blue Line', insp: 'Oberheim OB-Xa / OB-8, 1981–83',
+    note: 'Black panel with white legends and pale blue rules. Square white buttons with red LEDs, and black knobs with silver skirts. Cooler and plainer than the Jupiter, and very legible.',
+    fit: 'Player, Library', swatch: ['#121314', '#f2f3f5', '#6fa8dc', '#c9cdd3'],
+    face: '#121314', legend: '#f2f3f5', dim: '#9aa3ad', frame: 'rgba(160,190,220,.35)', accent: 'blueline', acc1: '#6fa8dc', acc2: '#3d6e9f', disp: 'led',
+    keys: ['k-white', 'k-white', 'k-blue', 'k-white'], keyShape: 'sq', knob: 'kb-skirt', meter: 'ladder' },
+  { id: 'walnut', group: 'synth', name: 'Walnut', insp: 'Sequential Prophet-5, 1978',
+    note: 'Black panel between walnut end cheeks, cream buttons with red LEDs, and black knobs with brushed aluminium caps. The warmest of the synth looks; the wood frames a window nicely.',
+    fit: 'Player', swatch: ['#141210', '#7a4d2c', '#e4dcc4', '#d9dadc'],
+    face: '#141210', legend: '#f0ece4', dim: '#a39a8c', cheeks: true, wood: 'repeating-linear-gradient(180deg, #6b4126 0 7px, #7d4f2f 7px 11px, #5c371f 11px 19px, #85563a 19px 22px)', accent: 'hairline', acc1: 'rgba(240,236,228,.25)',
+    disp: 'led', keys: ['k-cream', 'k-cream', 'k-cream', 'k-red'], keyShape: 'sq', knob: 'kb-alucap', meter: 'ladder' },
+  { id: 'mocha', group: 'synth', name: 'Mocha', insp: 'Yamaha DX7, 1983',
+    note: 'Chocolate-brown panel, flat membrane buttons in sage green and burgundy, and a yellow-green backlit LCD. The most unusual of the set, and pure early digital.',
+    fit: 'Library (its lists and text suit an LCD)', swatch: ['#3a2b25', '#6f9a85', '#7d3a46', '#b9c77d'],
+    face: '#3a2b25', legend: '#e9dfd2', dim: '#b3a596', frame: 'rgba(233,223,210,.28)', accent: 'hairline', acc1: '#6f9a85', disp: 'lcd',
+    keys: ['k-sage', 'k-sage', 'k-burg', 'k-burg'], keyShape: 'membrane', knob: 'kb-knurl', capA: '#4a3a33', capB: '#4a3a33', ledOn: '#ff4b3a',
+    roBg: 'linear-gradient(#b9c77d,#a8b86c)', roInk: '#23291a', roGlow: 'transparent', meter: 'ladder', seg: '#c7d58a', segOff: '#2b3020', segHot: '#c7d58a', segPeak: '#ff6a4a' },
+  { id: 'hammertone', group: 'studio', name: 'Hammertone', insp: 'Fairchild 670, 1959', tag: 'Older than the 80s',
+    note: 'Grey-green hammered paint, cream-faced VU meters, big black bakelite knobs, an amber pilot lamp and screws at the corners. Heavy, warm and serious. Born for an equaliser.',
+    fit: 'Equaliser, Analyser', swatch: ['#5f675d', '#e6dfc9', '#efe3c0', '#141210', '#ff9d1c'],
+    face: '#5f675d', tex: 'tex-hammer', legend: '#efe8d2', dim: '#c9c2ab', frame: 'rgba(239,232,210,.4)', screws: true, accent: 'none', disp: 'amber', logoGlow: '0 1px 0 rgba(0,0,0,.45)',
+    keys: ['toggle', 'toggle', 'toggle', 'lamp'], knob: 'kb-bakelite', roBg: '#120a02', roInk: '#ffb347', roGlow: 'rgba(255,170,60,.5)', meter: 'vu', vuFace: '#efe3c0', vuInk: '#2a2620', vuRed: '#b8352a' },
+  { id: 'console', group: 'studio', name: 'Console', insp: 'Neve 1073, 1970',
+    note: 'Slate-blue paint, small red knob caps over grey, and white legends. It reads like a mixing desk: technical and friendly, and it suits rows of identical controls such as ten EQ bands.',
+    fit: 'Equaliser', swatch: ['#61758c', '#b8352a', '#2a2c30', '#f4f6f8'],
+    face: '#61758c', tex: 'tex-brushed', legend: '#f4f6f8', dim: '#cdd6e0', frame: 'rgba(244,246,248,.4)', accent: 'hairline', acc1: 'rgba(0,0,0,.25)', disp: 'led',
+    keys: ['k-grey', 'k-grey', 'k-red2', 'k-red2'], keyShape: 'sq', knob: 'kb-marconi', meter: 'vu', vuFace: '#efe3c0', vuInk: '#2a2620', vuRed: '#b8352a' },
+  { id: 'bluemeter', group: 'hifi', name: 'Blue Meter', insp: 'McIntosh amplifiers and preamps', tag: 'Hi-fi separates',
+    note: 'Black glass, blue-lit meters, teal-green legends and chrome knobs. The icon of the hi-fi separate, which is exactly what the family has become.',
+    fit: 'Player, Library, Analyser', swatch: ['#050607', '#2f7cff', '#4fd1b0', '#c5c8cc'],
+    face: '#050607', tex: 'tex-glass', legend: '#5fe0be', dim: '#3d9e86', frame: 'rgba(95,224,190,.3)', accent: 'none', disp: 'vfdblue', logoInk: '#7ff0cf', logoGlow: '0 0 8px rgba(95,224,190,.6)',
+    keys: ['toggle', 'toggle', 'toggle', 'toggle'], knob: 'kb-chrome', ptr: '#1a1a1a', roBg: '#04070f', roInk: '#8fc6ff', roGlow: 'rgba(90,160,255,.7)', ledOn: '#4fd1b0', ledGlow: 'rgba(79,209,176,.8)',
+    meter: 'vu', vuFace: '#123b8f', vuInk: '#e8f0ff', vuRed: '#ff7a6a', vuGlow: true },
+  { id: 'silverface', group: 'hifi', name: 'Silverface', insp: 'Technics and Pioneer separates, early 80s',
+    note: 'Brushed aluminium, black buttons, aluminium knobs, and cyan fluorescent displays with segmented bar meters. Bright and precise, and the natural partner to the current Silver panel.',
+    fit: 'Player, Analyser', swatch: ['#c9cbcc', '#1d1f22', '#7ff6e4', '#041312'],
+    face: '#c9cbcc', tex: 'tex-brushed', legend: '#1d1f22', dim: '#55585c', frame: 'rgba(29,31,34,.35)', accent: 'hairline', acc1: 'rgba(29,31,34,.35)', disp: 'vfd',
+    keys: ['k-black', 'k-black', 'k-black', 'k-black'], knob: 'kb-alu', ptr: '#1d1f22', roBg: '#041312', roInk: '#7ff6e4', roGlow: 'rgba(80,240,220,.6)', ledOn: '#7ff6e4', ledGlow: 'rgba(80,240,220,.8)', ledOff: '#29403d',
+    meter: 'ladder', seg: '#7ff6e4', segOff: '#123230', segHot: '#7ff6e4', segPeak: '#ff8a7a', segGlow: 'rgba(80,240,220,.7)' },
+  { id: 'champagne', group: 'hifi', name: 'Champagne', insp: 'Marantz and Sansui receivers, late 70s',
+    note: 'A brushed champagne-gold faceplate, a black glass window lit blue with amber needles, and gold knobs. The most luxurious, best kept for one app rather than all four.',
+    fit: 'Player', swatch: ['#c8b383', '#2a2418', '#59b7d6', '#ffb347'],
+    face: '#c8b383', tex: 'tex-brushed', legend: '#2a2418', dim: '#5e5238', frame: 'rgba(42,36,24,.35)', accent: 'hairline', acc1: 'rgba(42,36,24,.3)', disp: 'amber',
+    keys: ['k-alu', 'k-alu', 'k-alu', 'k-alu'], knob: 'kb-gold', ptr: '#2a2418', roBg: '#120a02', roInk: '#ffb347', roGlow: 'rgba(255,170,60,.5)', ledOn: '#ffb347', ledGlow: 'rgba(255,170,60,.8)', ledOff: '#5b4a2a',
+    meter: 'vu', vuFace: '#1f5f7a', vuInk: '#e9f6fb', vuRed: '#ffb347', vuGlow: true },
+  { id: 'rocker', group: 'synth', name: 'Rocker', insp: 'Moog Minimoog Model D, 1970',
+    note: 'Black panel in a walnut case, white legends, black knobs with silver numbered skirts, and rocker switches in orange, white and blue. No screens at all on the original, so the display here is plain dark glass.',
+    fit: 'Player, Analyser', swatch: ['#121110', '#6b4126', '#e8772e', '#2f6fb5', '#f0ece4'],
+    face: '#121110', legend: '#f0ece4', dim: '#a39a8c', cheeks: true, wood: 'repeating-linear-gradient(180deg, #6b4126 0 7px, #7d4f2f 7px 11px, #5c371f 11px 19px, #85563a 19px 22px)', accent: 'hairline', acc1: 'rgba(240,236,228,.22)',
+    disp: 'glass', keys: ['k-moogorange', 'k-white', 'k-moogblue', 'k-moogorange'], keyShape: 'rocker', knob: 'kb-moog', roBg: '#0b0b0c', roInk: '#e8e4dc', roGlow: 'transparent', meter: 'ladder' },
+  { id: 'patchbay', group: 'synth', name: 'Patchbay', insp: 'Korg MS-20, 1978',
+    note: 'Black with white legends, small black knobs with white skirts, and a patch bay of jacks with a yellow cable. The jacks could stand for real inputs and outputs, such as which output the Analyser listens to.',
+    fit: 'Analyser, Equaliser', swatch: ['#161616', '#f2f2f0', '#9a9da0', '#e8b02e'],
+    face: '#161616', legend: '#f2f2f0', dim: '#9d9d9a', frame: 'rgba(242,242,240,.32)', accent: 'hairline', acc1: 'rgba(242,242,240,.4)', disp: 'led', jacks: true,
+    keys: ['k-grey', 'k-grey', 'k-white', 'k-red'], keyShape: 'sq', knob: 'kb-skirt', meter: 'ladder' },
+  { id: 'desk', group: 'studio', name: 'Desk', insp: 'SSL 4000 E/G console, 1979–87',
+    note: 'Warm grey paint, knob caps coloured by job (green for frequency, blue for Q, red for gain), small square buttons that light up, and LED bar meters. The most systematic look, and colour-coding matches the family\'s own knob colours.',
+    fit: 'Equaliser', swatch: ['#8e8c87', '#3f9a5c', '#2f6db3', '#c8372b', '#f1efe8'],
+    face: '#8e8c87', tex: 'tex-brushed', legend: '#141414', dim: '#3a3a38', frame: 'rgba(20,20,20,.35)', accent: 'hairline', acc1: 'rgba(0,0,0,.3)', disp: 'led',
+    keys: ['k-litw', 'k-litw', 'k-litg', 'k-litr'], keyShape: 'lit', knob: 'kb-cap', capA: '#3f9a5c', capB: '#2f6db3', capC: '#c8372b', meter: 'ladder' },
+  { id: 'studiotape', group: 'tape', name: 'Studio Tape', insp: 'Otari MX-5050, 1980s',
+    note: 'Beige-grey industrial paint, cream VU meters, and chunky transport keys: green for play, red for record. Built to be used all day in a studio, and the transport keys suit the Player\'s play, stop and record.',
+    fit: 'Player', swatch: ['#c8c3b5', '#efe3c0', '#3c9a5a', '#d8432a', '#8f8c84'],
+    face: '#c8c3b5', legend: '#24221e', dim: '#5e5a51', frame: 'rgba(36,34,30,.35)', screws: true, accent: 'hairline', acc1: 'rgba(36,34,30,.3)', disp: 'led',
+    keys: ['k-otgrey', 'k-otgrey', 'k-green', 'k-red'], keyShape: 'transport', labels: ['Rew', 'Stop', 'Play', 'Rec'], knob: 'kb-black', meter: 'vu', vuFace: '#efe3c0', vuInk: '#2a2620', vuRed: '#b8352a' },
+  { id: 'reel', group: 'tape', name: 'Reel', insp: 'Revox A77 / B77, 1967–90', 
+    note: 'Swiss precision: light silver-grey brushed metal, a black band, black knobs with silver rings, and VU meters. Calmer and more European than the Otari.',
+    fit: 'Player, Equaliser', swatch: ['#bfc1c0', '#202224', '#efe9d6', '#d8432a'],
+    face: 'repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 1px, rgba(0,0,0,.035) 1px 3px), linear-gradient(180deg, #c3c5c4 0 62%, #202224 62% 100%)', legend: '#1d1f21', lowInk: '#e9e6df', dim: '#55585b', frame: 'rgba(29,31,33,.35)', accent: 'none', disp: 'led',
+    keys: ['k-grey', 'k-grey', 'k-grey', 'k-red'], keyShape: 'transport', labels: ['Rew', 'Stop', 'Play', 'Rec'], knob: 'kb-black', meter: 'vu', vuFace: '#f2ecd8', vuInk: '#2a2620', vuRed: '#b8352a' },
+  { id: 'cassette', group: 'tape', name: 'Cassette', insp: 'Nakamichi Dragon and 1000ZXL, 1980s', tag: 'Hi-fi separates',
+    note: 'Matte black with champagne buttons and blue-green fluorescent peak meters. Precise and quiet: the high end of 80s cassette.',
+    fit: 'Player, Analyser', swatch: ['#121314', '#cdbf9f', '#8dffc4', '#ff5a4a'],
+    face: '#121314', legend: '#d9d3c4', dim: '#8a857a', frame: 'rgba(217,211,196,.25)', accent: 'hairline', acc1: 'rgba(205,191,159,.35)', disp: 'vfdgreen',
+    keys: ['k-champ', 'k-champ', 'k-champ', 'k-red2'], keyShape: 'small', knob: 'kb-alu', ptr: '#222', roBg: '#030f0a', roInk: '#8dffc4', roGlow: 'rgba(110,255,180,.6)', ledOn: '#8dffc4', ledGlow: 'rgba(110,255,180,.8)', ledOff: '#1d3a2c',
+    meter: 'ladder', seg: '#8dffc4', segOff: '#0f2a1d', segHot: '#8dffc4', segPeak: '#ff7a6a', segGlow: 'rgba(110,255,180,.7)' },
+  { id: 'teak', group: 'tape', name: 'Teak', insp: 'Tandberg decks and receivers, 1970s',
+    note: 'Scandinavian: brushed aluminium in a teak case, cream VU meters and black knobs. Lighter and warmer than Walnut, closer to furniture than to a studio.',
+    fit: 'Player, Library', swatch: ['#d0d1d0', '#a8662f', '#efe3c0', '#1d1f21'],
+    face: '#d0d1d0', tex: 'tex-brushed', legend: '#1d1f21', dim: '#5a5c5e', frame: 'rgba(29,31,33,.3)', cheeks: true, wood: 'repeating-linear-gradient(180deg, #a8662f 0 6px, #b8763c 6px 9px, #965a28 9px 15px, #bd7d45 15px 18px)', accent: 'hairline', acc1: 'rgba(29,31,33,.3)', disp: 'led',
+    keys: ['k-black', 'k-black', 'k-black', 'k-black'], keyShape: 'small', knob: 'kb-black', meter: 'vu', vuFace: '#efe3c0', vuInk: '#2a2620', vuRed: '#b8352a' },
+  { id: 'bronze', group: 'hifi', name: 'Bronze', insp: 'Quad 33 / 44 preamplifiers, 1967–90',
+    note: 'Bronze-grey and dark brown, small brown push buttons and small knobs, and almost nothing else. British understatement: the opposite of the McIntosh, with the controls doing the talking.',
+    fit: 'Library, Player', swatch: ['#8c806d', '#3b2b20', '#4a3426', '#ffb347'],
+    face: 'linear-gradient(180deg, #8c806d 0 55%, #3b2b20 55% 100%)', legend: '#f1ebdf', dim: '#d6ccbb', frame: 'rgba(241,235,223,.3)', accent: 'none', disp: 'amber',
+    keys: ['k-brown', 'k-brown', 'k-brown', 'k-brown'], keyShape: 'small', knob: 'kb-brown', capC: '#2b2b2b', roBg: '#120a02', roInk: '#ffb347', roGlow: 'rgba(255,170,60,.5)', ledOn: '#ffb347', ledGlow: 'rgba(255,170,60,.8)', ledOff: '#3a2a16',
+    meter: 'ladder', seg: '#ffb347', segOff: '#2c1e0c', segHot: '#ffb347', segPeak: '#ff6a4a', segGlow: 'rgba(255,170,60,.6)' },
+  { id: 'anodised', group: 'hifi', name: 'Anodised', insp: 'Schiit Audio desktop amps and DACs, 2010s', tag: 'Modern',
+    note: 'Bare brushed aluminium, one big knob, small white LEDs and a crisp white display. Not of the 80s, but a clean desktop look that would make the family feel current next to the vintage skins.',
+    fit: 'Player, Equaliser', swatch: ['#c9cbcc', '#f4f4f2', '#050505', '#77797b'],
+    face: '#c9cbcc', tex: 'tex-brushed', legend: '#2a2c2e', dim: '#5c5f62', frame: 'rgba(42,44,46,.3)', accent: 'none', disp: 'oled',
+    keys: ['k-alu', 'k-alu', 'k-alu', 'k-alu'], keyShape: 'small', knob: 'kb-alubig', ptr: '#2a2c2e', roBg: '#050505', roInk: '#f4f4f2', roGlow: 'rgba(255,255,255,.35)', ledOn: '#ffffff', ledGlow: 'rgba(255,255,255,.9)', ledOff: '#8d9093',
+    meter: 'ladder', seg: '#f4f4f2', segOff: '#2a2a2a', segHot: '#f4f4f2', segPeak: '#ff6a4a', segGlow: 'rgba(255,255,255,.6)' },
+];
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function vu(s, value, label) {
+  // A VU meter: arc from -20 to +3 VU, red from 0.
+  const w = 150, h = 82, cx = 75, cy = 96, r = 70;
+  const ang = v => (-50 + (v + 20) / 23 * 100) * Math.PI / 180;
+  const pt = (a, rr) => [cx + rr * Math.sin(a), cy - rr * Math.cos(a)];
+  let ticks = '';
+  for (const v of [-20, -10, -7, -5, -3, -2, -1, 0, 1, 2, 3]) {
+    const a = ang(v), [x1, y1] = pt(a, r), [x2, y2] = pt(a, r - (v % 5 === 0 || v >= 0 ? 9 : 6));
+    ticks += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${v >= 0 ? s.vuRed : s.vuInk}" stroke-width="1.4"/>`;
+  }
+  const arc = (v0, v1, col, wdt) => { const [x0, y0] = pt(ang(v0), r), [x1, y1] = pt(ang(v1), r); return `<path d="M${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}" fill="none" stroke="${col}" stroke-width="${wdt}"/>`; };
+  const [nx, ny] = pt(ang(value), r + 4);
+  const glow = s.vuGlow ? `<radialGradient id="g-${s.id}" cx="50%" cy="85%" r="75%"><stop offset="0" stop-color="#ffffff" stop-opacity=".35"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>` : '';
+  return `<svg class="vu" viewBox="0 0 ${w} ${h}" role="img" aria-label="VU meter, ${label}">
+    <defs>${glow}</defs>
+    <rect x="1" y="1" width="${w - 2}" height="${h - 2}" rx="4" fill="${s.vuFace}" stroke="#000" stroke-width="2"/>
+    ${s.vuGlow ? `<rect x="1" y="1" width="${w - 2}" height="${h - 2}" rx="4" fill="url(#g-${s.id})"/>` : ''}
+    ${arc(-20, 0, s.vuInk, 1.2)}${arc(0, 3, s.vuRed, 3)}${ticks}
+    <text x="${cx}" y="58" text-anchor="middle" font-family="Share Tech Mono, monospace" font-size="11" fill="${s.vuInk}">VU</text>
+    <line x1="${cx}" y1="${cy}" x2="${nx.toFixed(1)}" y2="${ny.toFixed(1)}" stroke="${s.vuGlow ? '#ffb347' : '#111'}" stroke-width="1.6"/>
+    <rect x="2" y="${h - 13}" width="${w - 4}" height="11" fill="#0d0d0d" opacity=".9"/>
+    <text x="${cx}" y="${h - 4.5}" text-anchor="middle" font-family="Barlow Semi Condensed, sans-serif" font-weight="700" font-size="8" letter-spacing="1.6" fill="#d9d4c7">${label}</text>
+  </svg>`;
+}
+
+function ladder() {
+  const n = 22, on = 15;
+  return `<span class="ladder" aria-hidden="true">${Array.from({ length: n }, (_, i) => `<i class="${i >= 19 ? 'peak' : i >= 15 ? 'hot' : ''} ${i < on ? 'on' : ''}"></i>`).join('')}</span>`;
+}
+
+function unit(s) {
+  const vars = [
+    ['--face', s.face], ['--legend', s.legend], ['--dim', s.dim], ['--frame', s.frame], ['--wood', s.wood],
+    ['--acc1', s.acc1], ['--acc2', s.acc2], ['--logo-ink', s.logoInk], ['--logo-glow', s.logoGlow], ['--ptr', s.ptr],
+    ['--ro-bg', s.roBg], ['--ro-ink', s.roInk], ['--ro-glow', s.roGlow], ['--led-on', s.ledOn], ['--led-glow', s.ledGlow], ['--led-off', s.ledOff],
+    ['--seg', s.seg], ['--seg-off', s.segOff], ['--seg-hot', s.segHot], ['--seg-peak', s.segPeak], ['--seg-glow', s.segGlow],
+  ].filter(v => v[1]).map(([k, v]) => `${k}:${v}`).join(';');
+  const labels = ['Load', 'Save', 'Bypass', 'Run'];
+  const keys = s.keys.map((k, i) => {
+    if (k === 'lamp') return `<div class="kw"><span class="led" style="visibility:hidden"></span><span class="lamp" title="Pilot lamp"></span><span class="lab">Power</span></div>`;
+    if (k === 'toggle') return `<div class="kw"><span class="led ${i === 3 ? 'on' : ''}"></span><span class="key toggle"></span><span class="lab">${labels[i]}</span></div>`;
+    const noLed = s.keyShape === 'lit' || s.keyShape === 'rocker';
+    return `<div class="kw"><span class="led ${i === 3 || i === 2 ? 'on' : ''}" ${noLed ? 'style="visibility:hidden"' : ''}></span><span class="key ${s.keyShape || ''} ${k}"></span><span class="lab" ${s.keyLabInk ? `style="color:${s.keyLabInk}"` : ''}>${(s.labels || labels)[i]}</span></div>`;
+  }).join('');
+  const knob = (lab, val, ang, cap) => `<div class="kn"><span class="knob ${s.knob}" style="--a:${ang}deg;${cap ? `--cap:${cap}` : ''}"></span><span class="lab">${lab}</span><span class="ro">${val}</span></div>`;
+  const accent = s.accent === 'stripe' ? `<div class="stripe"><i style="background:#d8432a"></i><i style="background:#ec7b24"></i><i style="background:#efc23b"></i><i style="background:#e7e0c9"></i></div>`
+    : s.accent === 'blueline' ? `<div class="blueline"></div>` : s.accent === 'hairline' ? `<div class="hairline"></div>` : `<div class="hairline" style="background:transparent"></div>`;
+  const jacks = s.jacks ? `<div style="display:grid;gap:4px;justify-items:center"><div class="jacks"><i></i><i></i><i></i><i></i></div><span class="cable"></span><span style="font-size:9px;letter-spacing:.16em;color:var(--dim)">EXT IN · OUT</span></div>` : '';
+  const meter = jacks + (s.meter === 'vu' ? vu(s, -3, 'LEFT') + vu(s, -5, 'RIGHT')
+    : `<div style="display:grid;gap:6px;justify-items:end"><div style="display:flex;gap:8px;align-items:center"><span class="lab" style="font-size:9.5px;letter-spacing:.14em">IN</span>${ladder()}</div><div style="display:flex;gap:8px;align-items:center"><span class="lab" style="font-size:9.5px;letter-spacing:.14em">OUT</span>${ladder()}</div></div>`);
+  const screws = s.screws ? `<span class="screw" style="left:8px;top:8px"></span><span class="screw" style="right:8px;top:8px"></span><span class="screw" style="left:8px;bottom:8px"></span><span class="screw" style="right:8px;bottom:8px"></span>` : '';
+  return `<section class="unit" data-group="${s.group}" aria-labelledby="h-${s.id}">
+    <div class="stage">
+      <div class="panel ${s.cheeks ? 'cheeks' : ''} ${s.tex || ''}" style="${vars}">
+        ${screws}
+        <div class="brand"><span class="badge">Timster's Audio Works - <b>Equaliser</b></span><div class="logo">EQUALISER</div><div class="model">EQ-001 · ten band parametric</div></div>
+        <div class="disp d-${s.disp}"><div class="l"><span>HD600 AutoEQ</span><span>EQ IN</span></div><div class="l"><span>System-wide</span><span>48000 Hz</span></div></div>
+        <div class="meter">${meter}</div>
+        ${accent}
+        <div class="keys" style="grid-column:1 / 3;${s.lowInk ? `--legend:${s.lowInk}` : ''}">${keys}</div>
+        <div class="knobs" style="grid-column:3;justify-content:flex-end;${s.lowInk ? `--legend:${s.lowInk}` : ''}">${knob('Freq', '2.79 kHz', 20, s.capA)}${knob('Q', '2.37', -55, s.capB)}${knob('Gain', '+3.4 dB', 30, s.capC || '#2b2b2b')}</div>
+      </div>
+    </div>
+    <div class="notes">
+      ${s.tag ? `<span class="tag">${esc(s.tag)}</span>` : ''}
+      <h2 id="h-${s.id}">${esc(s.name)}</h2>
+      <div class="insp">Inspired by ${esc(s.insp)}</div>
+      <div class="swatches">${s.swatch.map(c => `<i style="background:${c}" title="${c}"></i>`).join('')}</div>
+      <p>${esc(s.note)}</p>
+      <div class="fit">Best fit: <b>${esc(s.fit)}</b></div>
+    </div>
+  </section>`;
+}
+
+document.getElementById('units').innerHTML = SKINS.map(unit).join('');
+
+document.querySelectorAll('.groups button').forEach(b => b.addEventListener('click', () => {
+  const g = b.dataset.g;
+  document.querySelectorAll('.groups button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  document.querySelectorAll('.unit').forEach(u => { u.hidden = g !== 'all' && u.dataset.group !== g; });
+  try { localStorage.setItem('taw-skins-group', g); } catch (e) {}
+}));
+try { const g = localStorage.getItem('taw-skins-group'); if (g) document.querySelector(`.groups button[data-g="${g}"]`)?.click(); } catch (e) {}
+</script>
