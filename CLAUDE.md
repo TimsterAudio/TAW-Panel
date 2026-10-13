@@ -1,6 +1,6 @@
 # TAW Panel: working conventions
 
-The shared panel crate for Timster's Audio Works' native apps (Library, Player, Equaliser, Analyser). It follows Drone Box's panel language; Drone Box's and the Equaliser's `docs/DESIGN.md` describe it.
+The shared panel crate for Timster's Audio Works' native apps (Library, Player, Equaliser, Analyser). `FAMILY.md` is the family overview every app points to; keep it current. It follows Drone Box's panel language; Drone Box's and the Equaliser's `docs/DESIGN.md` describe it.
 
 ## Hard rules
 

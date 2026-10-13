@@ -2,6 +2,8 @@
 
 The panel look shared by Timster's Audio Works' native apps: the **Library**, **Player**, **Equaliser** and **Analyser**. One crate, so a change to the look is made once.
 
+[FAMILY.md](FAMILY.md) describes the whole family: the apps, their names and model codes, and how they fit together.
+
 ![The gallery example on the Black panel](docs/gallery.png)
 
 It draws Drone Box's panel language with egui's painter: Black and Silver panels, Jupiter-style coloured keys with LEDs, knurled knobs, faders, red LED displays and readouts, meters, outlined sections and the red, orange, yellow and cream stripe. The four typefaces (Space Grotesk, Michroma, Barlow Semi Condensed, Share Tech Mono, all under the OFL) are built in.
