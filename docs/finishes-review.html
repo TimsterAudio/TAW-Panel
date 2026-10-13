@@ -76,6 +76,7 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
   background: var(--face); box-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 18px 40px -18px rgba(0,0,0,.45); }
 .m.mini { height: 132px; }
 .m.unit { height: 176px; border-radius: 10px; }
+.m::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 1px solid var(--edge); pointer-events: none; z-index: 3; }
 .m .tex { position: absolute; inset: 0; background: var(--tex); pointer-events: none; }
 .m .cheek { position: absolute; top: 0; bottom: 0; width: 26px; background: var(--wood); box-shadow: inset -2px 0 4px rgba(0,0,0,.35); }
 .m .cheek.l { left: 0; } .m .cheek.r { right: 0; box-shadow: inset 2px 0 4px rgba(0,0,0,.35); }
@@ -471,7 +472,7 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
     } else d = DISPLAYS[f.disp];
     const cheek = f.wood ? '26px' : '0px';
     const css = {
-      '--face': f.face, '--tex': f.tex, '--wood': f.wood || 'none', '--cheekw': cheek, '--t': f.t, '--d': f.d, '--raised': f.raised, '--well': f.well,
+      '--edge': mode === 'dark' ? 'rgba(255,255,255,.16)' : 'rgba(0,0,0,.26)', '--face': f.face, '--tex': f.tex, '--wood': f.wood || 'none', '--cheekw': cheek, '--t': f.t, '--d': f.d, '--raised': f.raised, '--well': f.well,
       '--ln': f.ln, '--ln2': f.ln2, '--sel': v.sel, '--acc': v.acc, '--onacc': v.onacc, '--groove': v.groove, '--knob': f.knob, '--bar': f.bar,
       '--dbg': d.dbg, '--dink': d.dink, '--dglow': d.dglow, '--dedge': d.dedge, '--df': d.df,
       '--uf': (f.uf || '"Hanken Grotesk"') + ', system-ui, sans-serif', '--mf': (f.mf || '"Chivo Mono"') + ', ui-monospace, monospace',
