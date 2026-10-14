@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- `hifi`: the TAW look for the hi-fi apps. Finishes (Anodised, Porcelain), light, dark and automatic builds, accents (the finish's own or Spool's colours), Hanken Grotesk and Chivo Mono, the nameplate (badge, logo, model line), window buttons, drag-to-move and edge resizing for windows without a system title bar, and its controls: buttons, switches, segmented controls, the family switcher, menus, knobs, faders, sliders, display windows, wells, meters and a settings drawer. The Jupiter look (`theme`, `widgets`) is unchanged, for the Box instruments.
+- `hifi`: the TAW look for the hi-fi apps. Finishes (Spool, the default, with Spool's seven colour themes tinting the whole panel; and Porcelain), light, dark and automatic builds, accents (the finish's own or Spool's colours), Hanken Grotesk and Chivo Mono, the nameplate (badge, logo, model line), window buttons, drag-to-move and edge resizing for windows without a system title bar, and its controls: buttons, switches, segmented controls, the family switcher, menus, knobs, faders, sliders, display windows, wells, meters and a settings drawer. The Jupiter look (`theme`, `widgets`) is unchanged, for the Box instruments.
 
 ## 0.2.0 – 2026-10-13
 

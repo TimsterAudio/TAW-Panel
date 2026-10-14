@@ -3,7 +3,8 @@
 //! dark build, and the controls drawn in it. The Jupiter look in [`theme`]
 //! and [`widgets`] stays for the Box instruments.
 //!
-//! - [`Look`]: the user's choice of finish, build and accent (saved by apps)
+//! - [`Look`]: the user's choice of finish, build and accent (saved by apps).
+//!   The default is Spool's look: its warm panels and seven colour themes.
 //! - [`Tokens`]: the colours a look resolves to, for drawing
 //! - [`install_fonts`]: Hanken Grotesk for text, Chivo Mono for numbers,
 //!   Michroma for the logo
@@ -32,18 +33,21 @@ use std::sync::Arc;
 /// The faceplate's material.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum Finish {
-    /// Brushed aluminium with a white display (the default).
+    /// Spool's look (the default): warm panels tinted by the colour theme,
+    /// as in Spool's Dark and Light modes. Settings saved while this was
+    /// the brushed-aluminium "Anodised" finish load as Spool.
     #[default]
-    Anodised,
+    #[serde(alias = "Anodised")]
+    Spool,
     /// Matte white, after Braun; Graphite in the dark build.
     Porcelain,
 }
 
 impl Finish {
-    pub const ALL: [Finish; 2] = [Finish::Anodised, Finish::Porcelain];
+    pub const ALL: [Finish; 2] = [Finish::Spool, Finish::Porcelain];
     pub fn name(self) -> &'static str {
         match self {
-            Finish::Anodised => "Anodised",
+            Finish::Spool => "Spool",
             Finish::Porcelain => "Porcelain",
         }
     }
@@ -73,9 +77,10 @@ impl Build {
 /// The accent colour: the finish's own, or one of Spool's colour themes.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum Accent {
+    /// The finish's own: Porcelain's orange, or Spool's amber.
     Finish,
-    #[default]
     Neutral,
+    #[default]
     Amber,
     Green,
     Blue,
@@ -86,18 +91,26 @@ pub enum Accent {
 
 impl Accent {
     pub const ALL: [Accent; 8] = [
-        Accent::Neutral,
-        Accent::Finish,
         Accent::Amber,
         Accent::Green,
         Accent::Blue,
         Accent::Red,
         Accent::Purple,
         Accent::Teal,
+        Accent::Neutral,
+        Accent::Finish,
     ];
+    /// The choices that make sense with `finish`: Spool's seven, plus
+    /// Porcelain's orange on Porcelain.
+    pub fn choices(finish: Finish) -> &'static [Accent] {
+        match finish {
+            Finish::Spool => &Accent::ALL[..7],
+            Finish::Porcelain => &Accent::ALL,
+        }
+    }
     pub fn name(self) -> &'static str {
         match self {
-            Accent::Finish => "Finish",
+            Accent::Finish => "Orange",
             Accent::Neutral => "Neutral",
             Accent::Amber => "Amber",
             Accent::Green => "Green",
@@ -122,6 +135,75 @@ impl Accent {
     }
 }
 
+/// One of Spool's palettes: background, panel, raised panel, line, text,
+/// dim text, accent and the accent's dim tint.
+struct SpoolPalette([u32; 8]);
+
+impl Accent {
+    /// Spool's palette for this colour theme, (dark, light).
+    fn palette(self) -> (SpoolPalette, SpoolPalette) {
+        let p = SpoolPalette;
+        match self {
+            Accent::Amber | Accent::Finish => (
+                p([
+                    0x26221d, 0x2c2a25, 0x39342d, 0x524636, 0xece6db, 0x929090, 0xe8a33d, 0x6b5427,
+                ]),
+                p([
+                    0xeee6d4, 0xf6efe2, 0xe8ddc5, 0xd6c3a1, 0x27281f, 0x7c735b, 0xb8791f, 0xe3cf9e,
+                ]),
+            ),
+            Accent::Green => (
+                p([
+                    0x1c2420, 0x222c29, 0x2b3732, 0x394c3f, 0xe8e7dc, 0x899293, 0x6bbf6b, 0x2f4a30,
+                ]),
+                p([
+                    0xe5e7d7, 0xecf1e5, 0xdbdfca, 0xbdc8a9, 0x242820, 0x74755d, 0x3f8f46, 0xcfe8cf,
+                ]),
+            ),
+            Accent::Blue => (
+                p([
+                    0x1b222a, 0x212933, 0x293340, 0x354558, 0xe8e6e0, 0x88909c, 0x5a9fe6, 0x2c4a66,
+                ]),
+                p([
+                    0xe4e4e0, 0xebedee, 0xdadbd5, 0xbbc0be, 0x242723, 0x737265, 0x3568b0, 0xcddcf0,
+                ]),
+            ),
+            Accent::Red => (
+                p([
+                    0x251d20, 0x2c2528, 0x382d31, 0x503a3d, 0xece4dc, 0x918c92, 0xe2685f, 0x5a2c29,
+                ]),
+                p([
+                    0xeee0d6, 0xf6eae3, 0xe8d6c7, 0xd6b7a5, 0x27261f, 0x7c6f5c, 0xb8392f, 0xf0d2cd,
+                ]),
+            ),
+            Accent::Purple => (
+                p([
+                    0x21202a, 0x272733, 0x313040, 0x444058, 0xeae5e0, 0x8d8e9c, 0xa684e8, 0x453263,
+                ]),
+                p([
+                    0xe9e2e0, 0xf0ebee, 0xe0d8d5, 0xc7bbbe, 0x252623, 0x777165, 0x7050b0, 0xe2d7f5,
+                ]),
+            ),
+            Accent::Teal => (
+                p([
+                    0x1a2526, 0x202c2e, 0x28373a, 0x334c4d, 0xe7e7df, 0x879398, 0x4fc2b0, 0x254843,
+                ]),
+                p([
+                    0xe3e7db, 0xebf0e9, 0xd9decf, 0xbac6b3, 0x232822, 0x737461, 0x2e8577, 0xc9ece6,
+                ]),
+            ),
+            Accent::Neutral => (
+                p([
+                    0x232529, 0x2a2d31, 0x35383d, 0x4b4e53, 0xebe7e0, 0x8f939a, 0xc6cad0, 0x484b50,
+                ]),
+                p([
+                    0xe7e3da, 0xeeece8, 0xded9cd, 0xc2beaf, 0x252721, 0x76715f, 0x585c64, 0xd6d9dd,
+                ]),
+            ),
+        }
+    }
+}
+
 /// What the user chose. Apps keep this in their saved settings.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(default)]
@@ -139,7 +221,7 @@ pub struct Tokens {
     /// The faceplate, top and bottom of its gradient.
     pub face_top: Color32,
     pub face_bottom: Color32,
-    /// Fine vertical brushing, as on anodised aluminium.
+    /// Fine vertical brushing (no finish uses it at present).
     pub brushed: bool,
     pub text: Color32,
     pub dim: Color32,
@@ -189,56 +271,37 @@ impl Tokens {
         let white = |a| rgba(255, 255, 255, a);
         let oled = (hex(0x050607), hex(0xf2f5f7), white(0.22));
         let mut t = match (look.finish, dark) {
-            (Finish::Anodised, false) => Tokens {
-                dark,
-                finish: look.finish,
-                face_top: hex(0xdfe1e3),
-                face_bottom: hex(0xc9ccd0),
-                brushed: true,
-                text: hex(0x1b1e22),
-                dim: hex(0x5c636b),
-                raised: hex(0xf1f2f4),
-                well: hex(0xf5f6f7),
-                line: black(0.13),
-                line_soft: black(0.06),
-                accent: hex(0x2f6fd6),
-                on_accent: Color32::WHITE,
-                select: Color32::TRANSPARENT,
-                groove: black(0.14),
-                thumb: Color32::WHITE,
-                bar: white(0.35),
-                edge: black(0.26),
-                display_bg: oled.0,
-                ink: oled.1,
-                glow: oled.2,
-                ok: hex(0x2fbf71),
-                warn: hex(0xd9902a),
-            },
-            (Finish::Anodised, true) => Tokens {
-                dark,
-                finish: look.finish,
-                face_top: hex(0x2d3135),
-                face_bottom: hex(0x1f2225),
-                brushed: true,
-                text: hex(0xeef0f2),
-                dim: hex(0x9aa2aa),
-                raised: hex(0x3a3f45),
-                well: hex(0x1a1c1f),
-                line: white(0.11),
-                line_soft: white(0.05),
-                accent: hex(0x5aa0ff),
-                on_accent: hex(0x08121f),
-                select: Color32::TRANSPARENT,
-                groove: white(0.12),
-                thumb: hex(0xeef0f2),
-                bar: black(0.18),
-                edge: white(0.16),
-                display_bg: oled.0,
-                ink: oled.1,
-                glow: oled.2,
-                ok: hex(0x2fbf71),
-                warn: hex(0xe0a040),
-            },
+            (Finish::Spool, _) => {
+                let (d, l) = look.accent.palette();
+                let SpoolPalette(c) = if dark { d } else { l };
+                let [bg, panel, raised, line, text, dim, accent, accent_dim] = c.map(hex);
+                Tokens {
+                    dark,
+                    finish: look.finish,
+                    face_top: bg,
+                    face_bottom: bg,
+                    brushed: false,
+                    text,
+                    dim,
+                    raised,
+                    well: panel,
+                    line,
+                    line_soft: line.gamma_multiply(0.45),
+                    accent,
+                    on_accent: if dark { bg } else { Color32::WHITE },
+                    select: accent_dim,
+                    groove: accent_dim,
+                    thumb: if dark { text } else { Color32::WHITE },
+                    bar: panel,
+                    edge: line,
+                    // Spool's display: a panel with the readout in the accent.
+                    display_bg: panel,
+                    ink: accent,
+                    glow: Color32::TRANSPARENT,
+                    ok: hex(if dark { 0x6bbf6b } else { 0x3f8f46 }),
+                    warn: hex(if dark { 0xe3a043 } else { 0xb0492f }),
+                }
+            }
             (Finish::Porcelain, false) => Tokens {
                 dark,
                 finish: look.finish,
@@ -290,12 +353,14 @@ impl Tokens {
                 warn: hex(0xe0a040),
             },
         };
-        if let Some((d, l)) = look.accent.spool() {
-            t.accent = if dark { d } else { l };
-            t.on_accent = if dark { hex(0x15130f) } else { Color32::WHITE };
+        if look.finish == Finish::Porcelain {
+            if let Some((d, l)) = look.accent.spool() {
+                t.accent = if dark { d } else { l };
+                t.on_accent = if dark { hex(0x15130f) } else { Color32::WHITE };
+            }
+            let a = t.accent;
+            t.select = rgba(a.r(), a.g(), a.b(), if dark { 0.18 } else { 0.14 });
         }
-        let a = t.accent;
-        t.select = rgba(a.r(), a.g(), a.b(), if dark { 0.18 } else { 0.14 });
         t
     }
 
@@ -508,16 +573,7 @@ pub fn display(p: &Painter, r: Rect, t: &Tokens) {
             sw: 0,
             se: 0,
         },
-        rgba(
-            0,
-            0,
-            0,
-            if t.dark || t.finish == Finish::Anodised {
-                0.35
-            } else {
-                0.06
-            },
-        ),
+        rgba(0, 0, 0, if t.dark { 0.30 } else { 0.06 }),
     );
     p.rect_stroke(
         r,
@@ -1529,14 +1585,18 @@ pub fn look_settings(ui: &mut Ui, t: &Tokens, look: &mut Look) -> bool {
     ) {
         look.build = Build::ALL[i];
     }
-    let r = drawer_row(ui, t, "Accent", 170.0);
-    let items: Vec<String> = Accent::ALL.iter().map(|a| a.name().to_string()).collect();
-    let sel = Accent::ALL
-        .iter()
-        .position(|a| *a == look.accent)
-        .unwrap_or(0);
+    let r = drawer_row(ui, t, "Colour", 170.0);
+    let choices = Accent::choices(look.finish);
+    let items: Vec<String> = choices.iter().map(|a| a.name().to_string()).collect();
+    // On Spool, "the finish's own" is amber.
+    let shown = if look.finish == Finish::Spool && look.accent == Accent::Finish {
+        Accent::Amber
+    } else {
+        look.accent
+    };
+    let sel = choices.iter().position(|a| *a == shown).unwrap_or(0);
     if let Some(i) = select(ui, r, "look-accent", t, &items, sel) {
-        look.accent = Accent::ALL[i];
+        look.accent = choices[i];
     }
     *look != before
 }
@@ -1546,14 +1606,34 @@ mod tests {
     use super::*;
 
     #[test]
-    fn default_is_anodised_light_neutral() {
+    fn default_is_spool_light_amber() {
         let l = Look::default();
-        assert_eq!(l.finish, Finish::Anodised);
+        assert_eq!(l.finish, Finish::Spool);
         assert_eq!(l.build, Build::Light);
-        assert_eq!(l.accent, Accent::Neutral);
+        assert_eq!(l.accent, Accent::Amber);
         let t = Tokens::new(&l, true);
         assert!(!t.dark, "Light stays light whatever the computer says");
-        assert_eq!(t.accent, hex(0x6d6a63));
+        assert_eq!(t.face_top, hex(0xeee6d4));
+        assert_eq!(t.accent, hex(0xb8791f));
+    }
+
+    #[test]
+    fn spool_themes_tint_the_whole_panel() {
+        let green = Look {
+            accent: Accent::Green,
+            build: Build::Dark,
+            ..Default::default()
+        };
+        let t = Tokens::new(&green, false);
+        assert_eq!(t.face_top, hex(0x1c2420));
+        assert_eq!(t.accent, hex(0x6bbf6b));
+    }
+
+    #[test]
+    fn anodised_settings_load_as_spool() {
+        let l: Look = serde_json::from_str(r#"{"finish":"Anodised","accent":"Neutral"}"#).unwrap();
+        assert_eq!(l.finish, Finish::Spool);
+        assert_eq!(l.accent, Accent::Neutral);
     }
 
     #[test]
@@ -1580,6 +1660,6 @@ mod tests {
     fn saved_looks_tolerate_missing_fields() {
         let l: Look = serde_json::from_str(r#"{"finish":"Porcelain"}"#).unwrap();
         assert_eq!(l.finish, Finish::Porcelain);
-        assert_eq!(l.accent, Accent::Neutral);
+        assert_eq!(l.accent, Accent::Amber);
     }
 }
