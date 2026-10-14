@@ -17,7 +17,13 @@ Instruments keep "Box" names: **Drone Box**, **Drum Box** (browser apps, their o
 
 ## The shared panel
 
-All four use **TAW-Panel** (this repo) for the look: Drone Box's Jupiter-style panel, Black or Silver, keys, knobs, faders, red displays, lists, and the spectrum drawing and FFT (feature `analyser`). Apps pin a TAW-Panel commit in Cargo.toml; a new panel version only reaches an app when its pin moves. TAW-Panel is public; the apps are private.
+All four use **TAW-Panel** (this repo) for the look. Apps pin a TAW-Panel commit in Cargo.toml; a new panel version only reaches an app when its pin moves. TAW-Panel is public; the apps are private.
+
+- **The TAW look** (`hifi`, from 2026-10-14) is for the hi-fi apps: a calm, modern faceplate. **Anodised** (brushed aluminium, white display) is the default, in **Light** with the **Neutral** accent; **Porcelain** (matte white, paper display; Graphite when dark) is the alternative. Light, Dark or Automatic; the accent can be the finish's own or one of Spool's colours. The badge ("Timster's Audio Works - Player"), slanted logo and model line stay from the original panel as the family's tie-in. Apps draw their own title strip and window buttons, with "Use the system title bar" in Settings. Each app has a Simple and a Detailed view, and a family switcher along the top. `docs/finishes-review.html` is the reviewed mock-up (version 1, with all seven finishes, is `finishes-review-v1.html`).
+- **The Jupiter look** (`theme`, `widgets`, `lists`, `frame`) is Drone Box's panel language: Black or Silver, coloured keys, knobs, faders, red displays. It stays for the **Box** instruments (Drone Box, Drum Box) and could give them a matching Box EQ and Box Analyser (same engines, Box face).
+- Both share the spectrum drawing and FFT (feature `analyser`).
+
+Where each app is: the Analyser and Equaliser have the TAW look (first working builds, on their branches for review); the Player and Library still have the Jupiter look.
 
 ## How they fit together
 
@@ -54,11 +60,13 @@ The short name is on the panel; the full name is everywhere technical, so "Libra
 ## Order of work
 
 1. Get each app to a usable state: the Equaliser tested on Windows (the EQ Box to TAW Equaliser switch), then the Player running (first build 2026-10-13, on its branch for review).
-2. Then the look: skins (parked in TAW-Panel's ROADMAP.md).
+2. The TAW look: Analyser and Equaliser first (done, for review), then the Player and Library.
+3. Later finishes and skins (parked in TAW-Panel's ROADMAP.md).
 
 ## Parked ideas
 
 Ideas suggested along the way, kept here for review later. Nothing here is scheduled.
 
-- **TAW finishes (proposed 2026-10-13)**: a modern hi-fi look for the TAW apps (Anodised, Bronze, Cassette, Walnut, Porcelain, Studio, Spool; each light and dark), Simple/Detailed views, Separates/Now Playing/Mini layouts. The Jupiter look would stay with the Box family (Drone Box, Drum Box, and a Box EQ and Analyser). See `docs/finishes-review.html`.
+- **More finishes** for the TAW look: Bronze, Cassette, Walnut, Studio and Spool (in `docs/finishes-review-v1.html`).
+- **Resizable columns and panes** (the Library first): drag a column divider or pane edge to resize, double-click to fit the contents, widths remembered per view; one flexible column (the title) takes the spare room.
 - **Panel skins**: 18 candidates reviewed 2026-10-13; see TAW-Panel's ROADMAP.md and `docs/skins-review.html`.
