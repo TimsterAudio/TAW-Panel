@@ -2,7 +2,7 @@
 <title>TAW Finishes Review</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Chivo+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Courier+Prime:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Hanken+Grotesk:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Chivo+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Courier+Prime:wght@700&display=swap">
 <style>
 /* Layout: a review sheet. Controls on top, one large live mock-up, then
    every finish side by side, the family stack, and the decisions. */
@@ -72,21 +72,32 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
 /* ------------------------------------------------------------ the mock-ups
    Fixed design sizes, scaled to fit. Every colour comes from the finish's
    variables, set inline on .m. */
-.m { width: 1040px; height: 640px; position: relative; overflow: hidden; color: var(--t); font-family: var(--uf); border-radius: 14px;
+.m { width: 1040px; height: 680px; position: relative; overflow: hidden; color: var(--t); font-family: var(--uf); border-radius: 14px;
   background: var(--face); box-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 18px 40px -18px rgba(0,0,0,.45); }
-.m.mini { height: 132px; }
+.m.mini { height: 140px; }
 .m.unit { height: 176px; border-radius: 10px; }
 .m::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 1px solid var(--edge); pointer-events: none; z-index: 3; }
 .m .tex { position: absolute; inset: 0; background: var(--tex); pointer-events: none; }
 .m .cheek { position: absolute; top: 0; bottom: 0; width: 26px; background: var(--wood); box-shadow: inset -2px 0 4px rgba(0,0,0,.35); }
 .m .cheek.l { left: 0; } .m .cheek.r { right: 0; box-shadow: inset 2px 0 4px rgba(0,0,0,.35); }
-.m .in { position: absolute; inset: 0 var(--cheekw) 0 var(--cheekw); padding: 18px 26px; display: grid; grid-template-columns: minmax(0, 1fr); }
-.plate { display: flex; align-items: center; gap: 18px; height: 40px; }
+.m .in { position: absolute; inset: 0 var(--cheekw) 0 var(--cheekw); padding: 16px 26px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.plate { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: 18px; height: 80px; }
+.badgeblk { display: grid; gap: 5px; justify-items: start; }
+.badge { font-size: 12px; border: 1px solid var(--ln); border-radius: 4px; padding: 3px 9px; color: var(--d); white-space: nowrap; background: var(--badgebg, transparent); }
+.badge b { color: var(--t); font-weight: 700; }
+.logo { font-family: "Michroma", var(--uf); font-size: 22px; letter-spacing: .16em; line-height: 1.15; display: inline-block; transform: skewX(-12deg); transform-origin: left bottom; margin-left: 3px; }
+.modelline { font-size: 9.5px; letter-spacing: .2em; color: var(--d); text-transform: uppercase; white-space: nowrap; }
+.pright { display: grid; justify-items: end; gap: 12px; }
+.pright .r2 { display: flex; gap: 12px; align-items: center; }
+.winb { display: flex; gap: 6px; margin-top: -4px; margin-right: -10px; }
+.winb span { width: 28px; height: 22px; border-radius: 6px; display: grid; place-items: center; color: var(--d); }
+.winb span.x { color: var(--t); }
+.winb svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; }
 .brand { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
 .brand .maker { font-size: 12px; color: var(--d); letter-spacing: .02em; }
 .brand .name { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
 .brand .code { font-family: var(--mf); font-size: 11px; color: var(--d); border: 1px solid var(--ln); padding: 2px 6px; border-radius: 4px; }
-.fam { display: flex; gap: 2px; background: var(--well); border: 1px solid var(--ln); border-radius: 999px; padding: 3px; margin-left: auto; }
+.fam { display: flex; gap: 2px; background: var(--well); border: 1px solid var(--ln); border-radius: 999px; padding: 3px; }
 .fam span { font-size: 12.5px; padding: 5px 12px; border-radius: 999px; color: var(--d); display: inline-flex; align-items: center; gap: 6px; }
 .fam span i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
 .fam span.on { background: var(--raised); color: var(--t); box-shadow: 0 1px 2px rgba(0,0,0,.18); font-weight: 600; }
@@ -179,10 +190,16 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
 .mini .prog { margin-top: 8px; width: 100%; }
 .mini .disp { height: 72px; width: 230px; grid-template-columns: 1fr; gap: 6px; padding: 10px 14px; }
 .mini .brandmini { position: absolute; right: 22px; top: 8px; font-size: 10.5px; color: var(--d); letter-spacing: .04em; }
+.mini .winb { margin: 0; } .mini .winb span { width: 22px; height: 18px; }
+.mini .in { padding-top: 26px; }
 
 /* Family units */
-.unit .in { padding: 12px 24px; grid-template-columns: 200px 1fr; gap: 26px; align-items: center; }
-.unit .nm { display: grid; gap: 4px; align-content: center; border-right: 1px solid var(--ln); height: 100%; }
+.unit .in { padding: 12px 24px; grid-template-columns: 232px 1fr; gap: 26px; align-items: center; }
+.unit .nm { display: grid; gap: 5px; align-content: center; justify-items: start; border-right: 1px solid var(--ln); height: 100%; }
+.unit .nm .logo { font-size: 18px; }
+.unit .nm .modelline { font-size: 8.5px; letter-spacing: .14em; }
+.unit .nm .badge { font-size: 11px; display: inline-flex; align-items: center; gap: 6px; }
+.unit .nm .badge i { width: 8px; height: 8px; border-radius: 50%; }
 .unit .nm .maker { font-size: 11px; color: var(--d); }
 .unit .nm .name { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 .unit .nm .name i { width: 9px; height: 9px; border-radius: 50%; }
@@ -263,6 +280,11 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
 .drive i { width: 8px; height: 8px; border-radius: 50%; background: #2fbf71; }
 .drive i.offl { background: transparent; box-shadow: inset 0 0 0 1.5px var(--d); }
 .drive small { color: var(--d); font-size: 11.5px; font-family: var(--mf); }
+.lib > div { position: relative; }
+.grip { position: absolute; right: -11px; top: 50%; width: 4px; height: 34px; margin-top: -17px; border-radius: 2px; background: var(--ln); box-shadow: 0 0 0 3px var(--face, transparent); }
+.th { display: grid; grid-template-columns: 26px 1fr 54px 60px; gap: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--d); padding: 4px 4px 6px; border-bottom: 1px solid var(--ln); font-weight: 600; }
+.th span { position: relative; }
+.th span + span::before { content: ""; position: absolute; left: -5px; top: 1px; bottom: 1px; width: 1px; background: var(--ln); }
 .col { background: var(--well); border: 1px solid var(--ln); border-radius: 8px; display: grid; align-content: start; overflow: hidden; }
 .col h5 { padding: 9px 12px; border-bottom: 1px solid var(--ln); }
 .col .ai { display: flex; justify-content: space-between; padding: 7px 12px; font-size: 13.5px; border-bottom: 1px solid var(--ln2); }
@@ -291,9 +313,9 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
 
 <div class="page">
   <header class="top">
-    <div class="eyebrow">Timster's Audio Works · panel review · 13 October 2026</div>
+    <div class="eyebrow">Timster's Audio Works · panel review · version 2 · 14 October 2026</div>
     <h1>TAW finishes: a modern hi-fi look for the Library, Player, Equaliser and Analyser</h1>
-    <p class="muted">The Jupiter look stays with the Box instruments. This is a proposal for the TAW apps: one calm layout built for listening, in a choice of finishes, each in a light and a dark build. Use the controls to change the mock-up below; click any thumbnail further down to load it.</p>
+    <p class="muted">The Jupiter look stays with the Box instruments. For the first builds of the TAW apps: Anodised (the default, Light, Neutral accent) and Porcelain as the alternative, each in a light and a dark build. The original badge, logo and model line stay as the tie-in, and the apps draw their own window buttons instead of a system title bar.</p>
   </header>
 
   <div class="controls" role="group" aria-label="Mock-up settings">
@@ -322,8 +344,8 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
   </section>
 
   <section aria-labelledby="all-h">
-    <h2 id="all-h">Every finish, light and dark</h2>
-    <p class="muted">Same Player, same layout. Only the faceplate changes: material, texture, accent and the style of the display window.</p>
+    <h2 id="all-h">The two finishes, light and dark</h2>
+    <p class="muted">Same Player, same layout. Bronze, Cassette, Walnut, Studio and Spool are parked for later (version 1 of this page has them).</p>
     <div class="grid2" id="all"></div>
   </section>
 
@@ -367,11 +389,12 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
   <section aria-labelledby="dec-h">
     <h2 id="dec-h">For you to decide</h2>
     <ol class="decide">
-      <li>Which layout is the Player's default: Separates (artwork, display and list together), Now Playing (big artwork and controls, the list as a side panel), or both with a switch, plus Mini as a small always-on-top window?</li>
-      <li>Which finishes ship first. A suggestion: Anodised and Dark Anodised as the default pair, then Spool, Cassette and Walnut.</li>
-      <li>Whether the accent is fixed per finish, or chosen separately as in Spool (its seven colours are offered above).</li>
+      <li>Which layout is the Player's default: Separates, Now Playing, or both with a switch, plus Mini as a small always-on-top window?</li>
+      <li>Whether Porcelain keeps its orange as an option, or uses Neutral like Anodised by default.</li>
+      <li>Whether the other accent colours (Spool's seven) are offered in settings from the start.</li>
       <li>Whether Simple is the default view for new users.</li>
       <li>Whether the light and dark builds follow the computer's setting automatically, with a manual override.</li>
+      <li>The window buttons: right-hand end everywhere, or follow the desktop (left on some Linux desktops)? And the "Use system title bar" setting as a fallback.</li>
       <li>Naming: keep "TAW-Panel" for the new system and rename the current crate for the Box family, or the other way round.</li>
     </ol>
   </section>
@@ -448,11 +471,13 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
       dark: { name: 'Spool Dark', face: '#26221d', tex: 'none', t: '#ece6db', d: '#929090', raised: '#39342d', well: '#2c2a25', ln: '#4a4339', ln2: 'rgba(255,240,210,.05)', sel: '#6b5427', acc: '#e8a33d', onacc: '#26221d', groove: '#6b5427', knob: '#ece6db', bar: '#2c2a25', disp: 'spool', uf: '"Space Grotesk"', mf: '"IBM Plex Mono"', spool: 1 },
     },
   };
-  const ORDER = ['anodised', 'bronze', 'cassette', 'walnut', 'porcelain', 'studio', 'spool'];
+  const ORDER = ['anodised', 'porcelain'];
+  const LATER = ['bronze', 'cassette', 'walnut', 'studio', 'spool'];
 
-  let state = { finish: 'anodised', mode: 'light', view: 'detailed', layout: 'separates', accent: 'default', app: 'equaliser' };
-  try { const s = JSON.parse(localStorage.getItem('taw-finishes') || 'null'); if (s) state = Object.assign(state, s); } catch (e) {}
-  const save = () => { try { localStorage.setItem('taw-finishes', JSON.stringify(state)); } catch (e) {} };
+  let state = { finish: 'anodised', mode: 'light', view: 'detailed', layout: 'separates', accent: 'neutral', app: 'equaliser' };
+  try { const s = JSON.parse(localStorage.getItem('taw-finishes-2') || 'null'); if (s) state = Object.assign(state, s); } catch (e) {}
+  if (!['anodised', 'porcelain'].includes(state.finish)) state.finish = 'anodised';
+  const save = () => { try { localStorage.setItem('taw-finishes-2', JSON.stringify(state)); } catch (e) {} };
 
   const hexToRgb = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
   const mix = (a, b, t) => { const x = hexToRgb(a), y = hexToRgb(b); return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join(''); };
@@ -507,13 +532,22 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
     const apps = [['Library', '#2aa79b'], ['Player', null], ['Equaliser', '#e0a030'], ['Analyser', '#9b7be0']];
     return `<div class="fam">${apps.map(([n, c]) => `<span class="${n === active ? 'on' : ''}"><i style="background:${c || 'var(--acc)'}"></i>${n}</span>`).join('')}</div>`;
   }
-  function plate(view) {
+  const MODEL = {
+    Library: ['LB-001', 'Music library manager', '0.2.0'], Player: ['PL-001', 'Music player', '0.1.0'],
+    Equaliser: ['EQ-001', 'Ten band parametric equaliser', '0.3.0'], Analyser: ['SP-001', 'Spectrum analyser', '0.1.0'],
+  };
+  const WIN = `<div class="winb" aria-hidden="true"><span><svg viewBox="0 0 12 12"><path d="M2 6.5h8"/></svg></span><span><svg viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="1"/></svg></span><span class="x"><svg viewBox="0 0 12 12"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7"/></svg></span></div>`;
+  // The original badge, logo and model line, then the window buttons and
+  // the family switcher on the right.
+  function plateFor(name, code, view) {
+    const m = MODEL[name];
     return `<div class="plate">
-      <div class="brand"><span class="name">Player</span><span class="code">PL-001</span><span class="maker">Timster's Audio Works</span></div>
-      ${familyNav('Player')}
-      <div class="seg"><span class="${view === 'simple' ? 'on' : ''}">Simple</span><span class="${view === 'detailed' ? 'on' : ''}">Detailed</span></div>
-      <div class="gear">${ICON.gear}</div></div>`;
+      <div class="badgeblk"><span class="badge">Timster's Audio Works - <b>${name}</b></span><span class="logo">${name.toUpperCase()}</span><span class="modelline">${m[0]} · ${m[1]} · V${m[2]}</span></div>
+      <div class="pright">${WIN}<div class="r2">${familyNav(name)}
+        <div class="seg"><span class="${view === 'simple' ? 'on' : ''}">Simple</span><span class="${view === 'detailed' ? 'on' : ''}">Detailed</span></div>
+        <div class="gear">${ICON.gear}</div></div></div></div>`;
   }
+  const plate = (view) => plateFor('Player', 'PL-001', view);
   const art = () => `<div class="art"><small>Mara Quell</small><b>Harbour Lights</b></div>`;
   const quality = (view) => view === 'simple'
     ? `<div class="q"><i></i>Playing as recorded · CD quality</div>`
@@ -542,7 +576,7 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
   function mini(o) {
     return `<div class="in">${art()}<div><div class="meta"><div class="t">Harbour Lights</div><div class="a" style="font-size:13.5px;color:var(--d)">Mara Quell · Lantern Row</div></div>${progress()}</div>
       ${buttons()}<div class="disp"><div class="meters"><div class="mrow"><span>L</span><div class="segs">${meter(24, o.f, o.v)}</div></div><div class="mrow"><span>R</span><div class="segs">${meter(22, o.f, o.v)}</div></div></div><div style="font-size:11px;letter-spacing:.1em;opacity:.8">${o.view === 'simple' ? 'CD QUALITY' : 'FLAC 16/44.1 · NATIVE'}</div></div></div>
-      <div class="brandmini">TAW Player · PL-001</div>`;
+      <div class="brandmini" style="display:flex;gap:10px;align-items:center;top:6px;right:12px"><span class="badge" style="font-size:10.5px;padding:1px 7px">Timster's Audio Works - <b>Player</b></span>${WIN.replace('margin-top: -4px', '')}</div>`;
   }
 
   function mock(fk, mode, accent, view, layout) {
@@ -558,7 +592,7 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
     const x = vars(fk, mode, accent);
     const cheeks = x.cheek ? '<div class="cheek l"></div><div class="cheek r"></div>' : '';
     const u = (name, code, dot, body) => `<div class="m unit" style="${x.css}"><div class="tex"></div>${cheeks}<div class="in">
-      <div class="nm"><span class="maker">Timster's Audio Works</span><span class="name"><i style="background:${dot}"></i>${name}</span><span class="code">${code}</span></div>${body}</div></div>`;
+      <div class="nm"><span class="badge"><i style="background:${dot}"></i>Timster's Audio Works - <b>${name}</b></span><span class="logo">${name.toUpperCase()}</span><span class="modelline">${code} · ${MODEL[name][1]}</span></div>${body}</div></div>`;
     const eq = () => {
       const pts = []; for (let i = 0; i <= 100; i++) { const xx = i / 100; const y = 40 - 14 * Math.exp(-((xx - .12) ** 2) / .004) + 9 * Math.exp(-((xx - .55) ** 2) / .01) - 11 * Math.exp(-((xx - .86) ** 2) / .006); pts.push(`${(xx * 600).toFixed(1)},${y.toFixed(1)}`); }
       return `<svg class="eq" viewBox="0 0 600 80" preserveAspectRatio="none"><line x1="0" y1="40" x2="600" y2="40" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="3 4"/><polyline points="${pts.join(' ')}" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>`;
@@ -582,13 +616,6 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
     'linear-gradient(120deg,#5a1414,#c0392b 50%,#f2c14e)',
     'linear-gradient(160deg,#ece6db,#b9b2a3)',
   ];
-  function plateFor(name, code, view) {
-    return `<div class="plate">
-      <div class="brand"><span class="name">${name}</span><span class="code">${code}</span><span class="maker">Timster's Audio Works</span></div>
-      ${familyNav(name)}
-      <div class="seg"><span class="${view === 'simple' ? 'on' : ''}">Simple</span><span class="${view === 'detailed' ? 'on' : ''}">Detailed</span></div>
-      <div class="gear">${ICON.gear}</div></div>`;
-  }
   const knob = (t, label, value) => {
     const a0 = 135, a1 = 405, a = a0 + (a1 - a0) * t, r = 14, c = 18;
     const pt = (deg, rr) => [c + rr * Math.cos(deg * Math.PI / 180), c + rr * Math.sin(deg * Math.PI / 180)];
@@ -716,7 +743,7 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
           <div class="vsep"></div>
           <div class="grp" style="gap:14px"><span class="lab" style="display:inline-flex;gap:8px;align-items:center"><span class="sw on"></span>Grid</span><span class="lab" style="display:inline-flex;gap:8px;align-items:center"><span class="sw on"></span>Peak hold</span><span class="lab">Colour</span><span class="sel" style="min-width:92px">Display</span></div>
          </div>`;
-    const winH = simple ? 452 : 380;
+    const winH = simple ? 476 : 404;
     return `<div class="in" style="grid-template-rows:auto 1fr">${plateFor('Analyser', 'SP-001', o.view)}
       <div class="anwin" style="height:${winH}px;margin-top:14px">${anSvg(988, winH, 'curve')}
         <div style="position:absolute;left:58px;top:12px;font-size:12px;opacity:.75;letter-spacing:.08em">${simple ? 'SPEAKERS' : 'SPEAKERS · 48 kHz · PEAK HOLD 1.5 s'}</div></div></div>
@@ -726,24 +753,24 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
   function library(o) {
     const simple = o.view === 'simple';
     const artists = [['Mara Quell', 4], ['Marlow Trio', 2], ['Massive Attack', 6], ['Matt Elliott', 3], ['Maxence Cyrin', 1], ['Mazzy Star', 3], ['Meat Puppets', 5], ['Melody Gardot', 4], ['Men I Trust', 3], ['Metronomy', 5], ['Mica Levi', 2], ['Midlake', 4]];
-    const tracks = TRACKS.slice(0, simple ? 8 : 5);
+    const tracks = TRACKS.slice(0, simple ? 8 : 4);
     return `<div class="in" style="grid-template-rows:auto auto 1fr;padding-bottom:52px">${plateFor('Library', 'LB-001', o.view)}
       <div class="toolrow" style="margin-top:14px"><div class="search" style="flex:1">${ICON.search}Search artists, albums and tracks</div>
         <span class="btn acc">Scan drives</span>${simple ? '' : '<span class="btn">Add folder</span><span class="btn">Exclude…</span><span class="sel">Lookups: off</span>'}</div>
       <div class="lib">
-        <div class="side">
+        <div class="side"><span class="grip" title="Drag to resize"></span>
           <div><h5>View</h5><div class="nav" style="margin-top:6px"><span class="on">Library <em>12,480</em></span><span>What's missing <em>41</em></span>${simple ? '' : '<span>Duplicates <em>soon</em></span><span>Organise <em>soon</em></span>'}</div></div>
           <div><h5>Drives</h5><div style="margin-top:6px;display:grid;gap:2px">
             <div class="drive"><i></i>Music (D:)<small>9,812</small></div><div class="drive"><i></i>NAS · Media<small>2,104</small></div><div class="drive"><i class="offl"></i>Old iPod<small>offline</small></div></div></div>
           ${simple ? '' : `<div><h5>Merge suggestions</h5><div class="nav" style="margin-top:6px"><span>Beatles · The Beatles <em>2</em></span><span>Bjork · Björk <em>2</em></span></div></div>`}
         </div>
-        <div class="col"><h5>Artists · M</h5>${artists.map(([n, c], i) => `<div class="ai ${i === 0 ? 'on' : ''}">${n}<em>${c}</em></div>`).join('')}</div>
+        <div class="col" style="overflow:visible"><span class="grip" title="Drag to resize"></span><h5>Artists · M</h5>${artists.map(([n, c], i) => `<div class="ai ${i === 0 ? 'on' : ''}">${n}<em>${c}</em></div>`).join('')}</div>
         <div style="display:grid;gap:14px;align-content:start;min-width:0">
           <div class="albumd"><div class="cov" style="background:${COVERS[0]}"></div>
             <div style="display:grid;align-content:start;gap:2px"><div class="lab">Mara Quell · album</div><div class="t">Lantern Row</div><div style="color:var(--d);font-size:13.5px">2024 · 8 tracks · 39 min</div>
               <div class="chips2">${simple ? '<span class="tag okk">Complete</span>' : '<span class="tag">FLAC 16/44.1</span><span class="tag okk">Artwork 1400 px</span><span class="tag okk">Tags complete</span>'}</div>
               <div style="display:flex;gap:8px;margin-top:10px"><span class="btn acc">${ICON.next.replace('<svg', '<svg width="12" height="12" fill="currentColor"')} Play in Player</span>${simple ? '' : '<span class="btn">Show folder</span>'}</div></div></div>
-          <div class="tlist">${tracks.map((t, i) => `<div class="tr"><span class="n">${i + 1}</span><span>${t[0]}</span><span class="f">${simple ? '' : 'FLAC'}</span><span class="tm">${t[2]}</span></div>`).join('')}</div>
+          <div class="tlist"><div class="th"><span>#</span><span>Title</span><span>${simple ? '' : 'Type'}</span><span style="text-align:right">Time</span></div>${tracks.map((t, i) => `<div class="tr"><span class="n">${i + 1}</span><span>${t[0]}</span><span class="f">${simple ? '' : 'FLAC'}</span><span class="tm">${t[2]}</span></div>`).join('')}</div>
           ${simple ? '' : `<div><div class="lab" style="margin-bottom:6px">More by Mara Quell</div><div class="albums">
             <div class="alb"><div class="cov" style="background:${COVERS[4]}"></div>Tidewater<small>2021</small></div>
             <div class="alb"><div class="cov none">no art</div>Field Notes (EP)<small>2019 · <span style="color:#c07a18">missing artwork</span></small></div>
@@ -755,7 +782,7 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
       <div class="libfoot"><span>12,480 tracks · 1,032 albums · last scan 2 hours ago</span><span>Read only · your files are never changed</span></div>`;
   }
 
-  const APPS = [['library', 'Library', 640], ['player', 'Player', 640], ['equaliser', 'Equaliser', 724], ['analyser', 'Analyser', 640]];
+  const APPS = [['library', 'Library', 680], ['player', 'Player', 680], ['equaliser', 'Equaliser', 764], ['analyser', 'Analyser', 680]];
   function appMock(app, fk, mode, accent, view) {
     if (app === 'player') return mock(fk, mode, accent, view, 'separates');
     const x = vars(fk, mode, accent);
@@ -766,7 +793,7 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
     return `<div class="m" style="${x.css};height:${h}px"><div class="tex"></div>${cheeks}${body}</div>`;
   }
   const APP_NOTES = {
-    library: [['Library', 'Search across everything, a sidebar for views and drives, and the selected album with its tracks and a Play in Player button. Problems show as small amber tags, not red warnings.'], ['Simple', 'Hides Duplicates, Organise, merge suggestions, Exclude and Lookups until they’re wanted; keeps Scan, search and Play.']],
+    library: [['Library', 'Search across everything, a sidebar for views and drives, and the selected album with its tracks and a Play in Player button. Problems show as small amber tags, not red warnings. The grey grips between the panes, and the lines between column titles, can be dragged to resize; double-click one to fit its contents. Widths are remembered.'], ['Simple', 'Hides Duplicates, Organise, merge suggestions, Exclude and Lookups until they’re wanted; keeps Scan, search and Play.']],
     player: [['Player', 'As above: artwork and track, the display window with meters and spectrum, the list, and the front-panel transport bar.'], ['Simple', 'Drops the display window and the numbers; the list gets the room.']],
     equaliser: [['Equaliser', 'One big On switch with where it’s working (whole computer, which output). Presets, preamp and meters in one row. The response graph is the display window, with the spectrum faintly behind. Ten band cards below: a type menu, a gain slider, and small Freq and Q knobs; the selected band is outlined and its point ringed on the graph. Pass filters have no gain, so their card says so instead of showing a slider.'],
       ['Simple', 'Five tone sliders (Bass to Treble, each a band of the same engine) and one-tap presets. Detailed keeps every band; switching back and forth never loses settings.']],
@@ -802,7 +829,7 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
     chips('c-app', APPS.map(([k, n]) => [k, n]), 'app', render);
     chips('c-layout', [['separates', 'Separates'], ['nowplaying', 'Now Playing'], ['mini', 'Mini']], 'layout', render);
     const dflt = F[state.finish][state.mode].acc;
-    chips('c-accent', [['default', 'Finish default', `<span class="dot" style="background:${dflt}"></span>`]]
+    chips('c-accent', [['default', 'Finish colour', `<span class="dot" style="background:${dflt}"></span>`]]
       .concat(Object.keys(SPOOL_ACCENTS).map(k => [k, k[0].toUpperCase() + k.slice(1), `<span class="dot" style="background:${SPOOL_ACCENTS[k][state.mode === 'dark' ? 0 : 1]}"></span>`])), 'accent', render);
   }
 
@@ -810,7 +837,7 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
     renderControls();
     const f = F[state.finish];
     const fm = f[state.mode];
-    const h = state.layout === 'mini' ? 132 : 640;
+    const h = state.layout === 'mini' ? 140 : 680;
     place(document.getElementById('live'), mock(state.finish, state.mode, state.accent, state.view, state.layout), 1040, h);
     const dispName = fm.disp === 'spool' ? 'Spool’s display' : DISPLAYS[fm.disp].name;
     document.getElementById('live-cap').textContent = `${fm.name} · ${dispName} display · ${state.view === 'simple' ? 'Simple' : 'Detailed'} view`;
@@ -843,9 +870,9 @@ ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 7
     // Drop stale thumbnail stages, then add the new ones.
     for (let i = stages.length - 1; i >= 0; i--) if (!document.body.contains(stages[i].stage)) stages.splice(i, 1);
     all.querySelectorAll('.thumb').forEach(t => {
-      place(t, mock(t.dataset.f, t.dataset.m, 'default', 'detailed', 'separates'), 1040, 640);
+      place(t, mock(t.dataset.f, t.dataset.m, state.accent, 'detailed', 'separates'), 1040, 680);
       ro.observe(t);
-      const go = () => { state.finish = t.dataset.f; state.mode = t.dataset.m; state.accent = 'default'; save(); render(); document.getElementById('live-h').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+      const go = () => { state.finish = t.dataset.f; state.mode = t.dataset.m; save(); render(); document.getElementById('live-h').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
       t.onclick = go; t.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } };
     });
   }

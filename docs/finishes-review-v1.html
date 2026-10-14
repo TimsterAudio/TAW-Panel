@@ -1,0 +1,858 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>TAW Finishes Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Chivo+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Courier+Prime:wght@700&display=swap">
+<style>
+/* Layout: a review sheet. Controls on top, one large live mock-up, then
+   every finish side by side, the family stack, and the decisions. */
+:root {
+  --bg: #f1f0ec;
+  --ink: #1e1f1c;
+  --muted: #64655f;
+  --line: #d7d5ce;
+  --card: #fbfaf7;
+  --chip: #e6e4dd;
+  --chip-on: #1e1f1c;
+  --chip-on-ink: #fbfaf7;
+  --pick: #d2622a;
+  --f-display: "Bricolage Grotesque", "Hanken Grotesk", system-ui, sans-serif;
+  --f-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "Chivo Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161715; --ink: #ecebe6; --muted: #9c9b94; --line: #33342f; --card: #1e1f1c;
+    --chip: #2a2b27; --chip-on: #ecebe6; --chip-on-ink: #161715; --pick: #f08a52; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161715; --ink: #ecebe6; --muted: #9c9b94; --line: #33342f; --card: #1e1f1c;
+  --chip: #2a2b27; --chip-on: #ecebe6; --chip-on-ink: #161715; --pick: #f08a52; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.page { max-width: 1240px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 64px; display: grid; gap: 44px; }
+h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+h2 { font-family: var(--f-display); font-weight: 700; font-size: 24px; margin: 0; text-wrap: balance; }
+h3 { font-size: 15px; margin: 0; font-weight: 700; }
+p { margin: 0; max-width: 68ch; }
+.muted { color: var(--muted); }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+header.top { display: grid; gap: 12px; }
+section { display: grid; gap: 16px; }
+.controls { display: grid; gap: 10px; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); }
+.row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.row > .lbl { width: 76px; font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 13px/1 var(--f-body); border: 0; background: var(--chip); color: var(--ink); padding: 8px 12px; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.chip[aria-pressed="true"] { background: var(--chip-on); color: var(--chip-on-ink); }
+.chip:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+.stage { width: 100%; position: relative; }
+.scaler { transform-origin: 0 0; position: absolute; left: 0; top: 0; }
+.note { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.note > div { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 22px 22px; }
+.fin { display: grid; gap: 8px; min-width: 0; }
+.fin .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.fin .cap { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.fin .cap small { color: var(--muted); font-size: 12px; }
+.thumb { cursor: pointer; border-radius: 8px; overflow: hidden; }
+.thumb:focus-visible { outline: 2px solid var(--pick); outline-offset: 2px; }
+.thumbname { font-size: 12px; color: var(--muted); margin-top: 3px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+td code { font-family: var(--f-mono); font-size: 13px; }
+.tablewrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+ol.decide { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 75ch; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* ------------------------------------------------------------ the mock-ups
+   Fixed design sizes, scaled to fit. Every colour comes from the finish's
+   variables, set inline on .m. */
+.m { width: 1040px; height: 640px; position: relative; overflow: hidden; color: var(--t); font-family: var(--uf); border-radius: 14px;
+  background: var(--face); box-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 18px 40px -18px rgba(0,0,0,.45); }
+.m.mini { height: 132px; }
+.m.unit { height: 176px; border-radius: 10px; }
+.m::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 1px solid var(--edge); pointer-events: none; z-index: 3; }
+.m .tex { position: absolute; inset: 0; background: var(--tex); pointer-events: none; }
+.m .cheek { position: absolute; top: 0; bottom: 0; width: 26px; background: var(--wood); box-shadow: inset -2px 0 4px rgba(0,0,0,.35); }
+.m .cheek.l { left: 0; } .m .cheek.r { right: 0; box-shadow: inset 2px 0 4px rgba(0,0,0,.35); }
+.m .in { position: absolute; inset: 0 var(--cheekw) 0 var(--cheekw); padding: 18px 26px; display: grid; grid-template-columns: minmax(0, 1fr); }
+.plate { display: flex; align-items: center; gap: 18px; height: 40px; }
+.brand { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
+.brand .maker { font-size: 12px; color: var(--d); letter-spacing: .02em; }
+.brand .name { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+.brand .code { font-family: var(--mf); font-size: 11px; color: var(--d); border: 1px solid var(--ln); padding: 2px 6px; border-radius: 4px; }
+.fam { display: flex; gap: 2px; background: var(--well); border: 1px solid var(--ln); border-radius: 999px; padding: 3px; margin-left: auto; }
+.fam span { font-size: 12.5px; padding: 5px 12px; border-radius: 999px; color: var(--d); display: inline-flex; align-items: center; gap: 6px; }
+.fam span i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.fam span.on { background: var(--raised); color: var(--t); box-shadow: 0 1px 2px rgba(0,0,0,.18); font-weight: 600; }
+.seg { display: flex; border: 1px solid var(--ln); border-radius: 8px; overflow: hidden; }
+.seg span { font-size: 12px; padding: 5px 10px; color: var(--d); }
+.seg span.on { background: var(--raised); color: var(--t); font-weight: 600; }
+.gear { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--ln); display: grid; place-items: center; color: var(--d); }
+.gear svg { width: 16px; height: 16px; }
+
+.body { display: grid; grid-template-columns: 330px 1fr; gap: 26px; margin-top: 16px; min-height: 0; }
+.art { width: 330px; height: 330px; border-radius: 6px; position: relative; overflow: hidden; box-shadow: 0 10px 24px -10px rgba(0,0,0,.5); background: linear-gradient(160deg, #0f3b52 0%, #1d6f86 38%, #e7a65a 72%, #f5d9a8 100%); }
+.art::before { content: ""; position: absolute; left: -10%; right: -10%; top: 58%; height: 2px; background: rgba(255,255,255,.55); box-shadow: 0 10px 0 rgba(255,255,255,.25), 0 22px 0 rgba(255,255,255,.12); }
+.art::after { content: ""; position: absolute; width: 74px; height: 74px; border-radius: 50%; right: 56px; top: 108px; background: radial-gradient(circle, #fff3d6 0 40%, rgba(255,243,214,0) 70%); }
+.art b { position: absolute; left: 18px; bottom: 16px; color: #fff; font: 700 22px/1 var(--uf); letter-spacing: .02em; text-shadow: 0 1px 6px rgba(0,0,0,.4); }
+.art small { position: absolute; left: 18px; bottom: 42px; color: rgba(255,255,255,.85); font: 500 11px/1 var(--uf); letter-spacing: .2em; text-transform: uppercase; }
+.meta { margin-top: 16px; display: grid; gap: 2px; }
+.meta .t { font-size: 22px; font-weight: 700; line-height: 1.15; }
+.meta .a { font-size: 15px; }
+.meta .al { font-size: 13.5px; color: var(--d); }
+.q { margin-top: 10px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.q i { width: 9px; height: 9px; border-radius: 50%; background: #2fbf71; box-shadow: 0 0 0 3px rgba(47,191,113,.18); }
+.q .chipq { font-family: var(--mf); font-size: 11px; border: 1px solid var(--ln); padding: 1px 6px; border-radius: 4px; color: var(--d); }
+
+.right { display: grid; grid-template-rows: auto 1fr; gap: 14px; min-height: 0; }
+.disp { background: var(--dbg); border-radius: 8px; height: 112px; padding: 12px 16px; display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; color: var(--dink);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.5), 0 0 0 1px var(--dedge); font-family: var(--df); }
+.disp .time { font-size: 46px; line-height: 1; letter-spacing: .02em; text-shadow: var(--dglow); font-variant-numeric: tabular-nums; }
+.disp .time small { display: block; font-size: 12px; letter-spacing: .14em; opacity: .7; margin-top: 8px; }
+.disp .meters { display: grid; gap: 7px; }
+.mrow { display: grid; grid-template-columns: 12px 1fr; gap: 8px; align-items: center; font-size: 10px; opacity: .9; }
+.segs { display: grid; grid-template-columns: repeat(32, 1fr); gap: 2px; height: 11px; }
+.segs b { border-radius: 1px; }
+.spec { display: flex; align-items: flex-end; gap: 2px; height: 26px; }
+.spec b { flex: 1; border-radius: 1px 1px 0 0; background: var(--dink); opacity: .75; }
+
+.list { background: var(--well); border: 1px solid var(--ln); border-radius: 8px; overflow: hidden; display: grid; align-content: start; }
+.lh, .li { display: grid; grid-template-columns: 34px 1fr 150px 56px; gap: 10px; padding: 0 14px; align-items: center; }
+.lh { height: 30px; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--d); border-bottom: 1px solid var(--ln); font-weight: 600; }
+.li { height: 34px; font-size: 14px; border-bottom: 1px solid var(--ln2); }
+.li .n { color: var(--d); font-family: var(--mf); font-size: 12px; text-align: right; }
+.li .ar { color: var(--d); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.li .tm { color: var(--d); font-family: var(--mf); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+.li.on { background: var(--sel); }
+.li.on .tt { color: var(--acc); font-weight: 600; }
+.li.on .n { color: var(--acc); }
+
+.trans { position: absolute; left: var(--cheekw); right: var(--cheekw); bottom: 0; height: 92px; padding: 0 26px; display: grid; grid-template-columns: auto 1fr auto; gap: 26px; align-items: center; border-top: 1px solid var(--ln); background: var(--bar); }
+.btns { display: flex; align-items: center; gap: 10px; }
+.b { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; color: var(--t); background: var(--raised); box-shadow: 0 1px 0 rgba(255,255,255,.15) inset, 0 2px 4px rgba(0,0,0,.25); }
+.b svg { width: 18px; height: 18px; fill: currentColor; }
+.b.big { width: 58px; height: 58px; background: var(--acc); color: var(--onacc); }
+.b.big svg { width: 24px; height: 24px; }
+.b.flat { background: transparent; box-shadow: none; color: var(--d); width: 34px; }
+.prog { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; }
+.prog > span { font-family: var(--mf); font-size: 12px; color: var(--d); font-variant-numeric: tabular-nums; min-width: 34px; }
+.prog > span:last-child { text-align: right; }
+.track { height: 6px; border-radius: 3px; background: var(--groove); position: relative; }
+.track i { position: absolute; left: 0; top: 0; bottom: 0; width: 38%; border-radius: 3px; background: var(--acc); }
+.track u { position: absolute; left: 38%; top: 50%; width: 16px; height: 16px; border-radius: 50%; background: var(--knob); transform: translate(-50%, -50%); box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+.times { display: flex; justify-content: space-between; font-family: var(--mf); font-size: 12px; color: var(--d); font-variant-numeric: tabular-nums; }
+.vol { display: flex; align-items: center; gap: 10px; color: var(--d); font-size: 12px; }
+.vol .track { width: 120px; }
+.vol .track i { width: 72%; } .vol .track u { left: 72%; width: 14px; height: 14px; }
+.vol svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* Now Playing layout */
+.np { display: grid; grid-template-columns: 380px 1fr 250px; gap: 32px; margin-top: 16px; }
+.np .art { width: 380px; height: 380px; }
+.np .art::after { right: 70px; top: 130px; width: 90px; height: 90px; }
+.np .mid { display: grid; align-content: center; gap: 10px; }
+.np .mid .t { font-size: 34px; font-weight: 700; line-height: 1.05; }
+.np .mid .a { font-size: 19px; }
+.np .mid .al { font-size: 15px; color: var(--d); }
+.np .mid .t { font-size: 40px; }
+.np .mid .q { margin-top: 14px; font-size: 14px; }
+.np .mid .lead { margin-top: 18px; font-size: 14px; color: var(--d); }
+.np .queue { background: var(--well); border: 1px solid var(--ln); border-radius: 10px; padding: 14px; display: grid; align-content: start; gap: 10px; }
+.np .queue h4 { margin: 0; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--d); }
+.qi { display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: center; font-size: 13px; }
+.qi .th { width: 40px; height: 40px; border-radius: 4px; background: linear-gradient(160deg, #0f3b52, #1d6f86 45%, #e7a65a); }
+.qi small { display: block; color: var(--d); font-size: 12px; }
+.npfoot { position: absolute; left: var(--cheekw); right: var(--cheekw); bottom: 0; height: 54px; padding: 0 26px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--ln); background: var(--bar); font-size: 13px; color: var(--d); }
+
+/* Mini layout */
+.mini .in { padding: 14px 22px; grid-template-columns: 104px 1fr auto auto; gap: 20px; align-items: center; }
+.mini .art { width: 104px; height: 104px; box-shadow: none; }
+.mini .art::after, .mini .art::before, .mini .art b, .mini .art small { display: none; }
+.mini .meta { margin: 0; }
+.mini .meta .t { font-size: 18px; }
+.mini .prog { margin-top: 8px; width: 100%; }
+.mini .disp { height: 72px; width: 230px; grid-template-columns: 1fr; gap: 6px; padding: 10px 14px; }
+.mini .brandmini { position: absolute; right: 22px; top: 8px; font-size: 10.5px; color: var(--d); letter-spacing: .04em; }
+
+/* Family units */
+.unit .in { padding: 12px 24px; grid-template-columns: 200px 1fr; gap: 26px; align-items: center; }
+.unit .nm { display: grid; gap: 4px; align-content: center; border-right: 1px solid var(--ln); height: 100%; }
+.unit .nm .maker { font-size: 11px; color: var(--d); }
+.unit .nm .name { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.unit .nm .name i { width: 9px; height: 9px; border-radius: 50%; }
+.unit .nm .code { font-family: var(--mf); font-size: 11px; color: var(--d); }
+.unit .bodyu { display: grid; grid-template-columns: 1fr auto; gap: 22px; align-items: center; height: 100%; }
+.search { height: 38px; border-radius: 8px; background: var(--well); border: 1px solid var(--ln); display: flex; align-items: center; padding: 0 12px; color: var(--d); font-size: 14px; gap: 8px; }
+.stats { display: flex; gap: 22px; margin-top: 10px; font-size: 13px; color: var(--d); }
+.stats b { color: var(--t); font-size: 18px; display: block; font-weight: 700; }
+.pill { font-size: 12.5px; padding: 6px 12px; border-radius: 999px; background: var(--raised); border: 1px solid var(--ln); white-space: nowrap; }
+.pill.acc { background: var(--acc); color: var(--onacc); border-color: transparent; font-weight: 600; }
+.unit .disp { height: 120px; grid-template-columns: 1fr; padding: 8px 12px; }
+.unit svg.eq { width: 100%; height: 104px; display: block; }
+
+/* Full-size apps */
+.app-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.btn { font-size: 12.5px; padding: 6px 12px; border-radius: 8px; background: var(--raised); border: 1px solid var(--ln); white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
+.btn.acc { background: var(--acc); color: var(--onacc); border-color: transparent; font-weight: 600; }
+.sel { font-size: 12.5px; padding: 6px 10px; border-radius: 8px; background: var(--well); border: 1px solid var(--ln); display: inline-flex; justify-content: space-between; align-items: center; gap: 10px; white-space: nowrap; }
+.sel::after { content: "▾"; color: var(--d); font-size: 10px; }
+.lab { font-size: 11px; color: var(--d); letter-spacing: .04em; }
+.sw { width: 34px; height: 20px; border-radius: 10px; background: var(--groove); position: relative; flex: none; }
+.sw::after { content: ""; position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--knob); box-shadow: 0 1px 2px rgba(0,0,0,.3); }
+.sw.on { background: var(--acc); } .sw.on::after { left: 16px; }
+.sw.big { width: 52px; height: 30px; border-radius: 15px; } .sw.big::after { width: 24px; height: 24px; top: 3px; left: 3px; } .sw.big.on::after { left: 25px; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; }
+.status i { width: 9px; height: 9px; border-radius: 50%; background: #2fbf71; box-shadow: 0 0 0 3px rgba(47,191,113,.18); }
+.minimeter { display: grid; gap: 3px; width: 84px; }
+.minimeter .segs { height: 6px; grid-template-columns: repeat(24, 1fr); }
+.toolrow { display: flex; align-items: center; gap: 14px; flex-wrap: nowrap; }
+.toolrow .grp { display: flex; align-items: center; gap: 8px; }
+.vsep { width: 1px; align-self: stretch; background: var(--ln); }
+
+/* Equaliser */
+.eqgraph { position: relative; background: var(--dbg); border-radius: 8px; box-shadow: inset 0 2px 6px rgba(0,0,0,.5), 0 0 0 1px var(--dedge); color: var(--dink); font-family: var(--df); overflow: hidden; }
+.eqgraph svg { display: block; width: 100%; height: 100%; }
+.bands { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 7px; }
+.band { min-width: 0; background: var(--well); border: 1px solid var(--ln); border-radius: 8px; padding: 8px 6px 10px; display: grid; gap: 8px; justify-items: center; }
+.band.selb { border-color: var(--acc); box-shadow: 0 0 0 1px var(--acc); }
+.band.off { opacity: .55; }
+.band .bh { display: flex; width: 100%; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 700; }
+.band .bh span { display: inline-flex; align-items: center; gap: 5px; }
+.band .bh i { width: 9px; height: 9px; border-radius: 50%; }
+.band .sw { width: 28px; height: 16px; } .band .sw::after { width: 12px; height: 12px; } .band .sw.on::after { left: 14px; }
+.band .sel { width: 100%; font-size: 11.5px; padding: 4px 7px; }
+.vfader { width: 6px; height: 104px; border-radius: 3px; background: var(--groove); position: relative; }
+.vfader::before { content: ""; position: absolute; left: -6px; right: -6px; top: 33%; height: 1px; background: var(--d); opacity: .5; }
+.vfader i { position: absolute; left: 0; right: 0; border-radius: 3px; background: var(--acc); }
+.vfader u { position: absolute; left: 50%; width: 22px; height: 12px; border-radius: 4px; background: var(--knob); transform: translate(-50%, -50%); box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+.val { font-family: var(--mf); font-size: 12px; font-variant-numeric: tabular-nums; }
+.kn { display: grid; justify-items: center; gap: 1px; }
+.kn svg { width: 34px; height: 34px; }
+.kn .val, .kn .lab { white-space: nowrap; }
+.kn .val { font-size: 10.5px; }
+.kn .lab { font-size: 10px; }
+.tone { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+.tone .tb { background: var(--well); border: 1px solid var(--ln); border-radius: 10px; padding: 14px; display: grid; justify-items: center; gap: 10px; }
+.tone .vfader { height: 190px; width: 8px; }
+.tone .vfader u { width: 34px; height: 16px; }
+.tone .tb b { font-size: 15px; }
+
+/* Analyser */
+.anwin { position: relative; background: var(--dbg); border-radius: 8px; box-shadow: inset 0 2px 6px rgba(0,0,0,.5), 0 0 0 1px var(--dedge); color: var(--dink); font-family: var(--df); overflow: hidden; }
+.anwin svg { display: block; width: 100%; height: 100%; }
+.anbar { position: absolute; left: var(--cheekw); right: var(--cheekw); bottom: 0; padding: 12px 26px 14px; border-top: 1px solid var(--ln); background: var(--bar); display: grid; gap: 10px; }
+.segc { display: flex; border: 1px solid var(--ln); border-radius: 8px; overflow: hidden; background: var(--well); }
+.segc span { font-size: 12px; padding: 6px 11px; color: var(--d); white-space: nowrap; }
+.segc span.on { background: var(--acc); color: var(--onacc); font-weight: 600; }
+
+/* Library */
+.lib { display: grid; grid-template-columns: 196px 180px 1fr; gap: 18px; margin-top: 14px; min-height: 0; }
+.side { display: grid; align-content: start; gap: 14px; }
+.side h5, .col h5 { margin: 0; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--d); font-weight: 600; }
+.nav { display: grid; gap: 2px; }
+.nav span { display: flex; justify-content: space-between; align-items: center; font-size: 13.5px; padding: 6px 10px; border-radius: 7px; }
+.nav span.on { background: var(--sel); color: var(--acc); font-weight: 600; }
+.nav span em { font-style: normal; font-size: 11.5px; color: var(--d); font-family: var(--mf); }
+.drive { display: grid; grid-template-columns: 10px 1fr auto; gap: 8px; align-items: center; font-size: 13px; padding: 3px 2px; }
+.drive i { width: 8px; height: 8px; border-radius: 50%; background: #2fbf71; }
+.drive i.offl { background: transparent; box-shadow: inset 0 0 0 1.5px var(--d); }
+.drive small { color: var(--d); font-size: 11.5px; font-family: var(--mf); }
+.col { background: var(--well); border: 1px solid var(--ln); border-radius: 8px; display: grid; align-content: start; overflow: hidden; }
+.col h5 { padding: 9px 12px; border-bottom: 1px solid var(--ln); }
+.col .ai { display: flex; justify-content: space-between; padding: 7px 12px; font-size: 13.5px; border-bottom: 1px solid var(--ln2); }
+.col .ai em { font-style: normal; color: var(--d); font-size: 12px; font-family: var(--mf); }
+.col .ai.on { background: var(--sel); color: var(--acc); font-weight: 600; }
+.albumd { display: grid; grid-template-columns: 150px 1fr; gap: 18px; }
+.albumd .cov { width: 150px; height: 150px; border-radius: 6px; }
+.albumd .t { font-size: 22px; font-weight: 700; line-height: 1.15; }
+.chips2 { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag { font-size: 11.5px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--ln); color: var(--d); }
+.tag.warn { border-color: #d9902a; color: #c07a18; }
+.tag.okk { border-color: #2fbf71; color: #23955a; }
+.albums { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+.albums .cov { height: 64px; aspect-ratio: auto; }
+.alb { display: grid; gap: 5px; font-size: 12.5px; }
+.alb .cov { aspect-ratio: 1; border-radius: 5px; position: relative; }
+.alb .cov.none { background: repeating-linear-gradient(45deg, var(--well) 0 6px, var(--ln2) 6px 12px); border: 1px dashed var(--ln); display: grid; place-items: center; color: var(--d); font-size: 11px; }
+.alb small { color: var(--d); }
+.libfoot { position: absolute; left: var(--cheekw); right: var(--cheekw); bottom: 0; height: 40px; padding: 0 26px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--ln); background: var(--bar); font-size: 12.5px; color: var(--d); }
+.tlist { display: grid; }
+.tlist .tr { display: grid; grid-template-columns: 26px 1fr 54px 60px; gap: 8px; font-size: 13px; padding: 6px 4px; border-bottom: 1px solid var(--ln2); align-items: center; }
+.tlist .tr .n, .tlist .tr .tm { color: var(--d); font-family: var(--mf); font-size: 12px; }
+.tlist .tr .tm { text-align: right; }
+.tlist .tr .f { font-family: var(--mf); font-size: 10.5px; color: var(--d); }
+</style>
+
+<div class="page">
+  <header class="top">
+    <div class="eyebrow">Timster's Audio Works · panel review · 13 October 2026</div>
+    <h1>TAW finishes: a modern hi-fi look for the Library, Player, Equaliser and Analyser</h1>
+    <p class="muted">The Jupiter look stays with the Box instruments. This is a proposal for the TAW apps: one calm layout built for listening, in a choice of finishes, each in a light and a dark build. Use the controls to change the mock-up below; click any thumbnail further down to load it.</p>
+  </header>
+
+  <div class="controls" role="group" aria-label="Mock-up settings">
+    <div class="row"><span class="lbl">Finish</span><div class="chips" id="c-finish"></div></div>
+    <div class="row"><span class="lbl">Build</span><div class="chips" id="c-mode"></div>
+      <span class="lbl" style="width:auto;margin-left:10px">View</span><div class="chips" id="c-view"></div>
+      <span class="lbl" style="width:auto;margin-left:10px">Layout</span><div class="chips" id="c-layout"></div></div>
+    <div class="row"><span class="lbl">Accent</span><div class="chips" id="c-accent"></div></div>
+  </div>
+
+  <section aria-labelledby="live-h">
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+      <h2 id="live-h">Player</h2>
+      <p class="muted" id="live-cap" style="max-width:none"></p>
+    </div>
+    <div class="stage" id="live"></div>
+    <div class="note" id="live-notes"></div>
+  </section>
+
+  <section aria-labelledby="apps-h">
+    <div class="app-head"><h2 id="apps-h">Each app, full size</h2><p class="muted" id="apps-cap" style="max-width:none"></p></div>
+    <p class="muted">The four apps in the finish, build, view and accent chosen above. Switch View to Simple to see what a non-technical listener gets: the Equaliser becomes five tone sliders and presets, the Analyser just the picture.</p>
+    <div class="chips" id="c-app" role="group" aria-label="App"></div>
+    <div class="stage" id="app"></div>
+    <div class="note" id="app-notes"></div>
+  </section>
+
+  <section aria-labelledby="all-h">
+    <h2 id="all-h">Every finish, light and dark</h2>
+    <p class="muted">Same Player, same layout. Only the faceplate changes: material, texture, accent and the style of the display window.</p>
+    <div class="grid2" id="all"></div>
+  </section>
+
+  <section aria-labelledby="fam-h">
+    <h2 id="fam-h">The family as a stack of separates</h2>
+    <p class="muted">All four apps in the finish chosen above. Each unit keeps a small accent of its own on the nameplate (Library teal, Player in the finish accent, Equaliser amber, Analyser violet), and the switcher along the top of every app moves between them.</p>
+    <div class="stage" id="fam"></div>
+  </section>
+
+  <section aria-labelledby="words-h">
+    <h2 id="words-h">Simple and Detailed: the same facts in plain words</h2>
+    <p class="muted">Simple is the default. Detailed shows the numbers, meters and spectrum. Neither one claims more than the Player knows.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>What's happening</th><th>Simple</th><th>Detailed</th></tr></thead>
+      <tbody>
+        <tr><td>CD-quality file, played at its own rate, volume at 0 dB</td><td>● Playing as recorded · CD quality</td><td><code>FLAC · 16-bit · 44.1 kHz · native rate, untouched</code></td></tr>
+        <tr><td>Hi-res file, played at its own rate</td><td>● Playing as recorded · Hi-res</td><td><code>FLAC · 24-bit · 96 kHz · native rate, untouched</code></td></tr>
+        <tr><td>The output can't take the file's rate</td><td>● Converted for your speakers</td><td><code>FLAC · 24-bit · 96 kHz → resampled to 48 kHz</code></td></tr>
+        <tr><td>Volume turned down in the Player</td><td>● Playing · volume lowered</td><td><code>… · volume −6.0 dB (samples changed)</code></td></tr>
+        <tr><td>Lossy file</td><td>● Playing · compressed (MP3)</td><td><code>MP3 · 320 kbps · 44.1 kHz · native rate</code></td></tr>
+        <tr><td>Gap between albums at different rates</td><td>(nothing shown)</td><td><code>Output reopened at 96 kHz</code></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section aria-labelledby="split-h">
+    <h2 id="split-h">TAW and Box: what goes where</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th></th><th>TAW (hi-fi separates)</th><th>Box (instruments)</th></tr></thead>
+      <tbody>
+        <tr><td>Apps</td><td>Library, Player, Equaliser, Analyser</td><td>Drone Box, Drum Box, and a Box EQ and Box Analyser (same engines, Box face)</td></tr>
+        <tr><td>Look</td><td>These finishes: Anodised, Bronze, Cassette, Walnut, Porcelain, Studio, Spool</td><td>The Jupiter panel, Black or Silver, plus the instrument skins (Oberheim, Moog, Korg, Yamaha …)</td></tr>
+        <tr><td>Type</td><td>Normal-case labels at reading sizes, icons with words</td><td>Small letter-spaced capitals, slanted logo</td></tr>
+        <tr><td>Controls</td><td>Round transport buttons, sliders, a family switcher</td><td>Coloured keys with LEDs, knobs and faders</td></tr>
+        <tr><td>Displays</td><td>OLED white, amber or teal VFD, paper, Spool's own</td><td>Red LED displays</td></tr>
+        <tr><td>Shared crate</td><td>A new TAW design system drawn from tokens</td><td>Today's TAW-Panel, renamed for the Box family</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section aria-labelledby="dec-h">
+    <h2 id="dec-h">For you to decide</h2>
+    <ol class="decide">
+      <li>Which layout is the Player's default: Separates (artwork, display and list together), Now Playing (big artwork and controls, the list as a side panel), or both with a switch, plus Mini as a small always-on-top window?</li>
+      <li>Which finishes ship first. A suggestion: Anodised and Dark Anodised as the default pair, then Spool, Cassette and Walnut.</li>
+      <li>Whether the accent is fixed per finish, or chosen separately as in Spool (its seven colours are offered above).</li>
+      <li>Whether Simple is the default view for new users.</li>
+      <li>Whether the light and dark builds follow the computer's setting automatically, with a manual override.</li>
+      <li>Naming: keep "TAW-Panel" for the new system and rename the current crate for the Box family, or the other way round.</li>
+    </ol>
+  </section>
+</div>
+
+<script>
+(() => {
+  const ICON = {
+    prev: '<svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg>',
+    next: '<svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5l11 7-11 7z"/></svg>',
+    pause: '<svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>',
+    shuffle: '<svg viewBox="0 0 24 24"><path d="M16 4h4v4l-1.4-1.4-3.3 3.3-1.4-1.4 3.3-3.3zM4 6.6 5.4 5.2l13.2 13.2L20 17v4h-4l1.4-1.4L4 6.6zm6.3 7.1 1.4 1.4-6.3 6.3L4 20z"/></svg>',
+    repeat: '<svg viewBox="0 0 24 24"><path d="M7 7h10V4l4 4-4 4V9H9v3H7zm10 10H7v3l-4-4 4-4v3h8v-3h2z"/></svg>',
+    vol: '<svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16 8.5a4.5 4.5 0 0 1 0 7l-1.2-1.2a3 3 0 0 0 0-4.6zM18.5 6a8 8 0 0 1 0 12l-1.2-1.2a6.3 6.3 0 0 0 0-9.6z"/></svg>',
+    gear: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm8.6 4.6-2-.4a6.8 6.8 0 0 1-.6 1.5l1.2 1.7-1.6 1.6-1.7-1.2c-.5.3-1 .5-1.5.6l-.4 2h-2.2l-.4-2a6.8 6.8 0 0 1-1.5-.6l-1.7 1.2-1.6-1.6 1.2-1.7a6.8 6.8 0 0 1-.6-1.5l-2-.4v-2.2l2-.4c.1-.5.3-1 .6-1.5L4.6 6.3l1.6-1.6 1.7 1.2c.5-.3 1-.5 1.5-.6l.4-2h2.2l.4 2c.5.1 1 .3 1.5.6l1.7-1.2 1.6 1.6-1.2 1.7c.3.5.5 1 .6 1.5l2 .4z"/></svg>',
+    search: '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M10 4a6 6 0 0 1 4.8 9.6l4.8 4.8-1.4 1.4-4.8-4.8A6 6 0 1 1 10 4zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>',
+  };
+
+  // Brushed metal, wood grain and the like, drawn with gradients.
+  const brushed = (a) => `repeating-linear-gradient(90deg, rgba(255,255,255,${a}) 0 1px, rgba(0,0,0,${a * .6}) 1px 2px, transparent 2px 4px), linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0) 30%, rgba(0,0,0,.06))`;
+  const wood = (c1, c2, c3) => `repeating-linear-gradient(178deg, ${c1} 0 3px, ${c2} 3px 5px, ${c1} 5px 9px, ${c3} 9px 10px), linear-gradient(90deg, ${c2}, ${c1})`;
+  const plastic = (a) => `radial-gradient(120% 80% at 30% 0%, rgba(255,255,255,${a}), rgba(255,255,255,0) 60%)`;
+  const pin = (a) => `repeating-linear-gradient(0deg, rgba(255,255,255,${a}) 0 1px, transparent 1px 3px)`;
+
+  const DISPLAYS = {
+    oled: { dbg: '#050607', dink: '#f2f5f7', dglow: '0 0 10px rgba(255,255,255,.25)', dedge: 'rgba(255,255,255,.06)', df: '"Chivo Mono", ui-monospace, monospace', name: 'OLED white' },
+    amber: { dbg: '#140c04', dink: '#ffb547', dglow: '0 0 12px rgba(255,170,60,.55)', dedge: 'rgba(255,180,80,.08)', df: '"Chivo Mono", ui-monospace, monospace', name: 'amber VFD' },
+    teal: { dbg: '#04120f', dink: '#5ff0d0', dglow: '0 0 12px rgba(80,240,200,.5)', dedge: 'rgba(80,240,200,.08)', df: '"Chivo Mono", ui-monospace, monospace', name: 'teal VFD' },
+    green: { dbg: '#06110a', dink: '#8ef0a8', dglow: '0 0 12px rgba(120,240,160,.45)', dedge: 'rgba(120,240,160,.08)', df: '"Chivo Mono", ui-monospace, monospace', name: 'green fluorescent' },
+    paper: { dbg: '#e3e2dc', dink: '#262624', dglow: 'none', dedge: 'rgba(0,0,0,.12)', df: '"Chivo Mono", ui-monospace, monospace', name: 'paper (dark on light)' },
+    warm: { dbg: '#0a0806', dink: '#f3e6cf', dglow: '0 0 10px rgba(255,230,190,.3)', dedge: 'rgba(255,230,190,.07)', df: '"Chivo Mono", ui-monospace, monospace', name: 'warm white' },
+  };
+
+  // Spool's seven colour themes: [dark, light].
+  const SPOOL_ACCENTS = {
+    amber: ['#e8a33d', '#b8791f'], green: ['#6bbf6b', '#3f8f46'], blue: ['#5a9fe6', '#3568b0'], red: ['#e2685f', '#b8392f'],
+    purple: ['#a684e8', '#7050b0'], teal: ['#4fbdb2', '#23827a'], neutral: ['#bdb9b0', '#6d6a63'],
+  };
+
+  const F = {
+    anodised: {
+      label: 'Anodised', blurb: 'Brushed aluminium with a crisp white display. A modern streamer: neutral, clean, sits with anything.', suits: 'Default for everyone',
+      light: { name: 'Anodised', face: 'linear-gradient(180deg,#dfe1e3,#c9ccd0)', tex: brushed(.05), t: '#1b1e22', d: '#5c636b', raised: '#f1f2f4', well: '#f5f6f7', ln: 'rgba(0,0,0,.13)', ln2: 'rgba(0,0,0,.06)', sel: 'rgba(47,111,214,.12)', acc: '#2f6fd6', onacc: '#fff', groove: 'rgba(0,0,0,.14)', knob: '#fff', bar: 'rgba(255,255,255,.35)', disp: 'oled' },
+      dark: { name: 'Dark Anodised', face: 'linear-gradient(180deg,#2d3135,#1f2225)', tex: brushed(.035), t: '#eef0f2', d: '#9aa2aa', raised: '#3a3f45', well: '#1a1c1f', ln: 'rgba(255,255,255,.11)', ln2: 'rgba(255,255,255,.05)', sel: 'rgba(90,160,255,.16)', acc: '#5aa0ff', onacc: '#08121f', groove: 'rgba(255,255,255,.12)', knob: '#eef0f2', bar: 'rgba(0,0,0,.18)', disp: 'oled' },
+    },
+    bronze: {
+      label: 'Bronze', blurb: 'Champagne or deep bronze anodising with an amber display. Warm and premium, like a high-end integrated amp.', suits: 'People who want it to feel special',
+      light: { name: 'Champagne', face: 'linear-gradient(180deg,#e2d3b6,#c9b48e)', tex: brushed(.05), t: '#2a2218', d: '#6b5c46', raised: '#efe4cd', well: '#f4ecdc', ln: 'rgba(60,40,10,.16)', ln2: 'rgba(60,40,10,.07)', sel: 'rgba(138,90,34,.14)', acc: '#8a5a22', onacc: '#fff8ec', groove: 'rgba(60,40,10,.16)', knob: '#fffaf0', bar: 'rgba(255,250,235,.3)', disp: 'amber' },
+      dark: { name: 'Dark Bronze', face: 'linear-gradient(180deg,#43352a,#2a211a)', tex: brushed(.03), t: '#f2e5d0', d: '#b8a07f', raised: '#524133', well: '#221a14', ln: 'rgba(255,220,170,.12)', ln2: 'rgba(255,220,170,.05)', sel: 'rgba(224,160,80,.16)', acc: '#e0a050', onacc: '#1f140a', groove: 'rgba(255,220,170,.14)', knob: '#f2e5d0', bar: 'rgba(0,0,0,.18)', disp: 'amber' },
+    },
+    cassette: {
+      label: 'Cassette', blurb: 'Cream or smoked plastic with a teal display, after a 1980s tape deck. Playful, still clear.', suits: 'Fun; Spool’s Retro look grown up',
+      light: { name: 'Cassette', face: 'linear-gradient(180deg,#efe8d6,#e2d9c2)', tex: plastic(.6), t: '#2b2a26', d: '#6f6a5d', raised: '#f8f4ea', well: '#fbf8ef', ln: 'rgba(40,30,10,.14)', ln2: 'rgba(40,30,10,.06)', sel: 'rgba(226,85,43,.12)', acc: '#e2552b', onacc: '#fff', groove: 'rgba(40,30,10,.14)', knob: '#fff', bar: 'rgba(255,255,255,.25)', disp: 'teal', uf: '"Hanken Grotesk"', plateTop: 6 },
+      dark: { name: 'Smoked Cassette', face: 'linear-gradient(180deg,#2c2c30,#1c1c1f)', tex: plastic(.08), t: '#ece8de', d: '#a39f95', raised: '#38383c', well: '#18181a', ln: 'rgba(255,255,255,.1)', ln2: 'rgba(255,255,255,.05)', sel: 'rgba(255,122,69,.16)', acc: '#ff7a45', onacc: '#1c0e06', groove: 'rgba(255,255,255,.12)', knob: '#ece8de', bar: 'rgba(0,0,0,.2)', disp: 'teal', plateTop: 6 },
+    },
+    walnut: {
+      label: 'Walnut', blurb: 'Wood end cheeks on a metal face, like a 1970s receiver, with a warm white display.', suits: 'Living rooms; the hi-fi cabinet crowd',
+      light: { name: 'Teak & Silver', face: 'linear-gradient(180deg,#dcdedf,#c6c9cb)', tex: brushed(.05), wood: wood('#9a5a2c', '#b06d38', '#7a4420'), t: '#1d1f21', d: '#5d6266', raised: '#eff0f1', well: '#f4f5f5', ln: 'rgba(0,0,0,.13)', ln2: 'rgba(0,0,0,.06)', sel: 'rgba(160,90,40,.14)', acc: '#a5582a', onacc: '#fff', groove: 'rgba(0,0,0,.14)', knob: '#fff', bar: 'rgba(255,255,255,.3)', disp: 'warm' },
+      dark: { name: 'Walnut', face: 'linear-gradient(180deg,#262626,#1a1a1a)', tex: brushed(.025), wood: wood('#4a2c1a', '#5c3820', '#33200f'), t: '#f0e9df', d: '#a79e92', raised: '#333230', well: '#151515', ln: 'rgba(255,240,220,.1)', ln2: 'rgba(255,240,220,.05)', sel: 'rgba(230,181,106,.14)', acc: '#e6b56a', onacc: '#1c1308', groove: 'rgba(255,240,220,.12)', knob: '#f0e9df', bar: 'rgba(0,0,0,.2)', disp: 'warm' },
+    },
+    porcelain: {
+      label: 'Porcelain', blurb: 'Matte white and one orange accent, after Braun. The quietest and most approachable; dark build in graphite.', suits: 'Non-technical listeners; minimalists',
+      light: { name: 'Porcelain', face: '#f2f1ed', tex: 'none', t: '#1f1f1d', d: '#6c6b66', raised: '#ffffff', well: '#fbfaf7', ln: 'rgba(0,0,0,.1)', ln2: 'rgba(0,0,0,.05)', sel: 'rgba(217,84,43,.1)', acc: '#d9542b', onacc: '#fff', groove: 'rgba(0,0,0,.1)', knob: '#fff', bar: 'transparent', disp: 'paper' },
+      dark: { name: 'Graphite', face: '#1d1e1f', tex: 'none', t: '#ecebe7', d: '#9a9893', raised: '#2a2b2d', well: '#161718', ln: 'rgba(255,255,255,.09)', ln2: 'rgba(255,255,255,.045)', sel: 'rgba(255,112,67,.14)', acc: '#ff7043', onacc: '#1f0b04', groove: 'rgba(255,255,255,.1)', knob: '#ecebe7', bar: 'transparent', disp: 'oled' },
+    },
+    studio: {
+      label: 'Studio', blurb: 'Tape-machine grey with green fluorescent meters, after Nakamichi and Revox. Shows its numbers proudly.', suits: 'Enthusiasts; pairs with Detailed',
+      light: { name: 'Studio Grey', face: 'linear-gradient(180deg,#d0d3cf,#bcc0bb)', tex: pin(.08), t: '#1e211f', d: '#555c57', raised: '#e4e7e3', well: '#eef0ed', ln: 'rgba(0,0,0,.14)', ln2: 'rgba(0,0,0,.06)', sel: 'rgba(47,143,87,.14)', acc: '#2f8f57', onacc: '#fff', groove: 'rgba(0,0,0,.15)', knob: '#fff', bar: 'rgba(255,255,255,.25)', disp: 'green' },
+      dark: { name: 'Studio', face: 'linear-gradient(180deg,#26292a,#1b1d1e)', tex: pin(.025), t: '#e7e9e6', d: '#98a09b', raised: '#34383a', well: '#141617', ln: 'rgba(255,255,255,.1)', ln2: 'rgba(255,255,255,.05)', sel: 'rgba(123,211,137,.14)', acc: '#7bd389', onacc: '#08170c', groove: 'rgba(255,255,255,.12)', knob: '#e7e9e6', bar: 'rgba(0,0,0,.2)', disp: 'green' },
+    },
+    spool: {
+      label: 'Spool', blurb: 'Spool’s own look, carried over: its fonts, its warm panels and its seven colour themes, in Dark and Light.', suits: 'Spool users; continuity',
+      light: { name: 'Spool Light', face: '#eee6d4', tex: 'none', t: '#27281f', d: '#7c735b', raised: '#f6efe2', well: '#f6efe2', ln: '#d6c9ab', ln2: 'rgba(60,50,20,.07)', sel: '#e3cf9e', acc: '#b8791f', onacc: '#fff8ea', groove: '#e3cf9e', knob: '#fff', bar: '#e8ddc5', disp: 'spool', uf: '"Space Grotesk"', mf: '"IBM Plex Mono"', spool: 1 },
+      dark: { name: 'Spool Dark', face: '#26221d', tex: 'none', t: '#ece6db', d: '#929090', raised: '#39342d', well: '#2c2a25', ln: '#4a4339', ln2: 'rgba(255,240,210,.05)', sel: '#6b5427', acc: '#e8a33d', onacc: '#26221d', groove: '#6b5427', knob: '#ece6db', bar: '#2c2a25', disp: 'spool', uf: '"Space Grotesk"', mf: '"IBM Plex Mono"', spool: 1 },
+    },
+  };
+  const ORDER = ['anodised', 'bronze', 'cassette', 'walnut', 'porcelain', 'studio', 'spool'];
+
+  let state = { finish: 'anodised', mode: 'light', view: 'detailed', layout: 'separates', accent: 'default', app: 'equaliser' };
+  try { const s = JSON.parse(localStorage.getItem('taw-finishes') || 'null'); if (s) state = Object.assign(state, s); } catch (e) {}
+  const save = () => { try { localStorage.setItem('taw-finishes', JSON.stringify(state)); } catch (e) {} };
+
+  const hexToRgb = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+  const mix = (a, b, t) => { const x = hexToRgb(a), y = hexToRgb(b); return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join(''); };
+
+  function vars(fk, mode, accent) {
+    const f = F[fk][mode];
+    const v = Object.assign({}, f);
+    if (accent && accent !== 'default') {
+      const a = SPOOL_ACCENTS[accent][mode === 'dark' ? 0 : 1];
+      v.acc = a; v.onacc = mode === 'dark' ? '#15130f' : '#ffffff';
+      const [r, g, b] = hexToRgb(a); v.sel = `rgba(${r},${g},${b},${mode === 'dark' ? .18 : .14})`;
+      if (f.spool) { v.groove = mix(a, f.face, mode === 'dark' ? .6 : .55); v.sel = v.groove; }
+    }
+    let d;
+    if (f.disp === 'spool') {
+      d = { dbg: f.raised, dink: v.acc, dglow: 'none', dedge: f.ln, df: '"IBM Plex Mono", ui-monospace, monospace' };
+    } else d = DISPLAYS[f.disp];
+    const cheek = f.wood ? '26px' : '0px';
+    const css = {
+      '--edge': mode === 'dark' ? 'rgba(255,255,255,.16)' : 'rgba(0,0,0,.26)', '--face': f.face, '--tex': f.tex, '--wood': f.wood || 'none', '--cheekw': cheek, '--t': f.t, '--d': f.d, '--raised': f.raised, '--well': f.well,
+      '--ln': f.ln, '--ln2': f.ln2, '--sel': v.sel, '--acc': v.acc, '--onacc': v.onacc, '--groove': v.groove, '--knob': f.knob, '--bar': f.bar,
+      '--dbg': d.dbg, '--dink': d.dink, '--dglow': d.dglow, '--dedge': d.dedge, '--df': d.df,
+      '--uf': (f.uf || '"Hanken Grotesk"') + ', system-ui, sans-serif', '--mf': (f.mf || '"Chivo Mono"') + ', ui-monospace, monospace',
+    };
+    return { css: Object.entries(css).map(([k, x]) => `${k}:${x}`).join(';'), f, v, d, cheek: !!f.wood };
+  }
+
+  // Meter segments: green, then amber, then red; Studio all green-ish;
+  // Spool its own scale (accent below −3 dB, then amber to red).
+  function meter(level, f, v) {
+    let s = '';
+    for (let i = 0; i < 32; i++) {
+      let c;
+      if (f.spool) c = i < 27 ? v.acc : ['#f0d9a0', '#f0b040', '#e86a35', '#d83a2a', '#d83a2a'][i - 27];
+      else if (f.disp === 'green') c = i < 26 ? '#5fe08a' : i < 30 ? '#e8d65a' : '#ff5a40';
+      else c = i < 22 ? '#4fd06a' : i < 28 ? '#efc23b' : '#ff4a30';
+      const on = i < level;
+      s += `<b style="background:${c};opacity:${on ? 1 : .14}"></b>`;
+    }
+    return s;
+  }
+  const SPEC = [10, 14, 20, 23, 21, 18, 22, 25, 22, 19, 16, 18, 20, 17, 14, 15, 13, 11, 12, 10, 9, 8, 9, 7, 6, 6, 5, 4, 4, 3];
+  const spec = () => SPEC.map(h => `<b style="height:${h * 4}%"></b>`).join('');
+
+  const TRACKS = [
+    ['Low Tide', 'Mara Quell', '4:12'], ['Harbour Lights', 'Mara Quell', '5:03'], ['Night Ferry', 'Mara Quell', '3:47'],
+    ['Salt Air', 'Mara Quell feat. Ivo Lane', '4:29'], ['Lantern Row', 'Mara Quell', '6:10'], ['Breakwater', 'Mara Quell', '3:58'],
+    ['Pilot Light', 'Mara Quell', '4:41'], ['Last Boat Home', 'Mara Quell', '7:22'],
+  ];
+
+  function familyNav(active) {
+    const apps = [['Library', '#2aa79b'], ['Player', null], ['Equaliser', '#e0a030'], ['Analyser', '#9b7be0']];
+    return `<div class="fam">${apps.map(([n, c]) => `<span class="${n === active ? 'on' : ''}"><i style="background:${c || 'var(--acc)'}"></i>${n}</span>`).join('')}</div>`;
+  }
+  function plate(view) {
+    return `<div class="plate">
+      <div class="brand"><span class="name">Player</span><span class="code">PL-001</span><span class="maker">Timster's Audio Works</span></div>
+      ${familyNav('Player')}
+      <div class="seg"><span class="${view === 'simple' ? 'on' : ''}">Simple</span><span class="${view === 'detailed' ? 'on' : ''}">Detailed</span></div>
+      <div class="gear">${ICON.gear}</div></div>`;
+  }
+  const art = () => `<div class="art"><small>Mara Quell</small><b>Harbour Lights</b></div>`;
+  const quality = (view) => view === 'simple'
+    ? `<div class="q"><i></i>Playing as recorded · CD quality</div>`
+    : `<div class="q"><i></i><span class="chipq">FLAC</span><span class="chipq">16-bit · 44.1 kHz</span>Native rate, untouched</div>`;
+  const progress = () => `<div class="prog"><span>1:55</span><div class="track"><i></i><u></u></div><span>5:03</span></div>`;
+  const buttons = () => `<div class="btns"><div class="b flat">${ICON.shuffle}</div><div class="b">${ICON.prev}</div><div class="b big">${ICON.pause}</div><div class="b">${ICON.next}</div><div class="b flat">${ICON.repeat}</div></div>`;
+  const volume = () => `<div class="vol">${ICON.vol}<div class="track"><i></i><u></u></div></div>`;
+
+  function separates(o) {
+    const rows = o.view === 'simple' ? 9 : 6;
+    const list = `<div class="list"><div class="lh"><span style="text-align:right">#</span><span>Title</span><span>Artist</span><span style="text-align:right">Time</span></div>
+      ${TRACKS.slice(0, rows).map((t, i) => `<div class="li ${i === 1 ? 'on' : ''}"><span class="n">${i === 1 ? '▶' : i + 1}</span><span class="tt">${t[0]}</span><span class="ar">${t[1]}</span><span class="tm">${t[2]}</span></div>`).join('')}</div>`;
+    const disp = o.view === 'detailed' ? `<div class="disp"><div class="time">1:55<small>ELAPSED · TRACK 02</small></div>
+      <div class="meters"><div class="mrow"><span>L</span><div class="segs">${meter(24, o.f, o.v)}</div></div><div class="mrow"><span>R</span><div class="segs">${meter(22, o.f, o.v)}</div></div><div class="spec">${spec()}</div></div></div>` : '';
+    return `<div class="in" style="grid-template-rows:auto 1fr;padding-bottom:110px">${plate(o.view)}
+      <div class="body"><div>${art()}<div class="meta"><div class="t">Harbour Lights</div><div class="a">Mara Quell</div><div class="al">Lantern Row · 2024</div></div>${quality(o.view)}</div>
+      <div class="right" style="${o.view === 'simple' ? 'grid-template-rows:1fr' : ''}">${disp}${list}</div></div></div>
+      <div class="trans">${buttons()}${progress()}${volume()}</div>`;
+  }
+  function nowPlaying(o) {
+    return `<div class="in" style="grid-template-rows:auto 1fr;padding-bottom:110px">${plate(o.view)}
+      <div class="np">${art()}<div class="mid"><div class="t">Harbour Lights</div><div class="a">Mara Quell</div><div class="al">Lantern Row · 2024</div>${quality(o.view)}<div class="lead">Track 2 of 8 · 39 min album</div></div>
+      <div class="queue"><h4>Up next</h4>${TRACKS.slice(2, 7).map(t => `<div class="qi"><div class="th"></div><div>${t[0]}<small>${t[1]} · ${t[2]}</small></div></div>`).join('')}</div></div></div>
+      <div class="trans">${buttons()}${progress()}${volume()}</div>`;
+  }
+  function mini(o) {
+    return `<div class="in">${art()}<div><div class="meta"><div class="t">Harbour Lights</div><div class="a" style="font-size:13.5px;color:var(--d)">Mara Quell · Lantern Row</div></div>${progress()}</div>
+      ${buttons()}<div class="disp"><div class="meters"><div class="mrow"><span>L</span><div class="segs">${meter(24, o.f, o.v)}</div></div><div class="mrow"><span>R</span><div class="segs">${meter(22, o.f, o.v)}</div></div></div><div style="font-size:11px;letter-spacing:.1em;opacity:.8">${o.view === 'simple' ? 'CD QUALITY' : 'FLAC 16/44.1 · NATIVE'}</div></div></div>
+      <div class="brandmini">TAW Player · PL-001</div>`;
+  }
+
+  function mock(fk, mode, accent, view, layout) {
+    const x = vars(fk, mode, accent);
+    const o = { f: x.f, v: x.v, view };
+    const cls = layout === 'mini' ? 'm mini' : 'm';
+    const body = layout === 'nowplaying' ? nowPlaying(o) : layout === 'mini' ? mini(o) : separates(o);
+    const cheeks = x.cheek ? '<div class="cheek l"></div><div class="cheek r"></div>' : '';
+    return `<div class="${cls}" style="${x.css}"><div class="tex"></div>${cheeks}${body}</div>`;
+  }
+
+  function units(fk, mode, accent) {
+    const x = vars(fk, mode, accent);
+    const cheeks = x.cheek ? '<div class="cheek l"></div><div class="cheek r"></div>' : '';
+    const u = (name, code, dot, body) => `<div class="m unit" style="${x.css}"><div class="tex"></div>${cheeks}<div class="in">
+      <div class="nm"><span class="maker">Timster's Audio Works</span><span class="name"><i style="background:${dot}"></i>${name}</span><span class="code">${code}</span></div>${body}</div></div>`;
+    const eq = () => {
+      const pts = []; for (let i = 0; i <= 100; i++) { const xx = i / 100; const y = 40 - 14 * Math.exp(-((xx - .12) ** 2) / .004) + 9 * Math.exp(-((xx - .55) ** 2) / .01) - 11 * Math.exp(-((xx - .86) ** 2) / .006); pts.push(`${(xx * 600).toFixed(1)},${y.toFixed(1)}`); }
+      return `<svg class="eq" viewBox="0 0 600 80" preserveAspectRatio="none"><line x1="0" y1="40" x2="600" y2="40" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="3 4"/><polyline points="${pts.join(' ')}" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>`;
+    };
+    const bars = () => `<div class="spec" style="height:100px">${spec()}${spec()}</div>`;
+    return [
+      u('Library', 'LB-001', '#2aa79b', `<div class="bodyu"><div><div class="search">${ICON.search}Search artists, albums and tracks</div><div class="stats"><span><b>12,480</b>tracks</span><span><b>1,032</b>albums</span><span><b>3</b>drives, 1 offline</span></div></div><div style="display:grid;gap:8px;justify-items:end"><span class="pill">41 albums missing artwork</span><span class="pill acc">Play album</span></div></div>`),
+      u('Player', 'PL-001', 'var(--acc)', `<div class="bodyu"><div style="display:grid;grid-template-columns:116px 1fr;gap:18px;align-items:center"><div class="art" style="width:116px;height:116px;box-shadow:none"></div><div><div style="font-size:18px;font-weight:700">Harbour Lights</div><div style="color:var(--d);font-size:13.5px">Mara Quell · Lantern Row</div><div style="margin-top:10px">${progress()}</div></div></div>${buttons()}</div>`),
+      u('Equaliser', 'EQ-001', '#e0a030', `<div class="bodyu"><div class="disp" style="color:var(--dink)">${eq()}</div><div style="display:grid;gap:8px;justify-items:end"><span class="pill acc">On</span><span class="pill">Preset: Warm room</span></div></div>`),
+      u('Analyser', 'SP-001', '#9b7be0', `<div class="bodyu"><div class="disp">${bars()}</div><div style="display:grid;gap:8px;justify-items:end"><span class="pill">Listening to: Speakers</span><span class="pill">1/3 octave</span></div></div>`),
+    ].join('<div style="height:10px"></div>');
+  }
+
+  // ------------------------------------------------------------ full apps
+  const COVERS = [
+    'linear-gradient(160deg,#0f3b52,#1d6f86 40%,#e7a65a 75%,#f5d9a8)',
+    'linear-gradient(200deg,#2b1d3a,#7a3b6e 50%,#f08a5d)',
+    'linear-gradient(140deg,#1b2a1f,#3f6b45 55%,#cfe3a8)',
+    'radial-gradient(circle at 30% 30%,#f4e3c1,#c9773b 55%,#3a1d10)',
+    'linear-gradient(180deg,#101820,#2a3d55 60%,#9db4c8)',
+    'linear-gradient(120deg,#5a1414,#c0392b 50%,#f2c14e)',
+    'linear-gradient(160deg,#ece6db,#b9b2a3)',
+  ];
+  function plateFor(name, code, view) {
+    return `<div class="plate">
+      <div class="brand"><span class="name">${name}</span><span class="code">${code}</span><span class="maker">Timster's Audio Works</span></div>
+      ${familyNav(name)}
+      <div class="seg"><span class="${view === 'simple' ? 'on' : ''}">Simple</span><span class="${view === 'detailed' ? 'on' : ''}">Detailed</span></div>
+      <div class="gear">${ICON.gear}</div></div>`;
+  }
+  const knob = (t, label, value) => {
+    const a0 = 135, a1 = 405, a = a0 + (a1 - a0) * t, r = 14, c = 18;
+    const pt = (deg, rr) => [c + rr * Math.cos(deg * Math.PI / 180), c + rr * Math.sin(deg * Math.PI / 180)];
+    const arc = (from, to) => { const [x0, y0] = pt(from, r), [x1, y1] = pt(to, r); return `M${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${to - from > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`; };
+    const [px, py] = pt(a, 8);
+    return `<div class="kn"><svg viewBox="0 0 36 36"><path d="${arc(a0, a1)}" stroke="var(--groove)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="${arc(a0, Math.max(a0 + 1, a))}" stroke="var(--acc)" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="18" cy="18" r="9" fill="var(--raised)" stroke="var(--ln)"/><line x1="18" y1="18" x2="${px.toFixed(1)}" y2="${py.toFixed(1)}" stroke="var(--t)" stroke-width="2" stroke-linecap="round"/></svg><span class="val">${value}</span><span class="lab">${label}</span></div>`;
+  };
+  const vfader = (db, min = -24, max = 12) => {
+    const t = (max - db) / (max - min), z = (max - 0) / (max - min);
+    const top = Math.min(t, z) * 100, bot = Math.max(t, z) * 100;
+    return `<div class="vfader"><i style="top:${top}%;bottom:${100 - bot}%"></i><u style="top:${t * 100}%"></u></div>`;
+  };
+  const minimeter = (f, v, a, b) => `<div class="minimeter"><div class="segs">${meter(a, f, v).split('</b>').slice(0, 24).join('</b>')}</b></div><div class="segs">${meter(b, f, v).split('</b>').slice(0, 24).join('</b>')}</b></div></div>`;
+
+  // Equaliser bands: type, Hz, dB, Q, on, colour
+  const BAND_COL = ['#e5574a', '#ec8a3a', '#e8c547', '#a6d24f', '#4fbf7a', '#3bb3b0', '#4f8fe0', '#8a6fe0', '#d873b8', '#d9d2c2'];
+  const BANDS = [
+    ['High-pass', 30, 0, .71, 1], ['Low shelf', 105, 3, .7, 1], ['Peak', 250, -2.5, 1.2, 1], ['Peak', 500, 0, 1, 1], ['Peak', 1000, -1.5, 1.4, 1],
+    ['Peak', 2000, 0, 1, 1], ['Peak', 3200, 1.5, 2, 1], ['Peak', 6300, -3, 3.5, 1], ['High shelf', 10000, 2, .7, 1], ['Low-pass', 20000, 0, .71, 0],
+  ];
+  function bandDb(b, f) {
+    const [type, fc, g, q, on] = b; if (!on) return 0;
+    const o = Math.log2(f / fc);
+    switch (type) {
+      case 'Peak': return g * Math.exp(-o * o * q * 2.2);
+      case 'Low shelf': return g / (1 + Math.exp(o * 4));
+      case 'High shelf': return g / (1 + Math.exp(-o * 4));
+      case 'High-pass': return -10 * Math.log10(1 + Math.pow(fc / f, 4));
+      case 'Low-pass': return -10 * Math.log10(1 + Math.pow(f / fc, 4));
+    }
+    return 0;
+  }
+  const hz = (f) => f >= 1000 ? (f / 1000) + 'k' : String(f);
+  function eqGraph(W, H, withSpec) {
+    const L = 40, R = 14, T = 12, B = 22, w = W - L - R, h = H - T - B;
+    const X = (f) => L + Math.log(f / 20) / Math.log(1000) * w;
+    const Y = (db) => T + (12 - db) / 30 * h;
+    let g = '';
+    [20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000].forEach(f => { g += `<line x1="${X(f)}" y1="${T}" x2="${X(f)}" y2="${T + h}" stroke="currentColor" stroke-opacity=".12"/><text x="${X(f)}" y="${H - 6}" font-size="10" fill="currentColor" fill-opacity=".6" text-anchor="middle">${hz(f)}</text>`; });
+    [12, 6, 0, -6, -12, -18].forEach(d => { g += `<line x1="${L}" y1="${Y(d)}" x2="${L + w}" y2="${Y(d)}" stroke="currentColor" stroke-opacity="${d === 0 ? .35 : .12}"/><text x="${L - 6}" y="${Y(d) + 3}" font-size="10" fill="currentColor" fill-opacity=".6" text-anchor="end">${d > 0 ? '+' + d : d}</text>`; });
+    let spec = '';
+    if (withSpec) {
+      let pts = [`${L},${T + h}`];
+      for (let i = 0; i <= 120; i++) { const f = 20 * Math.pow(1000, i / 120); const lvl = -14 - 9 * Math.log10(f / 60) * (f > 60 ? 1 : 0) + 4 * Math.sin(i * .7) + 3 * Math.sin(i * 1.9); pts.push(`${X(f).toFixed(1)},${Y(lvl).toFixed(1)}`); }
+      pts.push(`${L + w},${T + h}`);
+      spec = `<polygon points="${pts.join(' ')}" fill="currentColor" fill-opacity=".10"/>`;
+    }
+    let tot = [];
+    for (let i = 0; i <= 200; i++) { const f = 20 * Math.pow(1000, i / 200); const db = BANDS.reduce((s, b) => s + bandDb(b, f), 0); tot.push(`${X(f).toFixed(1)},${Y(Math.max(-18, db)).toFixed(1)}`); }
+    const dots = BANDS.map((b, i) => {
+      if (!b[4]) return '';
+      const y = (b[0] === 'High-pass' || b[0] === 'Low-pass') ? Y(0) : Y(b[2]);
+      return `<circle cx="${X(b[1])}" cy="${y}" r="${i === 6 ? 8 : 6.5}" fill="${BAND_COL[i]}" stroke="${i === 6 ? 'currentColor' : 'rgba(0,0,0,.4)'}" stroke-width="${i === 6 ? 2 : 1}"/><text x="${X(b[1])}" y="${y + 3.5}" font-size="9" text-anchor="middle" fill="#111" font-weight="700">${i + 1}</text>`;
+    }).join('');
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${g}${spec}<polyline points="${tot.join(' ')}" fill="none" stroke="currentColor" stroke-width="2.6" style="filter:drop-shadow(var(--dglow))"/>${dots}</svg>`;
+  }
+
+  function equaliser(o, x) {
+    const top = `<div class="toolrow" style="margin-top:14px;height:44px">
+      <div class="grp"><div class="sw big on"></div><div style="display:grid;white-space:nowrap"><b style="font-size:15px">On</b><span class="status" style="font-size:12px;color:var(--d)"><i></i>All sound · Speakers</span></div></div>
+      <div class="vsep"></div>
+      <div class="grp"><span class="lab">Preset</span><span class="sel" style="min-width:130px">Warm room</span><span class="btn">Save</span>${o.view === 'detailed' ? '<span class="sel">APO file</span>' : ''}</div>
+      ${o.view === 'detailed' ? `<div class="vsep"></div><div class="grp"><span class="lab">Preamp</span><span class="val" style="font-size:14px;white-space:nowrap">−3.5 dB</span><span class="lab" style="display:inline-flex;gap:6px;align-items:center"><span class="sw on" style="width:28px;height:16px"></span>Auto</span></div>
+      <div class="grp" style="margin-left:auto"><span class="lab">In</span>${minimeter(x.f, x.v, 20, 19)}<span class="lab">Out</span>${minimeter(x.f, x.v, 18, 18)}</div>` : '<div class="grp" style="margin-left:auto"><span class="btn">Flat</span></div>'}
+    </div>`;
+    if (o.view === 'simple') {
+      const TB = [['Bass', 3, '105 Hz'], ['Low mid', -1.5, '250 Hz'], ['Mid', -1, '1 kHz'], ['High mid', 1.5, '3.2 kHz'], ['Treble', 2, '10 kHz']];
+      return `<div class="in" style="grid-template-rows:auto auto auto 1fr">${plateFor('Equaliser', 'EQ-001', o.view)}${top}
+        <div class="eqgraph" style="height:150px;margin-top:14px">${eqGraph(988, 150, false)}</div>
+        <div style="display:grid;gap:12px;margin-top:16px"><div class="tone">${TB.map(([n, db, f]) => `<div class="tb"><b>${n}</b>${vfader(db, -12, 12)}<span class="val" style="font-size:14px">${db > 0 ? '+' : ''}${db.toFixed(1)} dB</span><span class="lab">${f}</span></div>`).join('')}</div>
+        <div class="chips2" style="justify-content:center;gap:8px"><span class="lab" style="align-self:center">Quick presets</span>${['Flat', 'Warm room', 'Bright', 'Voices', 'Late night', 'Headphones'].map((p, i) => `<span class="btn ${i === 1 ? 'acc' : ''}">${p}</span>`).join('')}</div></div></div>`;
+    }
+    const bands = BANDS.map((b, i) => {
+      const [type, f, g, q, on] = b;
+      const isPass = type.includes('pass');
+      const ft = Math.log(f / 20) / Math.log(1000), qt = Math.log(q / .1) / Math.log(200);
+      return `<div class="band ${i === 6 ? 'selb' : ''} ${on ? '' : 'off'}"><div class="bh"><span><i style="background:${BAND_COL[i]}"></i>${i + 1}</span><div class="sw ${on ? 'on' : ''}"></div></div>
+        <span class="sel">${type}</span>
+        ${isPass ? '<div style="height:104px;display:grid;place-items:center;color:var(--d);font-size:11px;text-align:center;line-height:1.3">no gain<br>12 dB/oct</div>' : vfader(g)}
+        <span class="val">${isPass ? '—' : (g > 0 ? '+' : '') + g.toFixed(1) + ' dB'}</span>
+        <div style="display:flex;gap:2px">${knob(ft, 'Freq', hz(f))}${knob(qt, 'Q', q.toFixed(2))}</div></div>`;
+    }).join('');
+    return `<div class="in" style="grid-template-rows:auto auto auto 1fr">${plateFor('Equaliser', 'EQ-001', o.view)}${top}
+      <div class="eqgraph" style="height:200px;margin-top:14px">${eqGraph(988, 200, true)}
+        <div style="position:absolute;right:12px;top:8px;display:flex;gap:6px;font-family:var(--uf)"><span class="pill" style="font-size:11px;padding:3px 9px;background:transparent;color:var(--dink);border-color:currentColor;opacity:.8">Spectrum behind curve: on</span></div></div>
+      <div class="bands" style="margin-top:14px">${bands}</div></div>`;
+  }
+
+  function anSvg(W, H, kind) {
+    const L = 46, R = 16, T = 16, B = 26, w = W - L - R, h = H - T - B;
+    const X = (f) => L + Math.log(f / 20) / Math.log(1000) * w;
+    const Y = (db) => T + (-db) / 90 * h;
+    let g = '';
+    [20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000].forEach(f => { g += `<line x1="${X(f)}" y1="${T}" x2="${X(f)}" y2="${T + h}" stroke="currentColor" stroke-opacity=".12"/><text x="${X(f)}" y="${H - 8}" font-size="11" fill="currentColor" fill-opacity=".6" text-anchor="middle">${hz(f)}</text>`; });
+    [0, -15, -30, -45, -60, -75, -90].forEach(d => { g += `<line x1="${L}" y1="${Y(d)}" x2="${L + w}" y2="${Y(d)}" stroke="currentColor" stroke-opacity=".12"/><text x="${L - 8}" y="${Y(d) + 4}" font-size="11" fill="currentColor" fill-opacity=".6" text-anchor="end">${d}</text>`; });
+    const lvl = (f) => -22 - 7 * Math.log2(Math.max(1, f / 120)) + 5 * Math.sin(Math.log2(f) * 3.1) + 3 * Math.sin(Math.log2(f) * 7.3) + (f < 80 ? -6 * Math.log2(80 / f) : 0);
+    let body = '';
+    if (kind === 'bars') {
+      const n = 3; const k0 = Math.ceil(n * Math.log2(20 / 1000)), k1 = Math.floor(n * Math.log2(20000 / 1000)); const half = Math.pow(2, .5 / n);
+      for (let k = k0; k <= k1; k++) { const fc = 1000 * Math.pow(2, k / n); const x0 = X(Math.max(20, fc / half)), x1 = X(Math.min(20000, fc * half)); const y = Y(lvl(fc)); const pk = Y(lvl(fc) + 4);
+        body += `<rect x="${(x0 + 2).toFixed(1)}" y="${y.toFixed(1)}" width="${(x1 - x0 - 4).toFixed(1)}" height="${(T + h - y).toFixed(1)}" fill="currentColor" fill-opacity=".8"/><rect x="${(x0 + 2).toFixed(1)}" y="${pk.toFixed(1)}" width="${(x1 - x0 - 4).toFixed(1)}" height="2" fill="currentColor"/>`; }
+    } else {
+      let pts = [`${L},${T + h}`], line = [], peak = [];
+      for (let i = 0; i <= 260; i++) { const f = 20 * Math.pow(1000, i / 260); const y = Y(lvl(f)); pts.push(`${X(f).toFixed(1)},${y.toFixed(1)}`); line.push(`${X(f).toFixed(1)},${y.toFixed(1)}`); peak.push(`${X(f).toFixed(1)},${Y(lvl(f) + 5 + 2 * Math.sin(i)).toFixed(1)}`); }
+      pts.push(`${L + w},${T + h}`);
+      body = `<polygon points="${pts.join(' ')}" fill="currentColor" fill-opacity=".16"/><polyline points="${peak.join(' ')}" fill="none" stroke="currentColor" stroke-opacity=".4" stroke-width="1"/><polyline points="${line.join(' ')}" fill="none" stroke="currentColor" stroke-width="2.2" style="filter:drop-shadow(var(--dglow))"/>`;
+    }
+    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${g}${body}</svg>`;
+  }
+
+  function analyser(o) {
+    const simple = o.view === 'simple';
+    const bar = simple
+      ? `<div class="toolrow"><div class="grp"><span class="lab">Listening to</span><span class="sel" style="min-width:230px">Speakers (what's playing)</span></div>
+          <div class="grp"><span class="segc"><span class="on">Smooth</span><span>Bars</span><span>LEDs</span></span></div>
+          <div class="grp" style="margin-left:auto"><span class="btn">Freeze</span><span class="btn">Stay on top</span><span class="btn acc">Full screen</span></div></div>`
+      : `<div class="toolrow"><div class="grp"><span class="lab">Source</span><span class="sel" style="min-width:190px">Speakers (what's playing)</span></div>
+          <div class="grp"><span class="lab">View</span><span class="segc"><span class="on">Curve</span><span>Bars</span><span>LEDs</span></span></div>
+          <div class="grp"><span class="lab">Bands</span><span class="segc"><span class="on">1/3</span><span>1/6</span><span>1/12</span></span></div>
+          <div class="grp" style="margin-left:auto"><span class="btn">Freeze</span><span class="btn">On top</span><span class="btn acc">Full screen</span></div></div>
+         <div class="toolrow" style="justify-content:space-between">
+          <div class="grp" style="gap:14px"><span class="lab" style="width:58px">Motion</span>${knob(0, 'Rise', '0 ms')}${knob(.35, 'Fall', '300 ms')}${knob(.15, 'Hold', '1.5 s')}</div>
+          <div class="vsep"></div>
+          <div class="grp" style="gap:14px"><span class="lab" style="width:50px">Scale</span>${knob(.625, 'Range', '90 dB')}${knob(.5, 'Slope', '3 dB/oct')}</div>
+          <div class="vsep"></div>
+          <div class="grp" style="gap:14px"><span class="lab" style="display:inline-flex;gap:8px;align-items:center"><span class="sw on"></span>Grid</span><span class="lab" style="display:inline-flex;gap:8px;align-items:center"><span class="sw on"></span>Peak hold</span><span class="lab">Colour</span><span class="sel" style="min-width:92px">Display</span></div>
+         </div>`;
+    const winH = simple ? 452 : 380;
+    return `<div class="in" style="grid-template-rows:auto 1fr">${plateFor('Analyser', 'SP-001', o.view)}
+      <div class="anwin" style="height:${winH}px;margin-top:14px">${anSvg(988, winH, 'curve')}
+        <div style="position:absolute;left:58px;top:12px;font-size:12px;opacity:.75;letter-spacing:.08em">${simple ? 'SPEAKERS' : 'SPEAKERS · 48 kHz · PEAK HOLD 1.5 s'}</div></div></div>
+      <div class="anbar">${bar}</div>`;
+  }
+
+  function library(o) {
+    const simple = o.view === 'simple';
+    const artists = [['Mara Quell', 4], ['Marlow Trio', 2], ['Massive Attack', 6], ['Matt Elliott', 3], ['Maxence Cyrin', 1], ['Mazzy Star', 3], ['Meat Puppets', 5], ['Melody Gardot', 4], ['Men I Trust', 3], ['Metronomy', 5], ['Mica Levi', 2], ['Midlake', 4]];
+    const tracks = TRACKS.slice(0, simple ? 8 : 5);
+    return `<div class="in" style="grid-template-rows:auto auto 1fr;padding-bottom:52px">${plateFor('Library', 'LB-001', o.view)}
+      <div class="toolrow" style="margin-top:14px"><div class="search" style="flex:1">${ICON.search}Search artists, albums and tracks</div>
+        <span class="btn acc">Scan drives</span>${simple ? '' : '<span class="btn">Add folder</span><span class="btn">Exclude…</span><span class="sel">Lookups: off</span>'}</div>
+      <div class="lib">
+        <div class="side">
+          <div><h5>View</h5><div class="nav" style="margin-top:6px"><span class="on">Library <em>12,480</em></span><span>What's missing <em>41</em></span>${simple ? '' : '<span>Duplicates <em>soon</em></span><span>Organise <em>soon</em></span>'}</div></div>
+          <div><h5>Drives</h5><div style="margin-top:6px;display:grid;gap:2px">
+            <div class="drive"><i></i>Music (D:)<small>9,812</small></div><div class="drive"><i></i>NAS · Media<small>2,104</small></div><div class="drive"><i class="offl"></i>Old iPod<small>offline</small></div></div></div>
+          ${simple ? '' : `<div><h5>Merge suggestions</h5><div class="nav" style="margin-top:6px"><span>Beatles · The Beatles <em>2</em></span><span>Bjork · Björk <em>2</em></span></div></div>`}
+        </div>
+        <div class="col"><h5>Artists · M</h5>${artists.map(([n, c], i) => `<div class="ai ${i === 0 ? 'on' : ''}">${n}<em>${c}</em></div>`).join('')}</div>
+        <div style="display:grid;gap:14px;align-content:start;min-width:0">
+          <div class="albumd"><div class="cov" style="background:${COVERS[0]}"></div>
+            <div style="display:grid;align-content:start;gap:2px"><div class="lab">Mara Quell · album</div><div class="t">Lantern Row</div><div style="color:var(--d);font-size:13.5px">2024 · 8 tracks · 39 min</div>
+              <div class="chips2">${simple ? '<span class="tag okk">Complete</span>' : '<span class="tag">FLAC 16/44.1</span><span class="tag okk">Artwork 1400 px</span><span class="tag okk">Tags complete</span>'}</div>
+              <div style="display:flex;gap:8px;margin-top:10px"><span class="btn acc">${ICON.next.replace('<svg', '<svg width="12" height="12" fill="currentColor"')} Play in Player</span>${simple ? '' : '<span class="btn">Show folder</span>'}</div></div></div>
+          <div class="tlist">${tracks.map((t, i) => `<div class="tr"><span class="n">${i + 1}</span><span>${t[0]}</span><span class="f">${simple ? '' : 'FLAC'}</span><span class="tm">${t[2]}</span></div>`).join('')}</div>
+          ${simple ? '' : `<div><div class="lab" style="margin-bottom:6px">More by Mara Quell</div><div class="albums">
+            <div class="alb"><div class="cov" style="background:${COVERS[4]}"></div>Tidewater<small>2021</small></div>
+            <div class="alb"><div class="cov none">no art</div>Field Notes (EP)<small>2019 · <span style="color:#c07a18">missing artwork</span></small></div>
+            <div class="alb"><div class="cov" style="background:${COVERS[3]}"></div>Ember<small>2017</small></div>
+            <div class="alb"><div class="cov" style="background:${COVERS[6]}"></div>Early Recordings<small><span style="color:#c07a18">no year</span></small></div>
+            <div class="alb"><div class="cov" style="background:${COVERS[1]}"></div>Live at the Pier<small>2023</small></div></div></div>`}
+        </div>
+      </div></div>
+      <div class="libfoot"><span>12,480 tracks · 1,032 albums · last scan 2 hours ago</span><span>Read only · your files are never changed</span></div>`;
+  }
+
+  const APPS = [['library', 'Library', 640], ['player', 'Player', 640], ['equaliser', 'Equaliser', 724], ['analyser', 'Analyser', 640]];
+  function appMock(app, fk, mode, accent, view) {
+    if (app === 'player') return mock(fk, mode, accent, view, 'separates');
+    const x = vars(fk, mode, accent);
+    const o = { f: x.f, v: x.v, view };
+    const h = APPS.find(a => a[0] === app)[2];
+    const body = app === 'library' ? library(o) : app === 'equaliser' ? equaliser(o, x) : analyser(o);
+    const cheeks = x.cheek ? '<div class="cheek l"></div><div class="cheek r"></div>' : '';
+    return `<div class="m" style="${x.css};height:${h}px"><div class="tex"></div>${cheeks}${body}</div>`;
+  }
+  const APP_NOTES = {
+    library: [['Library', 'Search across everything, a sidebar for views and drives, and the selected album with its tracks and a Play in Player button. Problems show as small amber tags, not red warnings.'], ['Simple', 'Hides Duplicates, Organise, merge suggestions, Exclude and Lookups until they’re wanted; keeps Scan, search and Play.']],
+    player: [['Player', 'As above: artwork and track, the display window with meters and spectrum, the list, and the front-panel transport bar.'], ['Simple', 'Drops the display window and the numbers; the list gets the room.']],
+    equaliser: [['Equaliser', 'One big On switch with where it’s working (whole computer, which output). Presets, preamp and meters in one row. The response graph is the display window, with the spectrum faintly behind. Ten band cards below: a type menu, a gain slider, and small Freq and Q knobs; the selected band is outlined and its point ringed on the graph. Pass filters have no gain, so their card says so instead of showing a slider.'],
+      ['Simple', 'Five tone sliders (Bass to Treble, each a band of the same engine) and one-tap presets. Detailed keeps every band; switching back and forth never loses settings.']],
+    analyser: [['Analyser', 'The picture fills the window. Controls sit in a bar along the bottom like a front panel: source and view first, then Motion (rise, fall, hold) and Scale (range, slope) as small knobs, and switches. H hides the bar and leaves just the picture, as now.'], ['Simple', 'Source, a choice of Smooth, Bars or LEDs, Freeze, Stay on top and Full screen. Nothing else to understand.']],
+  };
+
+  // Scale a fixed-size design to the width of its stage.
+  const stages = [];
+  function fit(stage, w, h) {
+    const sc = stage.querySelector('.scaler');
+    const s = Math.min(1, stage.clientWidth / w);
+    sc.style.width = w + 'px'; sc.style.transform = `scale(${s})`;
+    stage.style.height = (h * s) + 'px';
+  }
+  function place(stage, html, w, h) {
+    stage.innerHTML = `<div class="scaler">${html}</div>`;
+    const entry = stages.find(e => e.stage === stage);
+    if (entry) { entry.w = w; entry.h = h; } else stages.push({ stage, w, h });
+    fit(stage, w, h);
+  }
+  const ro = new ResizeObserver(() => stages.forEach(e => fit(e.stage, e.w, e.h)));
+
+  // Controls
+  function chips(id, items, key, render) {
+    const el = document.getElementById(id);
+    el.innerHTML = items.map(([val, label, extra]) => `<button class="chip" id="${id}-${val}" data-v="${val}" aria-pressed="${state[key] === val}">${extra || ''}${label}</button>`).join('');
+    el.onclick = (e) => { const b = e.target.closest('button'); if (!b) return; state[key] = b.dataset.v; save(); render(); };
+  }
+  function renderControls() {
+    chips('c-finish', ORDER.map(k => [k, F[k].label]), 'finish', render);
+    chips('c-mode', [['light', 'Light'], ['dark', 'Dark']], 'mode', render);
+    chips('c-view', [['simple', 'Simple'], ['detailed', 'Detailed']], 'view', render);
+    chips('c-app', APPS.map(([k, n]) => [k, n]), 'app', render);
+    chips('c-layout', [['separates', 'Separates'], ['nowplaying', 'Now Playing'], ['mini', 'Mini']], 'layout', render);
+    const dflt = F[state.finish][state.mode].acc;
+    chips('c-accent', [['default', 'Finish default', `<span class="dot" style="background:${dflt}"></span>`]]
+      .concat(Object.keys(SPOOL_ACCENTS).map(k => [k, k[0].toUpperCase() + k.slice(1), `<span class="dot" style="background:${SPOOL_ACCENTS[k][state.mode === 'dark' ? 0 : 1]}"></span>`])), 'accent', render);
+  }
+
+  function render() {
+    renderControls();
+    const f = F[state.finish];
+    const fm = f[state.mode];
+    const h = state.layout === 'mini' ? 132 : 640;
+    place(document.getElementById('live'), mock(state.finish, state.mode, state.accent, state.view, state.layout), 1040, h);
+    const dispName = fm.disp === 'spool' ? 'Spool’s display' : DISPLAYS[fm.disp].name;
+    document.getElementById('live-cap').textContent = `${fm.name} · ${dispName} display · ${state.view === 'simple' ? 'Simple' : 'Detailed'} view`;
+    const layoutNote = {
+      separates: ['Separates', 'Artwork, the display and the list together. The default for a desktop window; the transport runs along the bottom like a front panel.'],
+      nowplaying: ['Now Playing', 'Big artwork and big type, the next few tracks in a side panel, and the same transport bar as Separates. Easiest for non-technical listeners and for a screen across the room.'],
+      mini: ['Mini', 'A small strip that can stay on top of other windows, like a remote control. Spool’s compact look, as a native window.'],
+    }[state.layout];
+    document.getElementById('live-notes').innerHTML = `
+      <div><h3>${f.label}</h3><p class="muted">${f.blurb}</p><p class="muted"><b style="color:var(--ink)">Suits:</b> ${f.suits}</p></div>
+      <div><h3>${layoutNote[0]} layout</h3><p class="muted">${layoutNote[1]}</p></div>
+      <div><h3>${state.view === 'simple' ? 'Simple view' : 'Detailed view'}</h3><p class="muted">${state.view === 'simple'
+        ? 'Artwork, the track, the controls and the list. The quality line uses plain words; the display window and meters are hidden.'
+        : 'Adds the display window (time, meters, spectrum) and the exact format, bit depth, rate and what the Player does to the signal.'}</p></div>`;
+    const ah = APPS.find(a => a[0] === state.app)[2];
+    place(document.getElementById('app'), appMock(state.app, state.finish, state.mode, state.accent, state.view), 1040, ah);
+    document.getElementById('apps-cap').textContent = `${fm.name} · ${state.view === 'simple' ? 'Simple' : 'Detailed'} view`;
+    document.getElementById('app-notes').innerHTML = APP_NOTES[state.app].map(([h, t], i) => `<div><h3>${i ? h + ' view' : h}</h3><p class="muted">${t}</p></div>`).join('');
+    place(document.getElementById('fam'), units(state.finish, state.mode, state.accent), 1040, 176 * 4 + 30);
+    renderAll();
+  }
+
+  function renderAll() {
+    const all = document.getElementById('all');
+    all.innerHTML = ORDER.map(k => `<div class="fin"><div class="cap"><h3>${F[k].label}</h3><small>${F[k].suits}</small></div>
+      <div class="pair">
+        <div><div class="thumb stage" tabindex="0" role="button" aria-label="Show ${F[k].light.name}" data-f="${k}" data-m="light" id="t-${k}-l"></div><div class="thumbname">${F[k].light.name}</div></div>
+        <div><div class="thumb stage" tabindex="0" role="button" aria-label="Show ${F[k].dark.name}" data-f="${k}" data-m="dark" id="t-${k}-d"></div><div class="thumbname">${F[k].dark.name}</div></div>
+      </div><p class="muted" style="font-size:13.5px">${F[k].blurb}</p></div>`).join('');
+    // Drop stale thumbnail stages, then add the new ones.
+    for (let i = stages.length - 1; i >= 0; i--) if (!document.body.contains(stages[i].stage)) stages.splice(i, 1);
+    all.querySelectorAll('.thumb').forEach(t => {
+      place(t, mock(t.dataset.f, t.dataset.m, 'default', 'detailed', 'separates'), 1040, 640);
+      ro.observe(t);
+      const go = () => { state.finish = t.dataset.f; state.mode = t.dataset.m; state.accent = 'default'; save(); render(); document.getElementById('live-h').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+      t.onclick = go; t.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } };
+    });
+  }
+
+  render();
+  ro.observe(document.getElementById('live'));
+  ro.observe(document.getElementById('fam'));
+  ro.observe(document.getElementById('app'));
+})();
+</script>
