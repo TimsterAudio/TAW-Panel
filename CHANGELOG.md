@@ -4,6 +4,8 @@
 
 ## 0.3.1 – 2026-10-14
 
+Commit `f5db7cb0eb288c656d739aa5ecc2c027b14baf00`.
+
 - `hifi::meter_scale`: a dB scale for `hifi::meter` (0, −3, −6, −12, −24, −48), a tick and a figure at each, drawn under the meter in the display's ink; figures that won't fit on a narrow meter are left out. With it, `meter_x` (where a level falls along a meter) and the constants `METER_FLOOR_DB` and `METER_MARKS`. For the Player's meters (user feedback, 2026-10-14).
 - The `gallery` example shows the TAW look (`hifi`), every piece on one page, and can start on any look (`gallery porcelain dark`). The Jupiter page is now the `jupiter` example.
 - Nothing existing changed: 0.3.0 callers build unchanged, and `meter` looks the same.

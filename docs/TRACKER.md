@@ -20,7 +20,7 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 
 | Date | To | For | Brief | State |
 |---|---|---|---|---|
-| 2026-10-14 | Player | 0.2.0, from the 0.1.0 test on Linux Mint | `docs/briefs/2026-10-14-0.2.0.md` in TAW-Player | Written, not yet picked up |
+| 2026-10-14 | Player | 0.2.0, from the 0.1.0 test on Linux Mint | `docs/briefs/2026-10-14-0.2.0.md` in TAW-Player | Written, not yet picked up. TAW-Panel 0.3.1 (meter scale) is out for it |
 
 ## Test rounds
 
@@ -36,6 +36,7 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 
 ## Decided
 
+- 2026-10-14: the meter scale is TAW-Panel 0.3.1 (a patch number, by the user's choice, though it adds a function).
 - 2026-10-14: this tracker, one line per project, in TAW-Panel; the detailed pipeline in each repo's ROADMAP.md.
 - 2026-10-14: Player: Enter plays the highlighted track (the arrows only move the highlight); the Library's Play key always starts playing, whatever the Player's new "Start playing when I open music" setting says.
 
