@@ -13,7 +13,7 @@ Four plain names under one maker's badge, like a stack of hi-fi units. Each has 
 | **Equaliser** | EQ-001 | System-wide parametric EQ (PipeWire sink on Linux, an audio-engine effect on Windows). | TAW-Equaliser | `taw-equaliser` |
 | **Analyser** | SP-001 | Spectrum analyser. Listens only. | TAW-Analyser | `taw-analyser` |
 
-Instruments keep "Box" names: **Drone Box**, **Drum Box** (browser apps, their own repos). **Spool** (the browser player) stays as it is while the Player is built.
+Instruments keep "Box" names: **Drone Box**, **Drum Box** (browser apps, their own repos), and **EQ Box** (TimsterAudio/EQ-Box, native, restored from its 0.2.0 on 2026-10-14 as the Box family's equaliser with Drone Box's panel and the SP-10 analyser built in). TAW Equaliser grew out of EQ Box; the two share one Windows engine (same CLSID), so only one engine can be installed. **Spool** (the browser player) stays as it is while the Player is built.
 
 ## The shared panel
 
