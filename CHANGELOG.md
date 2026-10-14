@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- The `gallery` example shows the TAW look (`hifi`), every piece on one page, and can start on any look (`gallery porcelain dark`). The Jupiter page is now the `jupiter` example. Nothing in the crate changed.
+
 ## 0.3.0 – 2026-10-14
 
 Commit `1b8162d75d10c41a8c9b021fc3d31e2a3311aeb6`.

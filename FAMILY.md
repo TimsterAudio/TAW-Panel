@@ -23,7 +23,7 @@ All four use **TAW-Panel** (this repo) for the look. Apps pin a TAW-Panel commit
 - **The Jupiter look** (`theme`, `widgets`, `lists`, `frame`) is Drone Box's panel language: Black or Silver, coloured keys, knobs, faders, red displays. It stays for the **Box** instruments (Drone Box, Drum Box) and could give them a matching Box EQ and Box Analyser (same engines, Box face).
 - Both share the spectrum drawing and FFT (feature `analyser`).
 
-Where each app is: the Equaliser (0.3.0) and Analyser (0.2.0) were released in the TAW look on 2026-10-14, on TAW-Panel 0.3.0; the Player (0.1.0) was released in it the same day, and the Library has it on its branch (not yet released).
+Where each app is: all four were released in the TAW look on 2026-10-14, on TAW-Panel 0.3.0: Library 0.3.0, Player 0.1.0, Equaliser 0.3.0 and Analyser 0.2.0.
 
 ## How they fit together
 
@@ -33,7 +33,7 @@ Library ──(album or playlist)──► Player ──► system output ──
 ```
 
 - **Library → Player:** the Library's Play key writes an `.m3u8` playlist and runs `taw-player --play <file>` when it finds the Player (next to the Library, in a folder beside it named `taw-player…`, or on the PATH); otherwise it opens the playlist in the default player. A Player that's already open takes the playlist and the second launch exits (files in the Player's data folder, not a socket). Later, the Player may read the Library's database (read-only) to browse the collection.
-- **Player → the others:** the Player's Family keys start the Library, Equaliser and Analyser when they're found (the same places, plus `Program Files\Timster's Audio Works\<App>` on Windows); the LED over each key shows whether it was. Every app works on its own: none needs another installed.
+- **The family switcher:** along the top of every app, it starts the others when they're found (next to the app, in a sibling folder named after the program, on the PATH, plus `Program Files\Timster's Audio Works\<App>` on Windows for the Player); apps that weren't found are dimmed. Every app works on its own: none needs another installed.
 - **Equaliser:** works at the system level, so it sits after any player with no coupling.
 - **Analyser:** listens to an output or an input; needs nothing from the others.
 
@@ -59,8 +59,8 @@ The short name is on the panel; the full name is everywhere technical, so "Libra
 
 ## Order of work
 
-1. Get each app to a usable state: the Equaliser tested on Windows (the EQ Box to TAW Equaliser switch), then the Player running (first build 2026-10-13, on its branch for review).
-2. The TAW look: Analyser and Equaliser first (done, for review), then the Player and Library.
+1. The TAW look for all four (done 2026-10-14; all released).
+2. Each app usable day to day, in its own chat: the Equaliser tested on Windows (the EQ Box to TAW Equaliser switch), the Player's listening test, the Library's resizable panes and columns, the Analyser's feedback.
 3. Later finishes and skins (parked in TAW-Panel's ROADMAP.md).
 
 ## Parked ideas

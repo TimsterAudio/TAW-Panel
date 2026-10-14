@@ -18,7 +18,7 @@ cargo test --all-features
 cargo clippy --target x86_64-pc-windows-gnu -- -D warnings
 ```
 
-For anything visible, run `cargo run --example gallery` (under Xvfb in a cloud session) and look at both panels.
+For anything visible, run `cargo run --example gallery` (the TAW look; add `porcelain dark` and the like to start on a look) and `cargo run --example jupiter` (the Box instruments' look), under Xvfb in a cloud session, and look at them.
 
 ## Releasing a version
 
