@@ -8,7 +8,7 @@ Last checked: **2026-10-14**, against `main` of all five repos.
 
 | Project | Released | Panel pin | Now | Waiting on | Next release |
 |---|---|---|---|---|---|
-| TAW-Panel | 0.3.0 | — | Gallery shows the TAW look (unreleased, docs and example only) | Player's meter-scale request | 0.4.0: meter scale |
+| TAW-Panel | 0.3.1 | — | 0.3.1 adds the meter scale for Player 0.2.0 | — | 0.4.0: resizable list |
 | Library (LB-001) | 0.3.0 | 0.3.0 | Released in the TAW look | The user's review of the look | 0.3.x: review fixes |
 | Player (PL-001) | 0.1.0 | 0.3.0 | Tested on Linux Mint; brief written for 0.2.0 | The Player session to pick up the brief | 0.2.0: feedback release |
 | Equaliser (EQ-001) | 0.3.0 | 0.3.0 | README screenshots updated (PR #3) | The user's test on real Windows | 0.3.x: Windows fixes |

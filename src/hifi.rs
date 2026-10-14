@@ -1341,12 +1341,11 @@ pub fn hslider(ui: &mut Ui, r: Rect, id: Id, t: &Tokens, v: &mut f32, spec: &Spe
 /// A one-row segmented level meter from −48 to 0 dBFS: green, amber above
 /// −12 dB, red above −3 dB.
 pub fn meter(p: &Painter, r: Rect, t: &Tokens, db: f32) {
-    const SEGS: usize = 24;
-    let gap = 2.0;
-    let w = (r.width() - gap * (SEGS - 1) as f32) / SEGS as f32;
-    let lit = ((db + 48.0) / 48.0 * SEGS as f32).ceil() as i32;
+    const SEGS: usize = METER_SEGMENTS;
+    let (w, gap) = meter_segment(r);
+    let lit = ((db - METER_FLOOR_DB) / -METER_FLOOR_DB * SEGS as f32).ceil() as i32;
     for s in 0..SEGS {
-        let seg_db = -48.0 + 48.0 * (s as f32 + 1.0) / SEGS as f32;
+        let seg_db = METER_FLOOR_DB - METER_FLOOR_DB * (s as f32 + 1.0) / SEGS as f32;
         let base = if seg_db > -3.0 {
             hex(0xff4a30)
         } else if seg_db > -12.0 {
@@ -1368,6 +1367,70 @@ pub fn meter(p: &Painter, r: Rect, t: &Tokens, db: f32) {
             CornerRadius::same(1),
             c,
         );
+    }
+}
+
+/// The level at the left end of `meter`; it lights from here up to 0 dB.
+pub const METER_FLOOR_DB: f32 = -48.0;
+const METER_SEGMENTS: usize = 24;
+
+/// The levels `meter_scale` marks, in dB, in the order they're kept when
+/// a narrow meter has no room for all of them.
+pub const METER_MARKS: [f32; 6] = [0.0, -48.0, -24.0, -12.0, -6.0, -3.0];
+
+/// A meter segment's width and the gap after it, for a meter drawn in `r`.
+fn meter_segment(r: Rect) -> (f32, f32) {
+    let gap = 2.0;
+    let w = (r.width() - gap * (METER_SEGMENTS - 1) as f32) / METER_SEGMENTS as f32;
+    (w, gap)
+}
+
+/// Where `db` falls along a meter drawn in `r`, following its segments and
+/// the gaps between them: the left edge at the floor, the right edge at 0 dB.
+pub fn meter_x(r: Rect, db: f32) -> f32 {
+    let (w, gap) = meter_segment(r);
+    let pos = ((db - METER_FLOOR_DB) / -METER_FLOOR_DB).clamp(0.0, 1.0) * METER_SEGMENTS as f32;
+    if pos >= METER_SEGMENTS as f32 {
+        return r.right();
+    }
+    let s = pos.floor();
+    r.left() + s * (w + gap) + (pos - s) * w
+}
+
+/// A dB scale for `meter`: a tick and a figure at each of `METER_MARKS`.
+/// `meter_r` is the meter it labels; the scale is drawn just under it and
+/// takes about 12 px. On a narrow meter, figures that would touch one
+/// already placed are left out (0 dB and the floor always stay).
+pub fn meter_scale(p: &Painter, meter_r: Rect, t: &Tokens) {
+    let font = num(9.0);
+    let c = t.ink_faint(0.7);
+    let top = meter_r.bottom() + 2.0;
+    let mut placed: Vec<Rect> = Vec::new();
+    for db in METER_MARKS {
+        let x = meter_x(meter_r, db);
+        let s = if db == 0.0 {
+            "0".to_string()
+        } else {
+            format!("-{}", -db as i32)
+        };
+        let w = text_width(p, &s, font.clone());
+        let (left, align) = if db >= 0.0 {
+            (x - w, Align2::RIGHT_TOP)
+        } else if db <= METER_FLOOR_DB {
+            (x, Align2::LEFT_TOP)
+        } else {
+            (x - w / 2.0, Align2::CENTER_TOP)
+        };
+        let slot = Rect::from_min_size(Pos2::new(left - 3.0, top), Vec2::new(w + 6.0, 10.0));
+        if placed.iter().any(|o| o.intersects(slot)) {
+            continue;
+        }
+        placed.push(slot);
+        p.line_segment(
+            [Pos2::new(x, top), Pos2::new(x, top + 2.0)],
+            Stroke::new(1.0, c),
+        );
+        label(p, Pos2::new(x, top + 2.5), align, &s, font.clone(), c);
     }
 }
 
@@ -1604,6 +1667,22 @@ pub fn look_settings(ui: &mut Ui, t: &Tokens, look: &mut Look) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn meter_x_follows_the_segments() {
+        let r = Rect::from_min_size(Pos2::new(100.0, 0.0), Vec2::new(478.0, 10.0));
+        assert_eq!(meter_x(r, METER_FLOOR_DB), r.left());
+        assert_eq!(meter_x(r, 0.0), r.right());
+        assert_eq!(meter_x(r, -90.0), r.left());
+        assert_eq!(meter_x(r, 6.0), r.right());
+        // 24 segments of 18 px with 2 px gaps: -24 dB is the start of the 13th.
+        assert!((meter_x(r, -24.0) - (100.0 + 12.0 * 20.0)).abs() < 0.01);
+        let xs: Vec<f32> = [-48.0, -24.0, -12.0, -6.0, -3.0, 0.0]
+            .iter()
+            .map(|&db| meter_x(r, db))
+            .collect();
+        assert!(xs.windows(2).all(|w| w[0] < w[1]));
+    }
 
     #[test]
     fn default_is_spool_light_amber() {

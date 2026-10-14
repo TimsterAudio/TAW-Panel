@@ -19,7 +19,7 @@ All the typefaces are built in, under the OFL.
 
 | Module | What's in it |
 |---|---|
-| `hifi` | The TAW look. `Look` (`Finish`, `Build`, `Accent`) and the `Tokens` it resolves to; `install_fonts`, `apply_visuals`; `faceplate`, `bar`, `well`, `display`; `nameplate`, `window_buttons`, `drag_to_move`, `resize_edges`; `button`, `switch`, `labelled_switch`, `segmented`, `family_switch`, `gear_button`, `select`, `knob`, `vfader`, `hslider`, `meter`, `status_light`, `ink_text`, `ink_curve`; `drawer` and `look_settings` |
+| `hifi` | The TAW look. `Look` (`Finish`, `Build`, `Accent`) and the `Tokens` it resolves to; `install_fonts`, `apply_visuals`; `faceplate`, `bar`, `well`, `display`; `nameplate`, `window_buttons`, `drag_to_move`, `resize_edges`; `button`, `switch`, `labelled_switch`, `segmented`, `family_switch`, `gear_button`, `select`, `knob`, `vfader`, `hslider`, `meter`, `meter_scale`, `status_light`, `ink_text`, `ink_curve`; `drawer` and `look_settings` |
 | `theme` | The Jupiter look: `Theme` (Black or Silver), `KnobStyle`, the key colours (`K_RED` … `K_GREY`), lights and display colours, `install_fonts` and `font` |
 | `widgets` | Jupiter controls: `key`, `lit_key`, `knob`, `fader`, `lcd`, `lcd_combo`, `readout`, `meter`, `ladder`, `section`, `frame_tab`, `stripe`, `led`, text helpers; and `Spec`, the range of a control, used by both looks |
 | `lists` | `rows` (a scrolling list that only draws what's on screen), `fit`, `thousands`, `ago`, and Jupiter list pieces (`well`, `row_bg`, `header`, `chip`, `light`) |

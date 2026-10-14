@@ -296,15 +296,14 @@ impl eframe::App for Gallery {
         );
         let mx = d.left() + 220.0;
         for (c, db) in [-9.0f32, -12.0].into_iter().enumerate() {
-            hifi::meter(
-                p,
-                Rect::from_min_size(
-                    Pos2::new(mx, d.top() + 22.0 + c as f32 * 16.0),
-                    Vec2::new(d.right() - 20.0 - mx, 10.0),
-                ),
-                &t,
-                db,
+            let m = Rect::from_min_size(
+                Pos2::new(mx, d.top() + 22.0 + c as f32 * 16.0),
+                Vec2::new(d.right() - 20.0 - mx, 10.0),
             );
+            hifi::meter(p, m, &t, db);
+            if c == 1 {
+                hifi::meter_scale(p, m, &t);
+            }
         }
         let base = d.bottom() - 16.0;
         let pts: Vec<Pos2> = (0..=120)
