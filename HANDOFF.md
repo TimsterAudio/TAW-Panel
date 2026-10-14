@@ -10,6 +10,6 @@ Written 2026-10-14 when the family's work moved from one shared chat to a chat p
 
 ## Next
 
-1. Move the Player and Library to the `hifi` look (in this chat, until they're functional).
+1. Move the Library to the `hifi` look (the Player moved on 2026-10-14, on its branch).
 2. A resizable list (panes and columns) for the Library and Player.
 3. Keep FAMILY.md current; parked ideas live there.
