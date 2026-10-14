@@ -55,7 +55,7 @@ The short name is on the panel; the full name is everywhere technical, so "Libra
 - Each repo: feature branches, `main` always works, CHANGELOG.md with an Unreleased section, and a release workflow that publishes Windows and Linux downloads when `main` carries a new version.
 - The command line is part of an app's contract once another app uses it: `taw-player [--play] [FILE | FOLDER | PLAYLIST ...]`.
 - Checks before pushing: `cargo fmt --check`, `cargo clippy -- -D warnings`, `cargo test`, and a Windows cross-compile (`--target x86_64-pc-windows-gnu`).
-- Work across apps happens in the family session; deep work on one app in a session for that app. Only one session works in a repo at a time.
+- Work across apps happens in the family session; deep work on one app in a session for that app. Only one session works in a repo at a time. `docs/TRACKER.md` (in this repo) tracks where every project stands and the handoffs between the family session and the app sessions; each repo's ROADMAP.md holds its own release pipeline, and briefs to an app's session go in that app's `docs/briefs/`.
 
 ## Order of work
 

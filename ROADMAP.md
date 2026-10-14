@@ -1,6 +1,19 @@
 # Roadmap
 
-TAW-Panel moves when the apps need it. Right now the priority is getting each app to a usable state (the Equaliser tested on Windows, the Player running); the look waits until then.
+TAW-Panel moves when the apps need it. All four apps are released on 0.3.0; each new version below is driven by an app release that needs it. [docs/TRACKER.md](docs/TRACKER.md) has where every project stands.
+
+## Pipeline (proposed 2026-10-14)
+
+Sizes: S = one session, M = two or three, L = a release of its own.
+
+| Release | What | For | Size |
+|---|---|---|---|
+| 0.4.0 | **Meter scale:** a dB scale for `hifi::meter` (0, −3, −6, −12, −24, −48), drawn in the display's ink, as a new function so existing callers build unchanged | Player 0.2.0 (user feedback, 2026-10-14); the Equaliser and Analyser can use it too | S |
+| 0.5.0 | **The resizable list:** drag a pane edge or column divider, double-click to fit, one flexible column takes the spare room, header right-click shows or hides columns, widths saved per view (serde, with defaults) | Library 0.4.0, then the Player | M |
+| 0.6.0 | **Meters, part 2:** Spool's meter scale (20 segments, 1 dB a step at the top) with four peak LEDs and hold; an analogue VU meter widget | Player's meters and VU window; the Equaliser and Analyser | M |
+| parked | More finishes (Bronze, Cassette, Walnut, Studio), then skins (below) | When the apps are settled | L |
+
+If the Player's bottom-corner resize problem (2026-10-14, Linux Mint) turns out to be in `hifi::resize_edges`, the fix is a patch release ahead of all of these.
 
 ## Parked: skins
 
@@ -28,3 +41,4 @@ Reviewed on 2026-10-13 and parked until the Equaliser is tested and the Player r
 
 - [x] 0.1.0: the shared look from the Equaliser plus the Library's list pieces
 - [x] 0.2.0: spectrum drawing and the analyser (feature `analyser`)
+- [x] 0.3.0: `hifi`, the TAW look (Spool and Porcelain; light, dark, automatic), used by all four apps

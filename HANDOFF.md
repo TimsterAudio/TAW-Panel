@@ -11,5 +11,6 @@ Written 2026-10-14 when the family's work moved from one shared chat to a chat p
 
 ## Next
 
-1. A resizable list (panes and columns) for the Library and Player.
-2. Keep FAMILY.md current; parked ideas live there.
+1. 0.4.0: a dB scale for the meters, for Player 0.2.0 (see ROADMAP.md).
+2. 0.5.0: a resizable list (panes and columns) for the Library and Player.
+3. Keep FAMILY.md and docs/TRACKER.md current; parked ideas live in FAMILY.md.
