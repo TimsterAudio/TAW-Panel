@@ -23,7 +23,7 @@ All four use **TAW-Panel** (this repo) for the look. Apps pin a TAW-Panel commit
 - **The Jupiter look** (`theme`, `widgets`, `lists`, `frame`) is Drone Box's panel language: Black or Silver, coloured keys, knobs, faders, red displays. It stays for the **Box** instruments (Drone Box, Drum Box) and could give them a matching Box EQ and Box Analyser (same engines, Box face).
 - Both share the spectrum drawing and FFT (feature `analyser`).
 
-Where each app is: the Analyser and Equaliser have the TAW look (first working builds, on their branches for review); the Player and Library still have the Jupiter look.
+Where each app is: the Equaliser (0.3.0) and Analyser (0.2.0) were released in the TAW look on 2026-10-14, on TAW-Panel 0.3.0; the Player and Library still have the Jupiter look and move next.
 
 ## How they fit together
 
