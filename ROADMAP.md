@@ -8,8 +8,8 @@ Sizes: S = one session, M = two or three, L = a release of its own.
 
 | Release | What | For | Size |
 |---|---|---|---|
-| 0.4.0 | **The resizable list:** drag a pane edge or column divider, double-click to fit, one flexible column takes the spare room, header right-click shows or hides columns, widths saved per view (serde, with defaults) | Library 0.4.0, then the Player | M |
-| 0.5.0 | **Meters, part 2:** Spool's meter scale (20 segments, 1 dB a step at the top) with four peak LEDs and hold; an analogue VU meter widget | Player's meters and VU window; the Equaliser and Analyser | M |
+| 0.5.0 | **The resizable list:** drag a pane edge or column divider, double-click to fit, one flexible column takes the spare room, header right-click shows or hides columns, widths saved per view (serde, with defaults) | Library 0.4.0, then the Player | M |
+| 0.6.0 | **Meters, part 2:** Spool's meter scale (20 segments, 1 dB a step at the top) with four peak LEDs and hold; an analogue VU meter widget | Player's meters and VU window; the Equaliser and Analyser | M |
 | parked | More finishes (Bronze, Cassette, Walnut, Studio), then skins (below) | When the apps are settled | L |
 
 If the Player's bottom-corner resize problem (2026-10-14, Linux Mint) turns out to be in `hifi::resize_edges`, the fix is a patch release ahead of all of these.
@@ -44,3 +44,4 @@ Reviewed on 2026-10-13 and parked until the Equaliser is tested and the Player r
 - [x] 0.3.1: `hifi::meter_scale`, a dB scale for the meters, for Player 0.2.0
 - [x] 0.3.2: resizing frameless windows from the corners, and after a resize or move
 - [x] 0.3.3: `hifi::badge` and `hifi::logo`, for a centred badge
+- [x] 0.4.0: the hi-fi nameplate without the big name; one tighter corner radius; chosen segments stand out; meter colours (classic or the display's); drawer sections (from the Player's feedback, 2026-10-15)
