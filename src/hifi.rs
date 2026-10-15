@@ -467,8 +467,8 @@ pub fn apply_visuals(ctx: &egui::Context, t: &Tokens) {
     v.widgets.hovered.weak_bg_fill = t.select;
     v.widgets.hovered.bg_fill = t.select;
     v.widgets.active.weak_bg_fill = t.select;
-    v.window_corner_radius = CornerRadius::same(8);
-    v.menu_corner_radius = CornerRadius::same(8);
+    v.window_corner_radius = CornerRadius::same(RADIUS);
+    v.menu_corner_radius = CornerRadius::same(RADIUS);
     if ctx.global_style().visuals != v {
         ctx.set_visuals(v);
     }
@@ -551,10 +551,10 @@ pub fn bar(p: &Painter, r: Rect, t: &Tokens) {
 
 /// A recessed area for lists and cards.
 pub fn well(p: &Painter, r: Rect, t: &Tokens) {
-    p.rect_filled(r, CornerRadius::same(8), t.well);
+    p.rect_filled(r, CornerRadius::same(RADIUS), t.well);
     p.rect_stroke(
         r,
-        CornerRadius::same(8),
+        CornerRadius::same(RADIUS),
         Stroke::new(1.0, t.line),
         StrokeKind::Inside,
     );
@@ -563,13 +563,13 @@ pub fn well(p: &Painter, r: Rect, t: &Tokens) {
 /// A display window (graph, spectrum, time): dark glass on most finishes,
 /// paper on light Porcelain.
 pub fn display(p: &Painter, r: Rect, t: &Tokens) {
-    p.rect_filled(r, CornerRadius::same(8), t.display_bg);
+    p.rect_filled(r, CornerRadius::same(RADIUS), t.display_bg);
     // The glass sits slightly below the faceplate.
     p.rect_filled(
         Rect::from_min_size(r.min, Vec2::new(r.width(), 3.0)),
         CornerRadius {
-            nw: 8,
-            ne: 8,
+            nw: RADIUS,
+            ne: RADIUS,
             sw: 0,
             se: 0,
         },
@@ -577,7 +577,7 @@ pub fn display(p: &Painter, r: Rect, t: &Tokens) {
     );
     p.rect_stroke(
         r,
-        CornerRadius::same(8),
+        CornerRadius::same(RADIUS),
         Stroke::new(1.0, t.line),
         StrokeKind::Outside,
     );
@@ -585,11 +585,62 @@ pub fn display(p: &Painter, r: Rect, t: &Tokens) {
 
 // ---------------------------------------------------------------- nameplate
 
-/// The badge, logo and model line, as on every Timster's Audio Works unit:
-/// "Timster's Audio Works - Analyser", ANALYSER, "SP-001 · SPECTRUM
-/// ANALYSER · V0.2.0". Returns the space it took.
+/// The nameplate of the hi-fi units: the badge ("Timster's Audio Works -
+/// Analyser") with the model line under it ("SP-001 · SPECTRUM ANALYSER ·
+/// V0.2.0"). The big slanted name is the Box instruments' (see [`logo`]).
+/// Returns the space it took.
 pub fn nameplate(ui: &Ui, at: Pos2, t: &Tokens, name: &str, model_line: &str) -> Rect {
     let p = ui.painter();
+    let badge = badge_at(p, at, t, name);
+    let ml = text(
+        p,
+        Pos2::new(at.x + 1.0, badge.bottom() + 6.0),
+        Align2::LEFT_TOP,
+        &model_line.to_uppercase(),
+        semi(9.5),
+        t.dim,
+        1.9,
+    );
+    Rect::from_min_max(at, Pos2::new(badge.right().max(ml.right()), ml.bottom()))
+}
+
+/// The "Timster's Audio Works - Player" badge on its own, centred on
+/// `centre_top` (the middle of its top edge): for a nameplate whose badge
+/// sits in the middle of the window's top edge, with [`logo`] at the left.
+/// Returns the space it took.
+pub fn badge(p: &Painter, centre_top: Pos2, t: &Tokens, name: &str) -> Rect {
+    let w = badge_galley(p, t, name).size().x + 18.0;
+    badge_at(p, Pos2::new(centre_top.x - w / 2.0, centre_top.y), t, name)
+}
+
+/// The big slanted name and the model line (ANALYSER, "SP-001 · SPECTRUM
+/// ANALYSER · V0.2.0"), from `at`: the nameplate before 0.4.0, kept for
+/// anything that wants it. Returns the space it took.
+pub fn logo(ui: &Ui, at: Pos2, t: &Tokens, name: &str, model_line: &str) -> Rect {
+    let p = ui.painter();
+    let logo_at = Pos2::new(at.x + 3.0, at.y);
+    slanted_text(
+        ui,
+        logo_at,
+        &name.to_uppercase(),
+        crate::theme::font(F_LOGO, 21.0),
+        t.text,
+        3.5,
+        12.0,
+    );
+    let ml = text(
+        p,
+        Pos2::new(at.x, logo_at.y + 33.0),
+        Align2::LEFT_TOP,
+        &model_line.to_uppercase(),
+        semi(9.5),
+        t.dim,
+        1.9,
+    );
+    Rect::from_min_max(at, Pos2::new(ml.right().max(at.x), ml.bottom()))
+}
+
+fn badge_galley(p: &Painter, t: &Tokens, name: &str) -> std::sync::Arc<egui::Galley> {
     let mut job = LayoutJob::default();
     job.append(
         "Timster's Audio Works - ",
@@ -609,41 +660,31 @@ pub fn nameplate(ui: &Ui, at: Pos2, t: &Tokens, name: &str, model_line: &str) ->
             ..Default::default()
         },
     );
-    let g = p.layout_job(job);
+    p.layout_job(job)
+}
+
+fn badge_at(p: &Painter, at: Pos2, t: &Tokens, name: &str) -> Rect {
+    let g = badge_galley(p, t, name);
     let badge = Rect::from_min_size(at, g.size() + Vec2::new(18.0, 6.0));
     p.rect_stroke(
         badge,
-        CornerRadius::same(4),
+        CornerRadius::same(RADIUS),
         Stroke::new(1.0, t.line),
         StrokeKind::Inside,
     );
     p.galley(badge.min + Vec2::new(9.0, 3.0), g, t.text);
-    let logo_at = Pos2::new(at.x + 3.0, badge.bottom() + 4.0);
-    slanted_text(
-        ui,
-        logo_at,
-        &name.to_uppercase(),
-        crate::theme::font(F_LOGO, 21.0),
-        t.text,
-        3.5,
-        12.0,
-    );
-    let ml = text(
-        p,
-        Pos2::new(at.x, logo_at.y + 33.0),
-        Align2::LEFT_TOP,
-        &model_line.to_uppercase(),
-        semi(9.5),
-        t.dim,
-        1.9,
-    );
-    Rect::from_min_max(at, Pos2::new(badge.right().max(ml.right()), ml.bottom()))
+    badge
 }
 
 // ---------------------------------------------------------------- window
 
 /// How far in from the window's edge a drag resizes it.
 pub const RESIZE_MARGIN: f32 = 6.0;
+
+/// The corner radius every panel piece shares: wells, display windows,
+/// buttons, segmented controls (the family switcher too), menus and the
+/// badge.
+pub const RADIUS: u8 = 6;
 
 /// Minimise, maximise and close, drawn in the finish, with their top right
 /// corner at `top_right`. Returns the space they took.
@@ -672,7 +713,7 @@ pub fn window_buttons(ui: &mut Ui, top_right: Pos2, t: &Tokens) -> Rect {
         let close = i == 2;
         if resp.hovered() {
             let bg = if close { hex(0xd9443a) } else { t.raised };
-            p.rect_filled(r, CornerRadius::same(6), bg);
+            p.rect_filled(r, CornerRadius::same(RADIUS), bg);
         }
         let c = if close && resp.hovered() {
             Color32::WHITE
@@ -842,11 +883,11 @@ pub fn button(ui: &mut Ui, r: Rect, id: Id, t: &Tokens, label_s: &str, primary: 
     } else {
         bg
     };
-    p.rect_filled(r, CornerRadius::same(8), bg);
+    p.rect_filled(r, CornerRadius::same(RADIUS), bg);
     if !primary {
         p.rect_stroke(
             r,
-            CornerRadius::same(8),
+            CornerRadius::same(RADIUS),
             Stroke::new(1.0, t.line),
             StrokeKind::Inside,
         );
@@ -854,7 +895,7 @@ pub fn button(ui: &mut Ui, r: Rect, id: Id, t: &Tokens, label_s: &str, primary: 
     if resp.has_focus() {
         p.rect_stroke(
             r.expand(2.0),
-            CornerRadius::same(9),
+            CornerRadius::same(RADIUS + 1),
             Stroke::new(2.0, t.accent),
             StrokeKind::Outside,
         );
@@ -962,11 +1003,7 @@ pub fn segmented(
     let total: f32 = widths.iter().sum::<f32>() + inset * 2.0;
     let left = if right { at.x - total } else { at.x };
     let r = Rect::from_min_size(Pos2::new(left, at.y - h / 2.0), Vec2::new(total, h));
-    let rad = if kind == Seg::Pill {
-        (h / 2.0) as u8
-    } else {
-        8
-    };
+    let rad = RADIUS;
     {
         let p = ui.painter();
         p.rect_filled(r, CornerRadius::same(rad), t.well);
@@ -1003,22 +1040,28 @@ pub fn segmented(
         };
         if let Some(bg) = bg {
             let cr = if kind == Seg::Pill {
-                CornerRadius::same(((h - inset * 2.0) / 2.0) as u8)
+                // Inset in the pill, so its corners follow the pill's.
+                CornerRadius::same(RADIUS - inset as u8)
             } else {
                 // Only the outer corners of the end cells are rounded.
                 let first = i == 0;
                 let last = i + 1 == items.len();
                 CornerRadius {
-                    nw: if first { 8 } else { 0 },
-                    sw: if first { 8 } else { 0 },
-                    ne: if last { 8 } else { 0 },
-                    se: if last { 8 } else { 0 },
+                    nw: if first { RADIUS } else { 0 },
+                    sw: if first { RADIUS } else { 0 },
+                    ne: if last { RADIUS } else { 0 },
+                    se: if last { RADIUS } else { 0 },
                 }
             };
             if on && kind == Seg::Pill {
                 p.rect_filled(cell.translate(Vec2::new(0.0, 1.0)), cr, rgba(0, 0, 0, 0.12));
             }
             p.rect_filled(cell, cr, bg);
+            // The choice gets a slightly heavier edge, so it stands out
+            // without shouting.
+            if on && kind != Seg::Accent {
+                p.rect_stroke(cell, cr, Stroke::new(1.5, t.line), StrokeKind::Inside);
+            }
         }
         let mut tx = cell.left() + pad;
         if let Some(c) = dots.get(i) {
@@ -1078,7 +1121,7 @@ pub fn gear_button(ui: &mut Ui, r: Rect, id: Id, t: &Tokens, active: bool) -> Re
     let p = ui.painter();
     p.rect_filled(
         r,
-        CornerRadius::same(8),
+        CornerRadius::same(RADIUS),
         if active {
             t.raised
         } else if resp.hovered() {
@@ -1089,7 +1132,7 @@ pub fn gear_button(ui: &mut Ui, r: Rect, id: Id, t: &Tokens, active: bool) -> Re
     );
     p.rect_stroke(
         r,
-        CornerRadius::same(8),
+        CornerRadius::same(RADIUS),
         Stroke::new(1.0, t.line),
         StrokeKind::Inside,
     );
@@ -1127,7 +1170,7 @@ pub fn select(
             w.weak_bg_fill = t.well;
             w.fg_stroke = Stroke::new(1.0, t.text);
             w.bg_stroke = Stroke::new(1.0, t.line);
-            w.corner_radius = CornerRadius::same(8);
+            w.corner_radius = CornerRadius::same(RADIUS);
             w.expansion = 0.0;
         }
         style.visuals.widgets.hovered.bg_stroke = Stroke::new(1.0, t.dim);
@@ -1350,6 +1393,32 @@ pub fn hslider(ui: &mut Ui, r: Rect, id: Id, t: &Tokens, v: &mut f32, spec: &Spe
 /// A one-row segmented level meter from −48 to 0 dBFS: green, amber above
 /// −12 dB, red above −3 dB.
 pub fn meter(p: &Painter, r: Rect, t: &Tokens, db: f32) {
+    meter_in(p, r, t, db, MeterColours::Classic);
+}
+
+/// How a meter's segments are coloured.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub enum MeterColours {
+    /// Green, then yellow from −12 dB, red from −3 dB: the classic LED meter.
+    #[default]
+    Classic,
+    /// In the display's own ink (the finish and colour theme), with only the
+    /// top 3 dB in red.
+    Display,
+}
+
+impl MeterColours {
+    pub const ALL: [MeterColours; 2] = [MeterColours::Classic, MeterColours::Display];
+    pub fn name(self) -> &'static str {
+        match self {
+            MeterColours::Classic => "Classic",
+            MeterColours::Display => "Display",
+        }
+    }
+}
+
+/// [`meter`] in the chosen colours.
+pub fn meter_in(p: &Painter, r: Rect, t: &Tokens, db: f32, colours: MeterColours) {
     const SEGS: usize = METER_SEGMENTS;
     let (w, gap) = meter_segment(r);
     let lit = ((db - METER_FLOOR_DB) / -METER_FLOOR_DB * SEGS as f32).ceil() as i32;
@@ -1357,6 +1426,8 @@ pub fn meter(p: &Painter, r: Rect, t: &Tokens, db: f32) {
         let seg_db = METER_FLOOR_DB - METER_FLOOR_DB * (s as f32 + 1.0) / SEGS as f32;
         let base = if seg_db > -3.0 {
             hex(0xff4a30)
+        } else if colours == MeterColours::Display {
+            t.ink
         } else if seg_db > -12.0 {
             hex(0xefc23b)
         } else {
@@ -1557,7 +1628,7 @@ pub fn drawer(
                 .on_hover_cursor(CursorIcon::PointingHand);
             let p = ui.painter();
             if resp.hovered() {
-                p.rect_filled(close, CornerRadius::same(8), t.line_soft);
+                p.rect_filled(close, CornerRadius::same(RADIUS), t.line_soft);
             }
             let m = close.center();
             let s = Stroke::new(1.6, t.text);
@@ -1578,26 +1649,35 @@ pub fn drawer(
             egui::ScrollArea::vertical()
                 .auto_shrink([false, false])
                 .show(&mut child, |ui| {
-                    ui.spacing_mut().item_spacing = Vec2::new(8.0, 10.0);
+                    ui.spacing_mut().item_spacing = Vec2::new(8.0, 4.0);
                     add(ui);
                 });
         });
 }
 
-/// A heading inside the settings drawer.
+/// A heading inside the settings drawer. Every section after the first
+/// starts with a hairline and some room above it, so the sections read as
+/// separate groups.
 pub fn drawer_heading(ui: &mut Ui, t: &Tokens, s: &str) {
-    ui.add_space(6.0);
+    let first = ui.next_widget_position().y - ui.max_rect().top() < 2.0;
+    if !first {
+        ui.add_space(12.0);
+        let (r, _) = ui.allocate_exact_size(Vec2::new(ui.available_width(), 1.0), Sense::hover());
+        ui.painter().rect_filled(r, 0, t.line);
+        ui.add_space(8.0);
+    }
     ui.label(
         egui::RichText::new(s.to_uppercase())
             .font(semi(11.0))
             .color(t.dim),
     );
+    ui.add_space(2.0);
 }
 
 /// A row in the drawer: a label on the left, `width` × 26 for a control
 /// on the right. Returns the control's rect.
 pub fn drawer_row(ui: &mut Ui, t: &Tokens, s: &str, width: f32) -> Rect {
-    let (row, _) = ui.allocate_exact_size(Vec2::new(ui.available_width(), 30.0), Sense::hover());
+    let (row, _) = ui.allocate_exact_size(Vec2::new(ui.available_width(), 28.0), Sense::hover());
     label(
         ui.painter(),
         Pos2::new(row.left(), row.center().y),

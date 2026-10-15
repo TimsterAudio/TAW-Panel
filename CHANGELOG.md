@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+## 0.4.0 – 2026-10-15
+
+Commit `d030ffdbc51c48e784cd74b20c5547a766461e5a`.
+
+From the user's feedback on the Player, for the whole hi-fi series:
+
+- **The nameplate is the badge with the model line under it.** The big slanted name stays with the Box instruments: `hifi::logo` still draws it for anything that wants it. Apps that call `nameplate` get the new, shorter plate and can tighten their top band (about 36 px tall instead of 70).
+- **One corner radius**, `hifi::RADIUS` (6, was 8): wells, display windows, buttons, segmented controls, the badge, menus, the gear key, and the family switcher (no longer a round-ended pill; its inner cells follow its corners).
+- **The chosen part of a segmented control** (Simple / Detailed, Spool / Porcelain, the family switcher) has a slightly heavier edge, so the choice stands out.
+- **Meter colours:** `hifi::meter_in` with `MeterColours::Classic` (green, yellow, red; what `meter` draws) or `MeterColours::Display` (the display's ink, with the top 3 dB still red). `MeterColours` is serde, for saving.
+- **The settings drawer:** sections after the first start with a hairline and more room above, and the rows within them sit closer together.
+- Callers build unchanged; the look changes where noted.
+
+## 0.3.3 – 2026-10-15
+
+Commit `3cf118182042752e9ec3622b6d202bf2d8f96dad`.
+
+- `hifi::badge` and `hifi::logo`: the nameplate's two halves on their own, so an app can put the "Timster's Audio Works - Player" badge in the middle of the window's top edge and the logo and model line up at the left (the Player 0.2.0's layout, by the user's choice). `nameplate` draws exactly as before, from the same pieces.
+- Nothing else changed: callers build unchanged.
+
 ## 0.3.2 – 2026-10-15
 
 Commit `5290f15aa8275851ba68e90417325e20565b1eeb` (made on branch `claude/kind-johnson-du69z8`, now on `main`).
