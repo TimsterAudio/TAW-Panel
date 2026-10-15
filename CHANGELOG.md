@@ -4,6 +4,8 @@
 
 ## 0.4.0 – 2026-10-15
 
+Commit `d030ffdbc51c48e784cd74b20c5547a766461e5a` (branch `claude/kind-johnson-du69z8`).
+
 From the user's feedback on the Player, for the whole hi-fi series:
 
 - **The nameplate is the badge with the model line under it.** The big slanted name stays with the Box instruments: `hifi::logo` still draws it for anything that wants it. Apps that call `nameplate` get the new, shorter plate and can tighten their top band (about 36 px tall instead of 70).
