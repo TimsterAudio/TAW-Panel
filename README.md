@@ -8,7 +8,7 @@ The panel look shared by Timster's Audio Works' native apps: the **Library**, **
 
 Two looks, one crate:
 
-- **The TAW look** (`hifi`), for the hi-fi apps. Spool's warm panels by default (Light, Amber), tinted by any of Spool's seven colour themes, or Porcelain; each in Light, Dark or Automatic (following the computer). Hanken Grotesk and Chivo Mono, with Michroma for the slanted logo. The badge ("Timster's Audio Works - Player"), logo and model line stay from the original panel. Apps draw their own title strip and window buttons.
+- **The TAW look** (`hifi`), for the hi-fi apps. Spool's warm panels by default (Light, Amber), tinted by any of Spool's seven colour themes, or Porcelain; each in Light, Dark or Automatic (following the computer). Hanken Grotesk and Chivo Mono (Michroma for the slanted name, `logo`, which the hi-fi nameplate no longer uses). The nameplate is the badge ("Timster's Audio Works - Player") with the model line under it. Apps draw their own title strip and window buttons.
 - **The Jupiter look** (`theme`, `widgets`), for the Box instruments (Drone Box, Drum Box, EQ Box): Drone Box's panel language, with Black and Silver panels, coloured keys with LEDs, knurled knobs, faders, red LED displays and the red, orange, yellow and cream stripe.
 
 ![The gallery in Porcelain, Dark](docs/gallery-porcelain-dark.png)
@@ -19,7 +19,7 @@ All the typefaces are built in, under the OFL.
 
 | Module | What's in it |
 |---|---|
-| `hifi` | The TAW look. `Look` (`Finish`, `Build`, `Accent`) and the `Tokens` it resolves to; `install_fonts`, `apply_visuals`; `faceplate`, `bar`, `well`, `display`; `nameplate`, `window_buttons`, `drag_to_move`, `resize_edges`; `button`, `switch`, `labelled_switch`, `segmented`, `family_switch`, `gear_button`, `select`, `knob`, `vfader`, `hslider`, `meter`, `meter_scale`, `status_light`, `ink_text`, `ink_curve`; `drawer` and `look_settings` |
+| `hifi` | The TAW look. `Look` (`Finish`, `Build`, `Accent`) and the `Tokens` it resolves to; `install_fonts`, `apply_visuals`; `faceplate`, `bar`, `well`, `display`; `nameplate`, `badge`, `logo`, `window_buttons`, `drag_to_move`, `resize_edges`; `button`, `switch`, `labelled_switch`, `segmented`, `family_switch`, `gear_button`, `select`, `knob`, `vfader`, `hslider`, `meter`, `meter_in` (`MeterColours`), `meter_scale`, `RADIUS`, `status_light`, `ink_text`, `ink_curve`; `drawer` and `look_settings` |
 | `theme` | The Jupiter look: `Theme` (Black or Silver), `KnobStyle`, the key colours (`K_RED` … `K_GREY`), lights and display colours, `install_fonts` and `font` |
 | `widgets` | Jupiter controls: `key`, `lit_key`, `knob`, `fader`, `lcd`, `lcd_combo`, `readout`, `meter`, `ladder`, `section`, `frame_tab`, `stripe`, `led`, text helpers; and `Spec`, the range of a control, used by both looks |
 | `lists` | `rows` (a scrolling list that only draws what's on screen), `fit`, `thousands`, `ago`, and Jupiter list pieces (`well`, `row_bg`, `header`, `chip`, `light`) |
@@ -31,8 +31,8 @@ All the typefaces are built in, under the OFL.
 
 ```toml
 [dependencies]
-# 0.3.0
-taw-panel = { git = "https://github.com/TimsterAudio/TAW-Panel", rev = "1b8162d75d10c41a8c9b021fc3d31e2a3311aeb6" }
+# 0.4.0
+taw-panel = { git = "https://github.com/TimsterAudio/TAW-Panel", rev = "d030ffdbc51c48e784cd74b20c5547a766461e5a" }
 ```
 
 ```rust
