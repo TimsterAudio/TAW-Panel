@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.3.3 – 2026-10-15
+
+- `hifi::badge` and `hifi::logo`: the nameplate's two halves on their own, so an app can put the "Timster's Audio Works - Player" badge in the middle of the window's top edge and the logo and model line up at the left (the Player 0.2.0's layout, by the user's choice). `nameplate` draws exactly as before, from the same pieces.
+- Nothing else changed: callers build unchanged.
+
 ## 0.3.2 – 2026-10-15
 
 Commit `5290f15aa8275851ba68e90417325e20565b1eeb` (branch `claude/kind-johnson-du69z8`).

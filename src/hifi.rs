@@ -589,7 +589,53 @@ pub fn display(p: &Painter, r: Rect, t: &Tokens) {
 /// "Timster's Audio Works - Analyser", ANALYSER, "SP-001 · SPECTRUM
 /// ANALYSER · V0.2.0". Returns the space it took.
 pub fn nameplate(ui: &Ui, at: Pos2, t: &Tokens, name: &str, model_line: &str) -> Rect {
+    let badge = badge_at(ui.painter(), at, t, name);
+    let l = logo(
+        ui,
+        Pos2::new(at.x, badge.bottom() + 4.0),
+        t,
+        name,
+        model_line,
+    );
+    Rect::from_min_max(at, Pos2::new(badge.right().max(l.right()), l.bottom()))
+}
+
+/// The "Timster's Audio Works - Player" badge on its own, centred on
+/// `centre_top` (the middle of its top edge): for a nameplate whose badge
+/// sits in the middle of the window's top edge, with [`logo`] at the left.
+/// Returns the space it took.
+pub fn badge(p: &Painter, centre_top: Pos2, t: &Tokens, name: &str) -> Rect {
+    let w = badge_galley(p, t, name).size().x + 18.0;
+    badge_at(p, Pos2::new(centre_top.x - w / 2.0, centre_top.y), t, name)
+}
+
+/// The logo and model line without the badge (ANALYSER, "SP-001 ·
+/// SPECTRUM ANALYSER · V0.2.0"), from `at`. Returns the space it took.
+pub fn logo(ui: &Ui, at: Pos2, t: &Tokens, name: &str, model_line: &str) -> Rect {
     let p = ui.painter();
+    let logo_at = Pos2::new(at.x + 3.0, at.y);
+    slanted_text(
+        ui,
+        logo_at,
+        &name.to_uppercase(),
+        crate::theme::font(F_LOGO, 21.0),
+        t.text,
+        3.5,
+        12.0,
+    );
+    let ml = text(
+        p,
+        Pos2::new(at.x, logo_at.y + 33.0),
+        Align2::LEFT_TOP,
+        &model_line.to_uppercase(),
+        semi(9.5),
+        t.dim,
+        1.9,
+    );
+    Rect::from_min_max(at, Pos2::new(ml.right().max(at.x), ml.bottom()))
+}
+
+fn badge_galley(p: &Painter, t: &Tokens, name: &str) -> std::sync::Arc<egui::Galley> {
     let mut job = LayoutJob::default();
     job.append(
         "Timster's Audio Works - ",
@@ -609,7 +655,11 @@ pub fn nameplate(ui: &Ui, at: Pos2, t: &Tokens, name: &str, model_line: &str) ->
             ..Default::default()
         },
     );
-    let g = p.layout_job(job);
+    p.layout_job(job)
+}
+
+fn badge_at(p: &Painter, at: Pos2, t: &Tokens, name: &str) -> Rect {
+    let g = badge_galley(p, t, name);
     let badge = Rect::from_min_size(at, g.size() + Vec2::new(18.0, 6.0));
     p.rect_stroke(
         badge,
@@ -618,26 +668,7 @@ pub fn nameplate(ui: &Ui, at: Pos2, t: &Tokens, name: &str, model_line: &str) ->
         StrokeKind::Inside,
     );
     p.galley(badge.min + Vec2::new(9.0, 3.0), g, t.text);
-    let logo_at = Pos2::new(at.x + 3.0, badge.bottom() + 4.0);
-    slanted_text(
-        ui,
-        logo_at,
-        &name.to_uppercase(),
-        crate::theme::font(F_LOGO, 21.0),
-        t.text,
-        3.5,
-        12.0,
-    );
-    let ml = text(
-        p,
-        Pos2::new(at.x, logo_at.y + 33.0),
-        Align2::LEFT_TOP,
-        &model_line.to_uppercase(),
-        semi(9.5),
-        t.dim,
-        1.9,
-    );
-    Rect::from_min_max(at, Pos2::new(badge.right().max(ml.right()), ml.bottom()))
+    badge
 }
 
 // ---------------------------------------------------------------- window
