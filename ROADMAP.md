@@ -1,6 +1,6 @@
 # Roadmap
 
-TAW-Panel moves when the apps need it. All four apps are released on 0.3.0; each new version below is driven by an app release that needs it. [docs/TRACKER.md](docs/TRACKER.md) has where every project stands.
+TAW-Panel moves when the apps need it. All four apps are released on 0.3.0; Player 0.2.0 is built on 0.3.2. Each new version below is driven by an app release that needs it. [docs/TRACKER.md](docs/TRACKER.md) has where every project stands.
 
 ## Pipeline (proposed 2026-10-14)
 
@@ -12,7 +12,7 @@ Sizes: S = one session, M = two or three, L = a release of its own.
 | 0.5.0 | **Meters, part 2:** Spool's meter scale (20 segments, 1 dB a step at the top) with four peak LEDs and hold; an analogue VU meter widget | Player's meters and VU window; the Equaliser and Analyser | M |
 | parked | More finishes (Bronze, Cassette, Walnut, Studio), then skins (below) | When the apps are settled | L |
 
-If the Player's bottom-corner resize problem (2026-10-14, Linux Mint) turns out to be in `hifi::resize_edges`, the fix is a patch release ahead of all of these.
+The Library, Equaliser and Analyser should move their pin to 0.3.2 in their next release, for the corner-resize fix.
 
 ## Parked: skins
 
