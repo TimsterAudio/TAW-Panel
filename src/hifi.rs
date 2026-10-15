@@ -730,6 +730,8 @@ pub fn drag_to_move(ui: &mut Ui, r: Rect) {
     let resp = ui.interact(r, Id::new("taw-window-drag"), Sense::click_and_drag());
     if resp.drag_started_by(egui::PointerButton::Primary) {
         ui.ctx().send_viewport_cmd(ViewportCommand::StartDrag);
+        // As in `resize_edges`: the window manager keeps the release.
+        ui.ctx().stop_dragging();
     }
     if resp.double_clicked() {
         let maximized = ui.input(|i| i.viewport().maximized.unwrap_or(false));
@@ -753,27 +755,10 @@ pub fn resize_edges(ui: &mut Ui, r: Rect) {
     let e = RESIZE_MARGIN;
     let c = e * 2.5;
     use ResizeDirection::*;
+    // Edges first, then the corners over them: egui gives a press to the
+    // last zone added within reach, so a corner must come after the two
+    // edges it overlaps or only one edge would move.
     let zones = [
-        (
-            Rect::from_min_size(r.min, Vec2::splat(c)),
-            NorthWest,
-            CursorIcon::ResizeNorthWest,
-        ),
-        (
-            Rect::from_min_size(Pos2::new(r.right() - c, r.top()), Vec2::splat(c)),
-            NorthEast,
-            CursorIcon::ResizeNorthEast,
-        ),
-        (
-            Rect::from_min_size(Pos2::new(r.left(), r.bottom() - c), Vec2::splat(c)),
-            SouthWest,
-            CursorIcon::ResizeSouthWest,
-        ),
-        (
-            Rect::from_min_size(r.max - Vec2::splat(c), Vec2::splat(c)),
-            SouthEast,
-            CursorIcon::ResizeSouthEast,
-        ),
         (
             Rect::from_min_max(r.min, Pos2::new(r.right(), r.top() + e)),
             North,
@@ -794,6 +779,26 @@ pub fn resize_edges(ui: &mut Ui, r: Rect) {
             East,
             CursorIcon::ResizeHorizontal,
         ),
+        (
+            Rect::from_min_size(r.min, Vec2::splat(c)),
+            NorthWest,
+            CursorIcon::ResizeNorthWest,
+        ),
+        (
+            Rect::from_min_size(Pos2::new(r.right() - c, r.top()), Vec2::splat(c)),
+            NorthEast,
+            CursorIcon::ResizeNorthEast,
+        ),
+        (
+            Rect::from_min_size(Pos2::new(r.left(), r.bottom() - c), Vec2::splat(c)),
+            SouthWest,
+            CursorIcon::ResizeSouthWest,
+        ),
+        (
+            Rect::from_min_size(r.max - Vec2::splat(c), Vec2::splat(c)),
+            SouthEast,
+            CursorIcon::ResizeSouthEast,
+        ),
     ];
     for (i, (zone, dir, cursor)) in zones.into_iter().enumerate() {
         let resp = ui
@@ -802,6 +807,10 @@ pub fn resize_edges(ui: &mut Ui, r: Rect) {
         if resp.drag_started_by(egui::PointerButton::Primary) {
             ui.ctx()
                 .send_viewport_cmd(ViewportCommand::BeginResize(dir));
+            // The window manager takes the pointer from here and keeps the
+            // button's release, so egui would think this zone was still
+            // being dragged and ignore the next press on any zone.
+            ui.ctx().stop_dragging();
         }
     }
 }

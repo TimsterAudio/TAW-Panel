@@ -42,3 +42,4 @@ Reviewed on 2026-10-13 and parked until the Equaliser is tested and the Player r
 - [x] 0.2.0: spectrum drawing and the analyser (feature `analyser`)
 - [x] 0.3.0: `hifi`, the TAW look (Spool and Porcelain; light, dark, automatic), used by all four apps
 - [x] 0.3.1: `hifi::meter_scale`, a dB scale for the meters, for Player 0.2.0
+- [x] 0.3.2: resizing frameless windows from the corners, and after a resize or move

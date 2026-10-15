@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.3.2 – 2026-10-15
+
+- Frameless windows resize from every corner. `hifi::resize_edges` added the corners before the edges, so egui gave a press in a corner to the edge over it and only one side moved; the corners now come last. Found on Linux Mint (Cinnamon, X11) in the Player, and the same in every app.
+- A drag that hands the window to the window manager (`resize_edges`, `drag_to_move`) now ends egui's own drag. The window manager keeps the mouse button's release, so egui went on thinking the zone was held and ignored the next press on any of them: every other resize or move did nothing.
+- Nothing else changed: callers build unchanged.
+
 ## 0.3.1 – 2026-10-14
 
 Commit `f5db7cb0eb288c656d739aa5ecc2c027b14baf00`.
