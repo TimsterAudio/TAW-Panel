@@ -34,10 +34,10 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 - Test Player 0.2.0 (the v0.2.0 release), especially media keys on Windows, MP3 gapless and the Library's M3U8.
 - Moving the Library, Equaliser and Analyser to TAW-Panel 0.4.0 changes their look (shorter nameplate, tighter corners): each app's session should tighten its top band and screenshot it.
 - Roadmap numbers to fix in each app's next session (the panel renumbering of 2026-10-15): the Library's resizable list needs TAW-Panel **0.5.0** (its ROADMAP says 0.4.0); the Analyser's VU comes from **0.6.0** (its ROADMAP says 0.5.0).
-- GitHub: set the Analyser's default branch to `main`. Every `claude/…` branch in the five repos is fully merged and can be deleted, except the Equaliser's `claude/roadmap-pipeline`, which isn't merged but is superseded (its plan is in ROADMAP.md); delete it too.
 
 ## Decided
 
+- 2026-10-16: tidy-up. Every repo's default branch is `main` (the Analyser's was switched by the user), and every old `claude/…` branch was deleted, leaving only `main` in all five repos. All were merged except the Equaliser's `claude/roadmap-pipeline` (ROADMAP.md only, superseded; its last commit was `b5b3f94`).
 - 2026-10-16: all five repos now run the Equaliser's cheaper CI (the family session ported it to TAW-Panel, the Library, the Player and the Analyser). Docs-only pushes don't run CI; Windows CI runs on `main`, pull requests and manual runs only; Release runs on `main` only. **Test packages of a branch** now come from a manual run: Actions > Release > Run workflow, on that branch.
 - 2026-10-15: from the user's feedback in the Player session, the hi-fi series drops the big slanted name from its nameplate (badge and model line only), uses one tighter corner radius, and offers classic or display meter colours: TAW-Panel 0.4.0, so the planned resizable list became 0.5.0 and meters part 2 0.6.0.
 - 2026-10-15: the corner-resize bug was in TAW-Panel (`hifi::resize_edges`, every app); fixed in 0.3.2 by the Player session, merged to TAW-Panel `main` by the family session so the pinned commit stays on `main`.
