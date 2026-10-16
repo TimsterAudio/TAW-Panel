@@ -33,6 +33,7 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 - Agree or adjust each project's pipeline (in each repo's ROADMAP.md, marked "proposed").
 - Test Player 0.2.0 (the v0.2.0 release), especially media keys on Windows, MP3 gapless and the Library's M3U8.
 - Moving the Library, Equaliser and Analyser to TAW-Panel 0.4.0 changes their look (shorter nameplate, tighter corners): each app's session should tighten its top band and screenshot it.
+- Player, next session (small hardening): with no D-Bus session bus, the media-controls thread panics inside `souvlaki` (zbus `unwrap`). The Player keeps playing, and real desktops always have a bus; check for the bus before starting media controls. Seen 2026-10-16 while screenshotting 0.2.0 under Xvfb.
 - Roadmap numbers to fix in each app's next session (the panel renumbering of 2026-10-15): the Library's resizable list needs TAW-Panel **0.5.0** (its ROADMAP says 0.4.0); the Analyser's VU comes from **0.6.0** (its ROADMAP says 0.5.0).
 
 ## Decided
