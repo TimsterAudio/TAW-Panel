@@ -33,12 +33,12 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 - Agree or adjust each project's pipeline (in each repo's ROADMAP.md, marked "proposed").
 - Test Player 0.2.0 (the v0.2.0 release), especially media keys on Windows, MP3 gapless and the Library's M3U8.
 - Moving the Library, Equaliser and Analyser to TAW-Panel 0.4.0 changes their look (shorter nameplate, tighter corners): each app's session should tighten its top band and screenshot it.
-- CI cost: the cheaper workflows uploaded to the Equaliser on 2026-10-14 (CI skips docs-only pushes, newer pushes cancel older runs, only `main` writes the build cache, the release dry run only for packaging changes) aren't in TAW-Panel, the Library, the Player or the Analyser yet. Each session can copy them across.
 - Roadmap numbers to fix in each app's next session (the panel renumbering of 2026-10-15): the Library's resizable list needs TAW-Panel **0.5.0** (its ROADMAP says 0.4.0); the Analyser's VU comes from **0.6.0** (its ROADMAP says 0.5.0).
 - GitHub: set the Analyser's default branch to `main`. Every `claude/…` branch in the five repos is fully merged and can be deleted, except the Equaliser's `claude/roadmap-pipeline`, which isn't merged but is superseded (its plan is in ROADMAP.md); delete it too.
 
 ## Decided
 
+- 2026-10-16: all five repos now run the Equaliser's cheaper CI (the family session ported it to TAW-Panel, the Library, the Player and the Analyser). Docs-only pushes don't run CI; Windows CI runs on `main`, pull requests and manual runs only; Release runs on `main` only. **Test packages of a branch** now come from a manual run: Actions > Release > Run workflow, on that branch.
 - 2026-10-15: from the user's feedback in the Player session, the hi-fi series drops the big slanted name from its nameplate (badge and model line only), uses one tighter corner radius, and offers classic or display meter colours: TAW-Panel 0.4.0, so the planned resizable list became 0.5.0 and meters part 2 0.6.0.
 - 2026-10-15: the corner-resize bug was in TAW-Panel (`hifi::resize_edges`, every app); fixed in 0.3.2 by the Player session, merged to TAW-Panel `main` by the family session so the pinned commit stays on `main`.
 - 2026-10-14: the meter scale is TAW-Panel 0.3.1 (a patch number, by the user's choice, though it adds a function).
