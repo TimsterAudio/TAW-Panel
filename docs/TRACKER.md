@@ -2,7 +2,7 @@
 
 Where each project stands, one line each, plus the handoffs between the family session and the app sessions. The detail lives in each repo's own `ROADMAP.md` (the release pipeline) and `HANDOFF.md` (where its session left off). TAW-Panel is public and the apps are private, so this file names releases and themes, not app internals.
 
-Last checked: **2026-10-15**, against `main` of all five repos (TAW-Panel and Player rows brought up to date by the Player session when it merged both).
+Last checked: **2026-10-16** by the family session, against `main` of all five repos: every commit an app pins is on TAW-Panel's `main`, and CI is green on every `main`.
 
 ## Projects
 
@@ -33,7 +33,9 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 - Agree or adjust each project's pipeline (in each repo's ROADMAP.md, marked "proposed").
 - Test Player 0.2.0 (the v0.2.0 release), especially media keys on Windows, MP3 gapless and the Library's M3U8.
 - Moving the Library, Equaliser and Analyser to TAW-Panel 0.4.0 changes their look (shorter nameplate, tighter corners): each app's session should tighten its top band and screenshot it.
-- GitHub: set the Analyser's default branch to `main`; delete the merged `claude/focused-ritchie-veg4m9` branches in the app repos; delete the Equaliser's `claude/roadmap-pipeline` (its plan is now in ROADMAP.md).
+- CI cost: the cheaper workflows uploaded to the Equaliser on 2026-10-14 (CI skips docs-only pushes, newer pushes cancel older runs, only `main` writes the build cache, the release dry run only for packaging changes) aren't in TAW-Panel, the Library, the Player or the Analyser yet. Each session can copy them across.
+- Roadmap numbers to fix in each app's next session (the panel renumbering of 2026-10-15): the Library's resizable list needs TAW-Panel **0.5.0** (its ROADMAP says 0.4.0); the Analyser's VU comes from **0.6.0** (its ROADMAP says 0.5.0).
+- GitHub: set the Analyser's default branch to `main`. Every `claude/…` branch in the five repos is fully merged and can be deleted, except the Equaliser's `claude/roadmap-pipeline`, which isn't merged but is superseded (its plan is in ROADMAP.md); delete it too.
 
 ## Decided
 
