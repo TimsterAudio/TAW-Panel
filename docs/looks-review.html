@@ -409,6 +409,140 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
 .fo tr.sel td:first-child { box-shadow: inset 2px 0 0 var(--pen); }
 .fo .foot { padding: 6px 18px 8px; font-size: 11px; color: var(--ink2); border-top: 1px solid var(--grid); }
 
+/* ------------------------------------------------ families, decisions */
+.decided { margin: 8px 0 0; padding: 14px 16px; background: var(--card); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 4px; display: grid; gap: 6px; }
+.decided h2 { margin: 0; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-dim); font-weight: 600; }
+.decided ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 16px; line-height: 1.45; max-width: 90ch; }
+.fams { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 900px) { .fams { grid-template-columns: minmax(0, 1fr); } }
+.fam-card { background: var(--card); border: 1px solid var(--rule); border-radius: 4px; padding: 14px 16px; display: grid; gap: 8px; align-content: start; }
+.fam-card h3 { margin: 0; font-family: var(--f-logo); font-weight: 400; font-size: 18px; letter-spacing: .05em; }
+.fam-card .who { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.fam-card p { margin: 0; font-size: 15px; line-height: 1.45; }
+.fam-card dl { margin: 0; display: grid; gap: 6px; }
+.fam-card dt { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-dim); }
+.fam-card dd { margin: 1px 0 0; font-size: 15px; line-height: 1.4; }
+.group-h { display: grid; gap: 6px; padding-top: 34px; margin-top: 8px; border-top: 2px solid var(--ink); scroll-margin-top: 70px; }
+.group-h .kicker { color: var(--accent); }
+.group-h h2 { margin: 0; font-family: var(--f-logo); font-weight: 400; font-size: clamp(20px, 2.6vw, 26px); letter-spacing: .05em; text-wrap: balance; }
+.group-h p { margin: 0; font-size: 16px; line-height: 1.5; max-width: 76ch; }
+
+/* ------------------------------------------------ audio apps in the App look */
+.pg.au { grid-template-columns: 152px 1fr; }
+.pg.au .rail { padding: 14px 10px; font-size: 13px; }
+.pg.au .logo { padding-bottom: 2px; font-size: 21px; }
+.pg.au .maker { font-size: 10.5px; color: var(--ink2); padding: 0 6px 12px 28px; }
+.pg.au nav a { display: flex; align-items: center; }
+.pg.au nav a small { margin-left: auto; font-size: 11px; color: var(--ink2); }
+.pg.au .sub { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink2); padding: 12px 8px 4px; }
+.pg.au .drive { padding: 3px 8px; font-size: 12px; display: grid; grid-template-columns: 10px 1fr auto; gap: 0 6px; align-items: center; }
+.pg.au .drive small { grid-column: 2 / 4; font-size: 10px; color: var(--ink2); }
+.pg.au .fam { margin-top: auto; border-top: 1px solid var(--grid); padding-top: 8px; display: grid; gap: 1px; }
+.pg.au .fam a { display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: 4px; color: var(--ink2); }
+.pg.au .fam a i { width: 7px; height: 7px; border-radius: 50%; }
+.pg.au .fam a.on { color: var(--ink); background: var(--sheet); }
+.pg.au .foot { margin-top: 8px; }
+.pg.au main { padding: 14px 18px; gap: 10px; }
+.pg.au h3 { font-size: 25px; }
+.pg.au .hd { gap: 8px; }
+.pg.au .hd .wb { margin-left: 14px; }
+.pg.au .hd .upd { margin-left: 4px; }
+.au-btn { font-size: 12px; font-weight: 600; padding: 5px 11px; border: 1px solid var(--grid); border-radius: 4px; background: var(--sheet); white-space: nowrap; }
+.au-btn.pri { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.au-chips { display: flex; gap: 4px; }
+.chip { font-size: 12px; padding: 3px 11px; border: 1px solid var(--grid); border-radius: 14px; color: var(--ink2); white-space: nowrap; }
+.chip.on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.tog { width: 32px; height: 18px; border-radius: 9px; background: var(--pen); position: relative; flex: none; }
+.tog::after { content: ""; position: absolute; right: 2px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--sheet); }
+.pill.wn { color: var(--warn); background: color-mix(in srgb, var(--warn) 12%, transparent); }
+.pill.ht { color: var(--heat); background: color-mix(in srgb, var(--heat) 10%, transparent); }
+.au-chart { position: relative; background: var(--sheet); border: 1px solid var(--grid); border-radius: 6px; overflow: hidden; }
+.au-chart canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.au-chart .cap { position: absolute; left: 10px; top: 7px; font-size: 11px; color: var(--ink2); }
+.au-sp { margin-left: auto; }
+
+.pl-top { display: grid; grid-template-columns: 196px 1fr; gap: 18px; }
+.pl-art { aspect-ratio: 1; border-radius: 6px; border: 1px solid var(--grid); background:
+  radial-gradient(70% 60% at 30% 35%, color-mix(in srgb, var(--pen) 55%, var(--sheet)) 0%, transparent 70%),
+  radial-gradient(60% 60% at 75% 75%, color-mix(in srgb, var(--heat) 40%, var(--sheet)) 0%, transparent 70%), var(--sheet);
+  display: grid; place-items: end start; padding: 10px; font-size: 10.5px; color: var(--ink2); }
+.pl-meta { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.pl-meta h4 { margin: 0; font-family: var(--f-disp); font-weight: 600; font-size: 26px; line-height: 1; }
+.pl-meta .by { font-size: 13px; color: var(--ink2); }
+.pl-meta .pills { display: flex; gap: 5px; flex-wrap: wrap; }
+.pl-meta .pills .pill { color: var(--ink2); }
+.pl-meta .pills .pill.ok { color: var(--ok); }
+.pl-time { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: end; margin-top: 2px; }
+.pl-time .t { font-family: var(--f-disp); font-weight: 600; font-size: 58px; line-height: .9; letter-spacing: -.01em; }
+.pl-time .t small { font-size: 16px; font-weight: 500; color: var(--ink2); margin-left: 6px; letter-spacing: 0; }
+.pl-time .au-chart { height: 82px; }
+.au-tab { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.au-tab th { text-align: left; font-weight: 500; font-size: 11px; color: var(--ink2); padding: 4px 8px; border-bottom: 1px solid var(--grid); }
+.au-tab td { padding: 4px 8px; border-bottom: 1px solid var(--faint); white-space: nowrap; }
+.au-tab td.n, .au-tab th.n { text-align: right; font-variant-numeric: tabular-nums; }
+.au-tab td.dim { color: var(--ink2); }
+.au-tab tr.on td { background: color-mix(in srgb, var(--pen) 12%, transparent); color: var(--ink); }
+.au-tab tr.on td:first-child { color: var(--pen); box-shadow: inset 2px 0 0 var(--pen); }
+.au-box { background: var(--sheet); border: 1px solid var(--grid); border-radius: 6px; overflow: hidden; }
+.pl-tr { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 8px; border-top: 1px solid var(--grid); font-size: 12px; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.pl-tr .ic { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; color: var(--ink); border: 1px solid var(--grid); background: var(--sheet); }
+.pl-tr .ic.big { width: 40px; height: 40px; background: var(--pen); border-color: var(--pen); color: var(--sheet); }
+.pl-tr .ic svg { width: 13px; height: 13px; fill: currentColor; }
+.pl-tr .bar { flex: 1; height: 4px; border-radius: 2px; background: var(--grid); position: relative; }
+.pl-tr .bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 2px; background: var(--pen); }
+.pl-tr .bar b { position: absolute; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--sheet); border: 2px solid var(--pen); }
+.pl-tr .vol { width: 90px; flex: none; }
+
+.eq-chart { height: 262px; }
+.eq-bands { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; }
+.eq-b { background: var(--sheet); border: 1px solid var(--grid); border-radius: 6px; padding: 7px 8px 8px; display: grid; gap: 4px; font-size: 11px; color: var(--ink2); }
+.eq-b.on { border-color: var(--pen); box-shadow: inset 0 0 0 1px var(--pen); }
+.eq-b .top { display: flex; align-items: center; gap: 5px; color: var(--ink); font-weight: 600; font-size: 12px; }
+.eq-b .top i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink2); }
+.eq-b.on .top i { background: var(--pen); }
+.eq-b .g { font-family: var(--f-disp); font-weight: 600; font-size: 19px; color: var(--ink); line-height: 1; }
+.eq-b .g small { font-size: 11px; font-weight: 500; color: var(--ink2); margin-left: 2px; }
+.eq-b .gauge { height: 4px; border-radius: 2px; background: var(--faint); position: relative; }
+.eq-b .gauge::before { content: ""; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: var(--ink2); }
+.eq-b .gauge i { position: absolute; top: 0; bottom: 0; border-radius: 2px; background: var(--ink2); }
+.eq-b.on .gauge i { background: var(--pen); }
+.au-hint { font-size: 11px; color: var(--ink2); margin-top: auto; }
+
+.an-chart { height: 290px; }
+.an-row { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--grid); padding-top: 8px; }
+.an-row > div { padding: 0 12px; border-left: 1px solid var(--grid); display: grid; gap: 2px; align-content: start; }
+.an-row > div:first-child { border-left: 0; padding-left: 0; }
+.an-row span { font-family: var(--f-disp); font-size: 14px; color: var(--ink2); }
+.an-row b { font-family: var(--f-disp); font-size: 26px; font-weight: 600; line-height: 1; }
+.an-row b small { font-size: 13px; font-weight: 500; margin-left: 3px; color: var(--ink2); }
+.an-row em { font-style: normal; font-size: 11.5px; color: var(--ink2); }
+.an-row canvas { width: 100%; height: 24px; }
+
+.lb-search { flex: 1; font-size: 12.5px; color: var(--ink2); padding: 6px 12px; border: 1px solid var(--grid); border-radius: 4px; background: var(--sheet); }
+.lb-cols { flex: 1; min-height: 0; display: grid; grid-template-columns: 150px minmax(0, 1fr) 196px; gap: 10px; }
+.lb-col { display: grid; grid-template-rows: auto 1fr; gap: 5px; min-height: 0; }
+.lb-col > span { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink2); }
+.lb-list { background: var(--sheet); border: 1px solid var(--grid); border-radius: 6px; overflow: hidden; font-size: 12.5px; }
+.lb-list div { display: flex; align-items: center; gap: 6px; padding: 5px 9px; border-bottom: 1px solid var(--faint); }
+.lb-list div small { margin-left: auto; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.lb-list div .dot { width: 6px; height: 6px; }
+.lb-list div.on { background: color-mix(in srgb, var(--pen) 12%, transparent); box-shadow: inset 2px 0 0 var(--pen); }
+.lb-al { display: grid; grid-template-columns: 34px 40px 1fr auto; gap: 8px; align-items: center; padding: 6px 10px; border-bottom: 1px solid var(--faint); font-size: 12.5px; }
+.lb-al.on { background: color-mix(in srgb, var(--pen) 12%, transparent); box-shadow: inset 2px 0 0 var(--pen); }
+.lb-al .cv { width: 34px; height: 34px; border-radius: 3px; border: 1px solid var(--grid); }
+.lb-al .yr { font-family: var(--f-disp); font-weight: 600; font-size: 15px; }
+.lb-al b { display: block; font-weight: 600; }
+.lb-al small { color: var(--ink2); font-size: 10.5px; }
+.lb-al .pp { display: flex; gap: 4px; }
+.lb-det { display: grid; gap: 6px; align-content: start; font-size: 12px; }
+.lb-det .cv { aspect-ratio: 1.6; border-radius: 6px; border: 1px dashed var(--grid); background: var(--sheet); display: grid; place-items: center; font-size: 11px; color: var(--ink2); }
+.lb-det h4 { margin: 0; font-family: var(--f-disp); font-weight: 600; font-size: 22px; line-height: 1; }
+.lb-det .by { color: var(--ink2); }
+.lb-det .btns { display: flex; gap: 5px; }
+.lb-det .au-tab td { padding: 3px 6px; }
+.lb-foot { display: flex; gap: 10px; font-size: 11px; color: var(--ink2); border-top: 1px solid var(--grid); padding-top: 7px; }
+.lb-foot span:last-child { margin-left: auto; }
+
 @media (prefers-reduced-motion: reduce) {
   .fl.flip { animation: none; }
   .sb .mimic .lamp.a { animation: none; }
@@ -418,14 +552,57 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
 
 <div class="wrap">
   <header class="top">
-    <div class="kicker">TAW Panel · review sheet · 27 October 2026</div>
+    <div class="kicker">TAW Panel · review sheet · version 2 · 27 October 2026</div>
     <h1>Panel looks beyond the hi-fi</h1>
-    <p class="lede">Eight looks for the shared panel: <b>Isobar's</b> and <b>Waypoint's</b> as they are now, and six new ones for apps outside the hi-fi family. Each window is 600 × 300, a little bigger than the Net Meter's 420 × 180. Every window can show the Net Meter, the same in each look so you can compare them, or the app that look suits best.</p>
+    <p class="lede">The shared panel in three families: <b>Apps</b>, <b>Audio</b> and <b>Utilities &amp; Fun</b>. Below are the App look as Isobar and Waypoint have it, the four audio apps redrawn in it, and the six looks for the utilities. Each look's window is 600 × 300, a little bigger than the Net Meter's 420 × 180, and can show the Net Meter or the app that look suits best.</p>
+    <div class="decided">
+      <h2>Decided on 27 October</h2>
+      <ul>
+        <li>The Net Meter moves to <b>Glass</b>.</li>
+        <li>Spool's name comes out of the panel's colour schemes. Spool was the starting point, not where the family is going.</li>
+        <li>Isobar's and Waypoint's look becomes the panel's <b>App look</b>, locked as it is.</li>
+        <li>The panel is organised as <b>Apps</b>, <b>Audio</b> and <b>Utilities &amp; Fun</b>, and only Utilities &amp; Fun gets the variety of looks.</li>
+        <li>No title bars where possible, and an option to turn them off everywhere else.</li>
+      </ul>
+    </div>
     <div class="today">
-      <img src="data:image/png;base64,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" alt="The Net Meter today, in the Spool finish: a cream faceplate with a badge, gear and window buttons above two small amber graphs." width="420" height="180">
-      <p><b>The Net Meter today</b>, in Spool Light. The hi-fi faceplate is calm and warm, but at gadget size the badge and buttons take about a quarter of the height, and the graphs get what's left.</p>
+      <img src="data:image/png;base64,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" alt="The Net Meter today, in the hi-fi look's warm finish: a cream faceplate with a badge, gear and window buttons above two small amber graphs." width="420" height="180">
+      <p><b>The Net Meter today</b>, in the hi-fi look. The faceplate is calm and warm, but at gadget size the badge and buttons take about a quarter of the height, and the graphs get what's left. Glass, below, is where it goes next.</p>
     </div>
   </header>
+
+  <section class="fams" id="families" aria-label="The three families">
+    <div class="fam-card">
+      <div class="who">Apps</div>
+      <h3>The App look</h3>
+      <p>Isobar's look, which Waypoint shares: chart paper, slate ink, a violet pen. Locked as it is.</p>
+      <dl>
+        <div><dt>For</dt><dd>Isobar, Waypoint, and any new app that works with records and readings.</dd></div>
+        <div><dt>Choices</dt><dd>Light, Dark or Automatic. No finishes or accents to pick.</dd></div>
+        <div><dt>Frame</dt><dd>The page: a side rail and content, with its own window buttons in the corner. "Use the system title bar" in Settings, off by default.</dd></div>
+      </dl>
+    </div>
+    <div class="fam-card">
+      <div class="who">Audio</div>
+      <h3>The hi-fi look</h3>
+      <p>Today's faceplate for the four separates, with the warm finish getting a name of its own instead of Spool's, and Porcelain beside it.</p>
+      <dl>
+        <div><dt>For</dt><dd>Library, Player, Equaliser, Analyser. The Box instruments keep the Jupiter look.</dd></div>
+        <div><dt>Choices</dt><dd>The two finishes, their accents, Light, Dark or Automatic, as now. Saved settings that say "Spool" still load.</dd></div>
+        <div><dt>Frame</dt><dd>As now: the apps draw their own title strip, with "Use the system title bar" in Settings.</dd></div>
+      </dl>
+    </div>
+    <div class="fam-card">
+      <div class="who">Utilities &amp; Fun</div>
+      <h3>Variety</h3>
+      <p>Glass, Phosphor, Departures, Signalbox, Blueprint and Folio. Each utility offers several and picks a default.</p>
+      <dl>
+        <div><dt>For</dt><dd>The Net Meter (Glass), the Split-Flap Clock (Departures), Folder Sync (Signalbox), the SPL Calculator (Blueprint).</dd></div>
+        <div><dt>Choices</dt><dd>Any of the six, each with a light and a dark build, from the right-click menu.</dd></div>
+        <div><dt>Frame</dt><dd>No title bar. Window buttons appear under the mouse or live in the right-click menu; "Use the system title bar" stays as an option.</dd></div>
+      </dl>
+    </div>
+  </section>
 
   <div class="controls">
     <div class="grp seg" id="viewAll"><span class="lab">Every window</span>
@@ -440,7 +617,17 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
     <nav class="jump" id="jump" aria-label="Looks"></nav>
   </div>
 
-  <div id="units"></div>
+  <header class="group-h" id="g-apps"><div class="kicker">Apps</div><h2>The App look, locked</h2>
+    <p>Isobar and Waypoint as they are. In the panel they would share one App look; Waypoint's kinds and statuses stay in Waypoint. The window buttons are drawn in the corner, so neither needs the system title bar.</p></header>
+  <div id="units-apps"></div>
+
+  <header class="group-h" id="g-audio"><div class="kicker">Audio, in the App look</div><h2>The four separates on chart paper</h2>
+    <p>What the Library, Player, Equaliser and Analyser would look like in Waypoint's look, at 920 × 520. Each keeps its own job and controls; the faceplate gives way to the page frame. The family switcher moves into the rail, the one big reading takes the place of the faceplate's display, and violet marks what's playing, chosen or measured. The Build switch at the top shows them in dark.</p></header>
+  <div id="units-audio"></div>
+
+  <header class="group-h" id="g-fun"><div class="kicker">Utilities &amp; Fun</div><h2>Six looks to choose from</h2>
+    <p>The family with the variety. Each utility offers the six and starts on the one that suits it; the Net Meter starts on Glass. None needs a title bar.</p></header>
+  <div id="units-fun"></div>
 
   <section class="after-units" id="roles">
     <h2>One set of colour roles</h2>
@@ -470,30 +657,30 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
   // are only for the looks that use them.
   const LOOKS = [
     {
-      id: 'isobar', name: 'Isobar', status: 'In use · Isobar', own: 'Isobar: Now',
+      id: 'isobar', name: 'Isobar', group: 'apps', status: 'App look · locked · Isobar', own: 'Isobar: Now',
       after: "the paper charts of a weather station's recording instruments, and a thermograph's violet pen.",
       type: 'Barlow, with Barlow Condensed for headings and readings.',
       builds: 'Pale green-grey paper; slate at night.',
-      suits: "Readings over time: Isobar, the Analyser's history, the Net Meter's longer views.",
+      suits: "Readings over time: Isobar, and any new app built on records and charts.",
       sig: 'One bold element per screen. Violet is kept for the thing being recorded.',
       fonts: { ui: "'Barlow', sans-serif", num: "'Barlow Condensed', sans-serif", disp: "'Barlow Condensed', sans-serif" }, r: 6,
       light: { paper: '#e9eee8', sheet: '#f6f8f4', grid: '#cdd8cb', faint: '#dfe6dd', ink: '#1c2633', ink2: '#5a6570', pen: '#5b3a9e', pen2: '#2a6896', warn: '#a8700c', ok: '#2f7a3e', heat: '#b3362b', wind: '#23796a' },
       dark: { paper: '#131a20', sheet: '#19222a', grid: '#2a3741', faint: '#222d36', ink: '#e6ebee', ink2: '#9aa7b2', pen: '#b49cf0', pen2: '#7fb6e4', warn: '#e2b04e', ok: '#7fcf8b', heat: '#f0806c', wind: '#5cc4a7' },
     },
     {
-      id: 'waypoint', name: 'Waypoint', status: 'In use · Waypoint', own: 'Waypoint: Itinerary',
+      id: 'waypoint', name: 'Waypoint', group: 'apps', status: 'App look · locked · Waypoint', own: 'Waypoint: Itinerary',
       after: "Isobar's paper, with a planner's layer on top.",
       type: "Barlow, as Isobar.",
       builds: "Isobar's.",
-      suits: "Planners and records with a status: Waypoint, the Library's plans you review.",
+      suits: "Planners and records with a status: Waypoint, and the same kind of app later.",
       sig: 'A colour for each kind of item, status pills from Idea to Paid, violet for today and the route.',
-      aside: "Today Waypoint keeps a hand-copied version of Isobar's theme file, and the two have drifted. In the panel it would be Isobar plus a planning layer. If you want it to stand apart, a warmer, map-buff paper is the place to start.",
+      aside: "Locked as it is. Today Waypoint keeps a hand-copied version of Isobar's theme file, and the two have drifted; in the panel they share one App look, and Waypoint's kinds and statuses stay in Waypoint.",
       fonts: { ui: "'Barlow', sans-serif", num: "'Barlow Condensed', sans-serif", disp: "'Barlow Condensed', sans-serif" }, r: 6,
       light: { paper: '#e9eee8', sheet: '#f6f8f4', grid: '#cdd8cb', faint: '#dfe6dd', ink: '#1c2633', ink2: '#5a6570', pen: '#5b3a9e', pen2: '#2a6896', warn: '#a8700c', ok: '#2f7a3e', heat: '#b3362b', wind: '#23796a' },
       dark: { paper: '#131a20', sheet: '#19222a', grid: '#2a3741', faint: '#222d36', ink: '#e6ebee', ink2: '#9aa7b2', pen: '#b49cf0', pen2: '#7fb6e4', warn: '#e2b04e', ok: '#7fcf8b', heat: '#f0806c', wind: '#5cc4a7' },
     },
     {
-      id: 'glass', name: 'Glass', status: 'New', own: 'Gadgets',
+      id: 'glass', name: 'Glass', group: 'fun', status: "Utilities & Fun · the Net Meter's look", own: 'Gadgets',
       after: 'desktop gadgets and frosted system panels.',
       type: 'Outfit, light weight for the big numbers.',
       builds: 'Frosted pale grey or smoked glass, both showing the desktop through.',
@@ -504,55 +691,55 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
       dark: { paper: 'rgba(14,17,22,.62)', sheet: 'rgba(30,34,42,.75)', grid: 'rgba(255,255,255,.10)', edge: 'rgba(255,255,255,.14)', ink: '#eef3f8', ink2: '#9aa6b2', pen: '#5ccfff', pen2: '#ffb35c', warn: '#e6b450', ok: '#6fd49a' },
     },
     {
-      id: 'phosphor', name: 'Phosphor', status: 'New', own: 'Analyser',
+      id: 'phosphor', name: 'Phosphor', group: 'fun', status: 'Utilities & Fun', own: 'Scope gadget',
       after: 'a bench oscilloscope: a graticule and a green trace with a short afterglow.',
       type: 'Share Tech Mono on the screen, Barlow Semi Condensed engraved on the case.',
       builds: 'A grey-blue case, light or dark. The screen is always dark.',
-      suits: "The Net Meter's big mode, the Analyser's scope view, anything diagnostic. The bridge between the TAW apps and the Box instruments.",
+      suits: "The Net Meter's big mode, a scope gadget that listens to the output, anything diagnostic. A cousin of the Box instruments.",
       sig: 'Channels (CH1, CH2), soft keys beside the screen, a glow on the trace.',
       fonts: { ui: "'Share Tech Mono', monospace", num: "'Share Tech Mono', monospace", disp: "'Share Tech Mono', monospace", eng: "'Barlow Semi Condensed', sans-serif" }, r: 8,
       light: { paper: '#b7c1ca', sheet: '#cfd7de', grid: '#2c4a3a', ink: '#17212a', ink2: '#47545f', pen: '#7dff9b', pen2: '#62d9ff', warn: '#ffcc4d', ok: '#7dff9b', display: '#0a120e', dink: '#a8f5b8' },
       dark: { paper: '#262d34', sheet: '#353e47', grid: '#2c4a3a', ink: '#dfe6ec', ink2: '#8b98a5', pen: '#7dff9b', pen2: '#62d9ff', warn: '#ffcc4d', ok: '#7dff9b', display: '#050a07', dink: '#a8f5b8' },
     },
     {
-      id: 'departures', name: 'Departures', status: 'New · after the Split-Flap Clock', own: 'Split-Flap Clock',
+      id: 'departures', name: 'Departures', group: 'fun', status: 'Utilities & Fun · after the Split-Flap Clock', own: 'Split-Flap Clock',
       after: 'split-flap boards at stations and airports, and your Split-Flap Clock.',
       type: 'Barlow Condensed SemiBold, as the clock uses.',
       builds: 'Cream or black around a black board. Yellow digits here; white is the clock\'s other choice.',
-      suits: "Clocks, countdowns and headline figures: the Net Meter's numbers, the Player's now playing, a trip countdown in Waypoint.",
+      suits: "Clocks, countdowns and headline figures: the Split-Flap Clock, the Net Meter's numbers.",
       sig: 'Digits on flaps that fold over when they change. Graphs as a board of lit cells.',
       fonts: { ui: "'Barlow Condensed', sans-serif", num: "'Barlow Condensed', sans-serif", disp: "'Barlow Condensed', sans-serif" }, r: 6,
       light: { paper: '#e6e3da', sheet: '#d4d0c5', grid: '#262626', ink: '#15140f', ink2: '#6b675d', pen: '#f2c230', pen2: '#eeebe2', warn: '#e0822a', ok: '#63c26b', display: '#111111', flap: '#232323', dink: '#f2c230', dink2: '#d9d6cc' },
       dark: { paper: '#0c0c0c', sheet: '#222222', grid: '#262626', ink: '#efece4', ink2: '#8e8a80', pen: '#f2c230', pen2: '#eeebe2', warn: '#e0822a', ok: '#63c26b', display: '#050505', flap: '#1f1f1f', dink: '#f2c230', dink2: '#d9d6cc' },
     },
     {
-      id: 'signalbox', name: 'Signalbox', status: 'New', own: 'Folder Sync',
+      id: 'signalbox', name: 'Signalbox', group: 'fun', status: 'Utilities & Fun', own: 'Folder Sync',
       after: "a railway signal box's track diagram, and power-station control rooms.",
       type: 'Overpass and Overpass Mono, from road-sign lettering.',
       builds: 'Pale green enamel, or the control room at night.',
-      suits: 'Folder Sync, and anything about how things connect: the family\'s chain from Library to speakers.',
+      suits: 'Folder Sync, and anything about how things connect.',
       sig: 'A line diagram with lamps: steady green is fine, flashing amber is working, red needs you.',
       fonts: { ui: "'Overpass', sans-serif", num: "'Overpass Mono', monospace", disp: "'Overpass', sans-serif" }, r: 4,
       light: { paper: '#c4cfc2', sheet: '#d8e0d5', grid: '#a9b7a6', ink: '#1b2620', ink2: '#4c5b53', pen: '#1b2620', pen2: '#2f6db0', warn: '#e8a317', ok: '#2fbf4a', lampoff: '#6d786f' },
       dark: { paper: '#1a221e', sheet: '#232d28', grid: '#34423b', ink: '#d9e3dc', ink2: '#8ea095', pen: '#d9e3dc', pen2: '#7fb0e8', warn: '#ffbf3a', ok: '#4be36a', lampoff: '#3b4640' },
     },
     {
-      id: 'blueprint', name: 'Blueprint', status: 'New', own: 'SPL Calculator',
+      id: 'blueprint', name: 'Blueprint', group: 'fun', status: 'Utilities & Fun', own: 'SPL Calculator',
       after: 'engineering drawings: whiteprint and cyanotype.',
       type: 'B612 and B612 Mono, made for aircraft cockpit displays.',
       builds: 'Whiteprint (blue on white) or cyanotype (white on blue).',
-      suits: "Calculators and setup tools: the SPL Calculator, speaker and room maths, the Equaliser's Detailed view.",
+      suits: "Calculators and setup tools: the SPL Calculator, speaker and room maths.",
       sig: 'Dimension lines, a title block with the model code, hatched fills, a red checking pencil.',
       fonts: { ui: "'B612', sans-serif", num: "'B612 Mono', monospace", disp: "'B612', sans-serif" }, r: 2,
       light: { paper: '#f2f5f9', sheet: '#ffffff', grid: '#cfdbe9', faint: '#e3eaf3', ink: '#1d4f8f', ink2: '#5d7fa9', pen: '#1d4f8f', pen2: '#c2362f', warn: '#c2362f', ok: '#2f7a3e' },
       dark: { paper: '#1d4e8a', sheet: '#22579a', grid: '#3e6ea9', faint: '#2d5f9b', ink: '#f3f7fc', ink2: '#b7cbe6', pen: '#ffffff', pen2: '#ffd27a', warn: '#ffd27a', ok: '#b9f0c4' },
     },
     {
-      id: 'folio', name: 'Folio', status: 'New', own: 'Library',
+      id: 'folio', name: 'Folio', group: 'fun', status: 'Utilities & Fun', own: 'Usage log',
       after: 'a printed reference: almanacs and record catalogues.',
       type: 'Newsreader for text and figures, Libre Franklin for labels.',
       builds: 'Cream paper, or a dark reading room.',
-      suits: "Catalogues and long tables: the Library's browsing, and Codeword if it's the newspaper puzzle.",
+      suits: "Logs, catalogues and long tables: the Net Meter's monthly use, and Codeword if it's the newspaper puzzle.",
       sig: 'Hairline rules, small-caps labels, numbers set like a printed table.',
       fonts: { ui: "'Libre Franklin', sans-serif", num: "'Newsreader', serif", disp: "'Newsreader', serif" }, r: 3,
       light: { paper: '#efece4', sheet: '#f8f6f1', grid: '#d8d2c4', faint: '#e4dfd3', ink: '#1b1a17', ink2: '#696458', pen: '#1f3b73', pen2: '#94641a', warn: '#94641a', ok: '#3d6b3a' },
@@ -799,7 +986,7 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
       html: () => `<div class="pg"><aside class="rail"><div class="logo"><span class="ring"></span>Isobar</div>
         <nav><a class="on">Now</a><a>History</a><a>Compare</a><a>Insights</a><a>Seasons</a><a>Settings</a></nav>
         <div class="foot"><span class="dot"></span>Live, just now</div></aside>
-        <main><div class="hd"><h3>Demo station</h3><span class="upd"><span class="dot"></span>Updated just now</span></div>
+        <main><div class="hd"><h3>Demo station</h3><span class="upd"><span class="dot"></span>Updated just now</span><span class="wb" style="margin-left:14px">${ICONS}</span></div>
         <div class="iso-top"><div class="iso-big"><div class="t">15.4<sup>°C</sup></div><div class="trend">↑ +0.4°C per hour</div>
           <div class="hl"><span>High<b class="h">19.8°C</b></span><span>Low<b class="l">9.6°C</b></span></div></div>
           <div class="iso-chart"><canvas></canvas></div></div>
@@ -832,7 +1019,7 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
         <div class="trip">Japan 2027 (sample)</div>
         <nav><a>Overview<span class="dot"></span></a><a class="on">Itinerary</a><a>Bookings</a><a>Costs</a><a>Trip details</a><a>Settings</a></nav>
         <div class="foot"><span class="dot" style="background:var(--ink2)"></span>Sample: not saved</div></aside>
-        <main><div class="hd"><h3>Itinerary</h3><span class="wp-btn">Phone itinerary</span></div>
+        <main><div class="hd"><h3>Itinerary</h3><span class="wp-btn">Phone itinerary</span><span class="wb" style="margin-left:14px">${ICONS}</span></div>
         <div class="wp-day"><h4>Saturday 15 May <small>Day 1</small><span class="add">+ Add</span></h4>
           ${it('09:45', 'pen', 'QF 25 Sydney (SYD) to Tokyo Haneda (HND)', 'Flight · arrives 17:35 · Ref QX7K2P', '$3,680.00', '<span class="pill ok">Paid</span>')}
           ${it('15:00', 'pen2', 'Hotel Kumo Shinjuku', '4 nights to Wed 19 May · Ref 4417 902 318', '¥92,000', '<span class="pill ok">Confirmed</span>', true)}
@@ -864,7 +1051,7 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
       live: true,
     },
     phosphor: {
-      html: () => `<div class="ph"><div class="strip"><small>Timster's Audio Works</small><b>Analyser</b><small>SP-001</small><span class="wb">${ICONS}</span></div>
+      html: () => `<div class="ph"><div class="strip"><b>Scope</b><small>listening to the output</small><span class="wb">${ICONS}</span></div>
         <div class="body"><div class="scr"><canvas></canvas></div>
         <div class="keys"><div class="eng">Display</div><div class="key on"><i></i>Peak hold</div><div class="key"><i></i>Slow</div><div class="key on"><i></i>1/3 oct</div><div class="key"><i></i>Freeze</div><div class="eng" style="margin-top:4px">Input</div><div class="key on"><i></i>Output</div></div></div></div>`,
       draw(u) {
@@ -963,21 +1150,21 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
     folio: {
       html: () => {
         const rows = [
-          ['Kind of Blue', 'Miles Davis', 1959, 5, 'FLAC 24/192'],
-          ['Hounds of Love', 'Kate Bush', 1985, 12, 'FLAC 16/44'],
-          ['OK Computer', 'Radiohead', 1997, 12, 'FLAC 16/44'],
-          ['Pet Sounds', 'The Beach Boys', 1966, 13, 'FLAC 24/96'],
-          ['Rumours', 'Fleetwood Mac', 1977, 11, 'FLAC 24/96'],
-          ['Blue Train', 'John Coltrane', 1958, 5, 'MP3 320'],
-          ['Remain in Light', 'Talking Heads', 1980, 8, 'FLAC 16/44'],
+          ['Tuesday 27', '3.84', '0.41', '41.2', '18:20'],
+          ['Monday 26', '6.12', '0.58', '45.9', '20:05'],
+          ['Sunday 25', '9.47', '1.02', '47.3', '19:40'],
+          ['Saturday 24', '8.03', '0.77', '44.8', '14:12'],
+          ['Friday 23', '4.40', '0.36', '39.5', '21:30'],
+          ['Thursday 22', '3.91', '0.52', '40.1', '08:55'],
+          ['Wednesday 21', '5.26', '0.44', '42.7', '19:02'],
         ];
-        return `<div class="fo"><div class="strip"><b>Library</b><small>Timster's Audio Works</small><span class="wb" style="margin-left:auto">${ICONS}</span></div>
-        <div class="body"><nav><span class="on">Albums</span><span>Artists</span><span>Genres</span><span>Years</span><span class="chk">To check (3)</span></nav>
-        <main><div class="mh"><h3>Albums</h3><small>1,284 albums · 312 artists</small></div>
-        <table><thead><tr><th>Album</th><th>Artist</th><th class="n">Year</th><th class="n">Tracks</th><th>Format</th></tr></thead><tbody>
-        ${rows.map((r, i) => `<tr${i === 1 ? ' class="sel"' : ''}><td>${r[0]}</td><td>${r[1]}</td><td class="n">${r[2]}</td><td class="n">${r[3]}</td><td class="f">${r[4]}</td></tr>`).join('')}
+        return `<div class="fo"><div class="strip"><b>Net Meter</b><small>the month so far</small><span class="wb" style="margin-left:auto">${ICONS}</span></div>
+        <div class="body"><nav><span class="on">October</span><span>September</span><span>August</span><span>The year</span><span class="chk">LAN shown apart</span></nav>
+        <main><div class="mh"><h3>October</h3><small>Internet · 118.6 GB down · 12.9 GB up</small></div>
+        <table><thead><tr><th>Day</th><th class="n">Down, GB</th><th class="n">Up, GB</th><th class="n">Peak, Mb/s</th><th class="n">Busiest</th></tr></thead><tbody>
+        ${rows.map((r, i) => `<tr${i === 2 ? ' class="sel"' : ''}><td>${r[0]}</td><td class="n">${r[1]}</td><td class="n">${r[2]}</td><td class="n">${r[3]}</td><td class="n f">${r[4]}</td></tr>`).join('')}
         </tbody></table></main></div>
-        <div class="foot">Checked 2 October · 3 files need a look</div></div>`;
+        <div class="foot">Kept on this computer only · days start at midnight</div></div>`;
       },
     },
   };
@@ -997,23 +1184,215 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
   };
   const isDark = () => build === 'auto' ? pageDark() : build === 'dark';
 
-  const units = LOOKS.map(look => {
+  // ---------------------------------------------------------- audio apps in the App look
+  const fam = on => `<div class="fam">${[['Library', 'wind'], ['Player', 'warn'], ['Equaliser', 'heat'], ['Analyser', 'pen2']]
+    .map(([n, c]) => `<a${n === on ? ' class="on"' : ''}><i style="background:var(--${c})"></i>${n}</a>`).join('')}</div>`;
+  const rail = (name, model, col, nav, extra, foot) => `<aside class="rail"><div class="logo"><span class="ring" style="box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 6px var(--${col})"></span>${name}</div>
+    <div class="maker">Timster's Audio Works · ${model}</div><nav>${nav}</nav>${extra || ''}${fam(name)}<div class="foot">${foot}</div></aside>`;
+  const ico = {
+    shuf: '<svg viewBox="0 0 14 14"><path d="M1 4h3l6 6h3v-1.5l2 2.5-2 2.5V12h-3.6l-6-6H1zM10 4h3V2.5l2 2.5-2 2.5V6h-3z"/></svg>',
+    prev: '<svg viewBox="0 0 14 14"><path d="M3 2h2v10H3zM13 2v10L6 7z"/></svg>',
+    play: '<svg viewBox="0 0 14 14"><path d="M3 1.5v11l9-5.5z"/></svg>',
+    pause: '<svg viewBox="0 0 14 14"><path d="M3 2h3v10H3zM8 2h3v10H8z"/></svg>',
+    next: '<svg viewBox="0 0 14 14"><path d="M9 2h2v10H9zM1 2v10l7-5z"/></svg>',
+    vol: '<svg viewBox="0 0 14 14"><path d="M1 5h3l4-3v10L4 9H1z"/></svg>',
+  };
+  const EQB = [
+    ['LS', 105, 5.5, .7], ['P', 150, -2.1, .9], ['P', 520, 1.2, 1.1], ['P', 1400, -1.8, 1.4], ['P', 2900, 3.4, 2.2],
+    ['P', 4200, -2.6, 4.0], ['P', 6100, 2.0, 3.2], ['P', 8300, -3.5, 3.0], ['HS', 10000, 1.6, .7], ['P', 12500, -1.4, 2.5],
+  ];
+  const hz = f => f >= 1000 ? (f / 1000).toFixed(f % 1000 ? 2 : 0).replace(/\.?0+$/, '') + 'k' : String(f);
+  const bandGain = ([t, f0, g, q], f) => {
+    const o = Math.log2(f / f0);
+    if (t === 'LS') return g / (1 + Math.exp(o * 4));
+    if (t === 'HS') return g / (1 + Math.exp(-o * 4));
+    return g * Math.exp(-(o * o) * q * q * .9);
+  };
+  function logGrid(ctx, P, L, T, pw, ph, fx, lines, yOf, labels) {
+    ctx.strokeStyle = P.faint; ctx.lineWidth = 1; ctx.beginPath();
+    [20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 20000]
+      .forEach(f => { const x = Math.round(fx(f)) + .5; ctx.moveTo(x, T); ctx.lineTo(x, T + ph); });
+    ctx.stroke();
+    ctx.strokeStyle = P.grid; ctx.beginPath();
+    [100, 1000, 10000].forEach(f => { const x = Math.round(fx(f)) + .5; ctx.moveTo(x, T); ctx.lineTo(x, T + ph); });
+    lines.forEach(v => { const y = Math.round(yOf(v)) + .5; ctx.moveTo(L, y); ctx.lineTo(L + pw, y); });
+    ctx.stroke();
+    ctx.font = `10.5px 'Barlow', sans-serif`; ctx.fillStyle = P.ink2;
+    [[20, '20'], [50, '50'], [100, '100'], [200, '200'], [500, '500'], [1000, '1k'], [2000, '2k'], [5000, '5k'], [10000, '10k'], [20000, '20k']]
+      .forEach(([f, l]) => { ctx.textAlign = f === 20000 ? 'right' : f === 20 ? 'left' : 'center'; ctx.fillText(l, fx(f), T + ph + 14); });
+    ctx.textAlign = 'right'; labels.forEach(v => ctx.fillText((v > 0 ? '+' : '') + v, L - 5, yOf(v) + 3.5)); ctx.textAlign = 'left';
+  }
+
+  const AUDIO = [
+    {
+      id: 'library', name: 'Library', model: 'LB-001',
+      today: 'Four panes on the faceplate: views and drives, artists, albums with what each needs, and the chosen album.',
+      app: "The same four panes on chart paper. Drives join the rail; what an album needs shows as Waypoint's status pills, amber for a gap and green when it's complete.",
+      keeps: 'Search, Scan drives, Lookups, read-only, the panes and their columns.',
+      html: () => `<div class="pg au">${rail('Library', 'LB-001', 'wind',
+        '<a class="on">Library<small>93</small></a><a>What\'s missing<small>8</small></a><a>Duplicates<small>soon</small></a><a>Organise<small>soon</small></a>',
+        '<div class="sub">Drives</div><div class="drive"><span class="dot"></span>Data<span>88</span><small>/media/data/Music</small></div><div class="drive"><span class="dot"></span>Old iPod<span>5</span><small>/media/IPOD</small></div>',
+        '<span class="dot"></span>Read only')}
+        <main><div class="hd"><span class="lb-search">Search artists and albums</span><span class="au-btn">Lookups: off</span><span class="au-btn">Add folder</span><span class="au-btn pri">Scan drives</span><span class="wb">${ICONS}</span></div>
+        <div class="lb-cols">
+          <div class="lb-col"><span>Artists</span><div class="lb-list">
+            <div>Kate Bush<small>3</small></div><div>Miles Davis<small>4</small></div><div>Portishead<small>2</small></div>
+            <div class="on">Radiohead<small>5</small><span class="dot" style="background:var(--warn)"></span></div><div>Talking Heads<small>2</small></div><div>Various Artists<small>11</small><span class="dot" style="background:var(--heat)"></span></div></div></div>
+          <div class="lb-col"><span>Albums · Radiohead</span><div class="lb-list" style="font-size:inherit">
+            ${[['1993', 'Pablo Honey', '12 tracks · 42:11 · MP3', '<span class="pill wn">Art</span><span class="pill wn">Album artist</span>', 1, 'var(--faint)'],
+               ['1995', 'The Bends', '12 tracks · 48:37 · MP3', '<span class="pill ht">Year</span>', 0, 'linear-gradient(135deg,#8a9bb0,#c9b98f)'],
+               ['1997', 'OK Computer', '12 tracks · 53:21 · FLAC', '<span class="pill ok">Complete</span>', 0, 'linear-gradient(135deg,#6f8fb0,#d7dde4)'],
+               ['2000', 'Kid A', '10 tracks · 49:56 · FLAC', '<span class="pill ok">Complete</span>', 0, 'linear-gradient(135deg,#7a2e2e,#e6dcd8)'],
+               ['2001', 'Amnesiac', '11 tracks · 43:57 · M4A', '<span class="pill wn">Art small</span>', 0, '#232323']]
+              .map(([y, t, sub, pp, on, cv]) => `<div class="lb-al${on ? ' on' : ''}" style="display:grid"><span class="cv" style="background:${cv}"></span><span class="yr">${y}</span><span><b>${t}</b><small>${sub}</small></span><span class="pp">${pp}</span></div>`).join('')}</div></div>
+          <div class="lb-det"><div class="cv">No artwork</div><span class="by">Radiohead · album</span><h4>Pablo Honey</h4><span class="by">1993 · 12 tracks · 42:11</span>
+            <div class="btns"><span class="au-btn pri">Play in Player</span><span class="au-btn">Show folder</span></div>
+            <div class="au-box"><table class="au-tab"><tbody>
+              ${[['01', 'You', '3:29'], ['02', 'Creep', '3:56'], ['03', 'How Do You?', '2:12'], ['04', 'Stop Whispering', '5:26']].map(r => `<tr><td class="dim">${r[0]}</td><td>${r[1]}</td><td class="n dim">${r[2]}</td></tr>`).join('')}
+            </tbody></table></div></div>
+        </div>
+        <div class="lb-foot"><span>1,284 albums · last scan 5 min ago</span><span>Tags 92% · artwork 81% complete</span><span>Your files are never changed</span></div></main></div>`,
+    },
+    {
+      id: 'player', name: 'Player', model: 'PL-001',
+      today: 'Artwork on the left, the elapsed time and meters in a display window, the queue, and a transport bar.',
+      app: "The elapsed time becomes the one big reading, as Isobar's temperature is, with the level through the track drawn on chart paper in violet. The queue is a plain table with the playing row marked.",
+      keeps: 'Gapless and bit-perfect, the format and output line, Simple and Detailed, the transport and volume.',
+      html: () => `<div class="pg au">${rail('Player', 'PL-001', 'warn',
+        '<a class="on">Now playing</a><a>Queue<small>12</small></a><a>Playlists</a><a>Settings</a>', '',
+        '<span class="dot"></span>Bit-perfect')}
+        <main><div class="hd"><h3>Now playing</h3><span class="au-sp"></span><span class="au-btn">Open folder</span><span class="au-btn">Add</span><span class="wb">${ICONS}</span></div>
+        <div class="pl-top"><div class="pl-art">Artwork</div>
+          <div class="pl-meta"><h4>Running Up That Hill</h4><span class="by">Kate Bush · Hounds of Love · Track 1 of 12</span>
+            <span class="pills"><span class="pill">FLAC</span><span class="pill">24-bit · 96 kHz</span><span class="pill ok">Native rate</span></span>
+            <span class="by" style="font-size:11.5px">Out: PipeWire · Built-in audio · 96 kHz · 2 ch</span>
+            <div class="pl-time"><div class="t">1:42<small>of 4:58</small></div><div class="au-chart"><canvas data-k="lvl"></canvas><span class="cap">Level through the track</span></div></div></div></div>
+        <div class="au-box"><table class="au-tab"><thead><tr><th style="width:26px">#</th><th>Title</th><th>Artist</th><th class="n">Time</th></tr></thead><tbody>
+          ${[['▶', 'Running Up That Hill', '4:58', 1], ['2', 'Hounds of Love', '3:02'], ['3', 'The Big Sky', '4:41'], ['4', 'Mother Stands for Comfort', '3:07'], ['5', 'Cloudbusting', '5:10']]
+            .map(r => `<tr${r[3] ? ' class="on"' : ''}><td class="dim">${r[0]}</td><td>${r[1]}</td><td class="dim">Kate Bush</td><td class="n dim">${r[2]}</td></tr>`).join('')}
+        </tbody></table></div>
+        <div class="pl-tr"><span class="ic">${ico.shuf}</span><span class="ic">${ico.prev}</span><span class="ic big">${ico.pause}</span><span class="ic">${ico.next}</span>
+          <span>1:42</span><span class="bar"><i style="width:34%"></i><b style="left:34%"></b></span><span>4:58</span>
+          <span class="ic" style="border:0;background:none">${ico.vol}</span><span class="bar vol"><i style="width:80%"></i><b style="left:80%"></b></span></div></main></div>`,
+      draw(u) {
+        const P = u.pal, { ctx, w, h } = prep($('canvas[data-k=lvl]', u.win), u.s);
+        gridLines(ctx, w, h, 8, 8, P.faint, 1); gridLines(ctx, w, h, 40, 40, P.grid, 1);
+        const at = .34, n = 160;
+        const lv = t => .55 + .22 * Math.sin(t * 9) + .12 * Math.sin(t * 31 + 1) + (Math.sin(t * 517) * .5 + .5) * .1;
+        ctx.beginPath();
+        for (let i = 0; i <= n * at; i++) { const t = i / n, x = t * w, y = h - 4 - lv(t) * (h - 24); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+        ctx.strokeStyle = P.pen; ctx.lineWidth = 1.8; ctx.lineJoin = 'round'; ctx.stroke();
+        ctx.lineTo(at * w, h); ctx.lineTo(0, h); ctx.closePath(); ctx.fillStyle = rgba(P.pen, .1); ctx.fill();
+        ctx.setLineDash([3, 3]); ctx.strokeStyle = P.ink2; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(at * w + .5, 18); ctx.lineTo(at * w + .5, h); ctx.stroke(); ctx.setLineDash([]);
+      },
+    },
+    {
+      id: 'equaliser', name: 'Equaliser', model: 'EQ-001',
+      today: 'The response on a display, ten band strips of faders and knobs, and the preset bar.',
+      app: 'The response curve is the big reading, drawn on chart paper in violet with numbered points to drag. The ten bands become readout cards; the chosen one opens its controls.',
+      keeps: 'Ten parametric bands, presets, preamp with Auto, bypass, the PipeWire and Windows engines.',
+      html: () => `<div class="pg au">${rail('Equaliser', 'EQ-001', 'heat',
+        '<a class="on">Bands</a><a>Presets</a><a>Output</a><a>Settings</a>', '',
+        '<span class="dot"></span>PipeWire · on')}
+        <main><div class="hd"><span class="tog"></span><h3>Headphones Parametric</h3><span class="upd" style="margin-left:6px">Preamp −5.4 dB · Auto</span><span class="au-sp"></span>
+          <span class="au-btn">Load…</span><span class="au-btn">Save…</span><span class="au-btn">Flat</span><span class="au-btn">Bypass</span><span class="wb">${ICONS}</span></div>
+        <div class="au-chart eq-chart"><canvas data-k="eq"></canvas></div>
+        <div class="eq-bands">${EQB.map(([t, f, g, q], i) => `<div class="eq-b${i === 5 ? ' on' : ''}"><span class="top"><i></i>${i + 1}<span style="margin-left:auto;font-weight:500;font-size:10.5px;color:var(--ink2)">${t === 'LS' ? 'Low sh.' : t === 'HS' ? 'High sh.' : 'Peak'}</span></span>
+          <span class="g">${g > 0 ? '+' : '−'}${Math.abs(g).toFixed(1)}<small>dB</small></span>
+          <span class="gauge"><i style="${g >= 0 ? `left:50%;width:${g / 12 * 50}%` : `right:50%;width:${-g / 12 * 50}%`}"></i></span>
+          <span>${hz(f)} Hz<br>Q ${q.toFixed(2)}</span></div>`).join('')}</div>
+        <div class="au-hint">Drag a point on the curve · scroll over one for Q · double-click to reset · Space: bypass</div></main></div>`,
+      draw(u) {
+        const P = u.pal, { ctx, w, h } = prep($('canvas[data-k=eq]', u.win), u.s);
+        const L = 34, T = 10, R = 12, B = 22, pw = w - L - R, ph = h - T - B;
+        const fx = f => L + Math.log10(f / 20) / 3 * pw, yOf = db => T + (12 - db) / 36 * ph;
+        logGrid(ctx, P, L, T, pw, ph, fx, [12, 6, 0, -6, -12, -18, -24], yOf, [12, 6, 0, -6, -12, -18, -24]);
+        ctx.strokeStyle = P.ink2; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(L, Math.round(yOf(0)) + .5); ctx.lineTo(L + pw, Math.round(yOf(0)) + .5); ctx.stroke();
+        // what's playing, quietly, under the curve
+        ctx.beginPath();
+        for (let i = 0; i <= 200; i++) { const f = 20 * Math.pow(1000, i / 200), o = Math.log2(f / 20); const db = -12 - o * .9 + Math.sin(o * 4.3) * 1.6 + (Math.sin(i * 12.9898) * 43758.5453 % 1) * 2.2; const x = fx(f), y = yOf(db); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+        ctx.lineTo(L + pw, T + ph); ctx.lineTo(L, T + ph); ctx.closePath(); ctx.fillStyle = rgba(P.ink2, .1); ctx.fill();
+        // the chosen band's own curve, then the sum
+        ctx.beginPath(); for (let i = 0; i <= 240; i++) { const f = 20 * Math.pow(1000, i / 240); const y = yOf(bandGain(EQB[5], f)); i ? ctx.lineTo(fx(f), y) : ctx.moveTo(fx(f), y); }
+        ctx.lineTo(L + pw, yOf(0)); ctx.lineTo(L, yOf(0)); ctx.closePath(); ctx.fillStyle = rgba(P.pen, .12); ctx.fill();
+        ctx.beginPath(); for (let i = 0; i <= 300; i++) { const f = 20 * Math.pow(1000, i / 300); const g = EQB.reduce((a, b) => a + bandGain(b, f), 0); const y = yOf(g); i ? ctx.lineTo(fx(f), y) : ctx.moveTo(fx(f), y); }
+        ctx.strokeStyle = P.pen; ctx.lineWidth = 2.2; ctx.lineJoin = 'round'; ctx.stroke();
+        ctx.font = `600 10px 'Barlow', sans-serif`; ctx.textAlign = 'center';
+        EQB.forEach((b, i) => {
+          const x = fx(b[1]), y = yOf(b[2]), on = i === 5;
+          ctx.beginPath(); ctx.arc(x, y, 8, 0, Math.PI * 2); ctx.fillStyle = on ? P.pen : P.sheet; ctx.fill();
+          ctx.strokeStyle = on ? P.pen : P.ink; ctx.lineWidth = 1.3; ctx.stroke();
+          ctx.fillStyle = on ? P.sheet : P.ink; ctx.fillText(String(i + 1), x, y + 3.5);
+        });
+        ctx.textAlign = 'left';
+      },
+    },
+    {
+      id: 'analyser', name: 'Analyser', model: 'SP-001',
+      today: 'A large spectrum display, with source, view, bands, motion and scale controls along the bottom.',
+      app: "The spectrum fills the page on chart paper, the live curve in violet and the peak hold dashed. Underneath, a row of readings in Isobar's manner: level, peak, loudness, each with its last minute as a sparkline.",
+      keeps: 'Curve, Bars and LEDs, 1/3 to 1/12 octave, rise, fall and hold, freeze, on top, full screen.',
+      html: () => `<div class="pg au">${rail('Analyser', 'SP-001', 'pen2',
+        '<a class="on">Spectrum</a><a>Over time</a><a>Settings</a>',
+        '<div class="sub">Listening to</div><div class="drive"><span class="dot"></span>Default output<span></span><small>what\'s playing · 48.0 kHz</small></div>',
+        '<span class="dot"></span>Live')}
+        <main><div class="hd"><h3>Spectrum</h3><span class="au-sp"></span><span class="au-chips"><span class="chip on">Curve</span><span class="chip">Bars</span><span class="chip">LEDs</span></span>
+          <span class="au-chips" style="margin-left:8px"><span class="chip on">1/3</span><span class="chip">1/6</span><span class="chip">1/12</span></span><span class="au-btn">Freeze</span><span class="au-btn">On top</span><span class="wb">${ICONS}</span></div>
+        <div class="au-chart an-chart"><canvas data-k="an"></canvas></div>
+        <div class="an-row"><div><span>Level</span><b>−18.2<small>dBFS</small></b><canvas data-k="s1"></canvas></div>
+          <div><span>Peak</span><b>−6.1<small>dBFS</small></b><canvas data-k="s2"></canvas></div>
+          <div><span>Loudness</span><b>−14.0<small>LUFS</small></b><canvas data-k="s3"></canvas></div>
+          <div><span>Motion</span><b>300<small>ms fall</small></b><em>Rise 0 ms · hold 1.5 s · 90 dB range · 3 dB/oct slope</em></div></div></main></div>`,
+      draw(u) {
+        const P = u.pal, { ctx, w, h } = prep($('canvas[data-k=an]', u.win), u.s);
+        const L = 34, T = 10, R = 12, B = 22, pw = w - L - R, ph = h - T - B;
+        const fx = f => L + Math.log10(f / 20) / 3 * pw, yOf = db => T + (-db) / 90 * ph;
+        logGrid(ctx, P, L, T, pw, ph, fx, [0, -20, -40, -60, -80], yOf, [0, -20, -40, -60, -80]);
+        const tt = reduce ? 0 : performance.now() / 1400;
+        const spec = (f, j) => { const o = Math.log2(f / 20); return -34 - o * 1.1 + 8 * Math.exp(-((o - 2.6) ** 2) / 1.3) + 4 * Math.exp(-((o - 6.8) ** 2) / .5) + Math.sin(o * 3.3 + tt) * 2.4 + j; };
+        const pts = []; for (let i = 0; i <= 220; i++) { const f = 20 * Math.pow(1000, i / 220); pts.push([fx(f), yOf(spec(f, (Math.sin(i * 78.233 + tt * 3) * .5) * 4))]); }
+        ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+        ctx.lineTo(L + pw, T + ph); ctx.lineTo(L, T + ph); ctx.closePath(); ctx.fillStyle = rgba(P.pen, .1); ctx.fill();
+        ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.strokeStyle = P.pen; ctx.lineWidth = 1.8; ctx.lineJoin = 'round'; ctx.stroke();
+        ctx.beginPath(); for (let i = 0; i <= 110; i++) { const f = 20 * Math.pow(1000, i / 110); const x = fx(f), y = yOf(spec(f, 0) + 7); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+        ctx.setLineDash([3, 3]); ctx.strokeStyle = P.ink2; ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]);
+        ctx.font = `10.5px 'Barlow', sans-serif`; ctx.fillStyle = P.ink2; ctx.fillText('Default output · 48.0 kHz · peak hold dashed', L + 8, T + 14);
+        spark($('canvas[data-k=s1]', u.win), u.s, P, P.pen, t => .5 + Math.sin(t * 7 + tt) * .2 + Math.sin(t * 61) * .06);
+        spark($('canvas[data-k=s2]', u.win), u.s, P, P.ink2, t => .7 + Math.sin(t * 5 + tt) * .15 + Math.abs(Math.sin(t * 43)) * .12);
+        spark($('canvas[data-k=s3]', u.win), u.s, P, P.pen2, t => .55 + Math.sin(t * 2.2 + tt * .5) * .12);
+      },
+      fast: true,
+    },
+  ];
+
+  // ---------------------------------------------------------- the page
+  const WAYPOINT = LOOKS.find(l => l.id === 'waypoint');
+  function makeUnit(host, id, dw, dh, look, notes, tabs, app) {
     const sec = document.createElement('section');
-    sec.className = 'unit'; sec.id = 'look-' + look.id; sec.setAttribute('aria-labelledby', 'h-' + look.id);
-    sec.innerHTML = `<div class="left"><div class="stage"><div class="scaler"><div class="win t-${look.id}"></div></div></div>
-      <div class="tabs" role="group" aria-label="Show in ${look.name}"><button type="button" id="v-${look.id}-nm" data-v="nm" aria-pressed="true">Net Meter</button><button type="button" id="v-${look.id}-own" data-v="own" aria-pressed="false">${look.own}</button></div></div>
-      <div class="notes"><div class="tag${look.status.startsWith('New') ? ' new' : ''}">${look.status}</div><h2 id="h-${look.id}">${look.name}</h2>
-      <p class="after">After ${look.after}</p>
-      <div class="sw" aria-hidden="true"></div>
-      <dl><div><dt>Type</dt><dd>${look.type}</dd></div><div><dt>Builds</dt><dd>${look.builds}</dd></div><div><dt>Suits</dt><dd>${look.suits}</dd></div><div><dt>Signature</dt><dd>${look.sig}</dd></div></dl>
-      ${look.aside ? `<p class="aside">${look.aside}</p>` : ''}</div>`;
-    $('#units').appendChild(sec);
-    const a = document.createElement('a'); a.href = '#look-' + look.id; a.textContent = look.name; $('#jump').appendChild(a);
-    const u = { look, sec, stage: $('.stage', sec), win: $('.win', sec), view: 'nm', s: 1, pal: null };
+    sec.className = 'unit'; sec.id = id; sec.setAttribute('aria-labelledby', 'h-' + id);
+    sec.innerHTML = `<div class="left"><div class="stage" style="aspect-ratio:${dw} / ${dh}"><div class="scaler" style="width:${dw}px;height:${dh}px"><div class="win t-${look.id}" style="width:${dw - 40}px;height:${dh - 40}px"></div></div></div>${tabs}</div>
+      <div class="notes">${notes}</div>`;
+    $(host).appendChild(sec);
+    const u = { look, app, sec, stage: $('.stage', sec), win: $('.win', sec), view: app ? 'app' : 'nm', s: 1, dw, pal: null };
     $$('.tabs button', sec).forEach(b => b.addEventListener('click', () => { setView(u, b.dataset.v); }));
     u.win.addEventListener('click', () => { if (look.id === 'glass' && u.view === 'nm') u.win.classList.toggle('hover-on'); });
     return u;
-  });
+  }
+  const units = [
+    ...LOOKS.map(look => makeUnit(look.group === 'apps' ? '#units-apps' : '#units-fun', 'look-' + look.id, 640, 340, look,
+      `<div class="tag${look.group === 'fun' ? ' new' : ''}">${look.status}</div><h2 id="h-look-${look.id}">${look.name}</h2>
+      <p class="after">After ${look.after}</p>
+      <div class="sw" aria-hidden="true"></div>
+      <dl><div><dt>Type</dt><dd>${look.type}</dd></div><div><dt>Builds</dt><dd>${look.builds}</dd></div><div><dt>Suits</dt><dd>${look.suits}</dd></div><div><dt>Signature</dt><dd>${look.sig}</dd></div></dl>
+      ${look.aside ? `<p class="aside">${look.aside}</p>` : ''}`,
+      `<div class="tabs" role="group" aria-label="Show in ${look.name}"><button type="button" id="v-${look.id}-nm" data-v="nm" aria-pressed="true">Net Meter</button><button type="button" id="v-${look.id}-own" data-v="own" aria-pressed="false">${look.own}</button></div>`)),
+    ...AUDIO.map(app => makeUnit('#units-audio', 'app-' + app.id, 960, 560, WAYPOINT,
+      `<div class="tag new">Audio · ${app.model} · in the App look</div><h2 id="h-app-${app.id}">${app.name}</h2>
+      <dl><div><dt>Today</dt><dd>${app.today}</dd></div><div><dt>In the App look</dt><dd>${app.app}</dd></div><div><dt>Stays the same</dt><dd>${app.keeps}</dd></div></dl>`,
+      '', app)),
+  ];
+  [['#families', 'Families'], ['#g-apps', 'Apps'], ['#g-audio', 'Audio in the App look'], ['#g-fun', 'Utilities & Fun'], ['#roles', 'Colour roles']]
+    .forEach(([h, t]) => { const a = document.createElement('a'); a.href = h; a.textContent = t; $('#jump').appendChild(a); });
 
   function applyPalette(u) {
     const dark = isDark(), P = u.look[dark ? 'dark' : 'light'];
@@ -1022,17 +1401,18 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
     for (const k in P) st.setProperty('--' + k, P[k]);
     st.setProperty('--f-ui', u.look.fonts.ui); st.setProperty('--f-num', u.look.fonts.num); st.setProperty('--f-disp', u.look.fonts.disp);
     st.setProperty('--f-eng', u.look.fonts.eng || u.look.fonts.ui); st.setProperty('--r', u.look.r + 'px');
-    u.stage.classList.toggle('wall', u.look.id === 'glass');
+    u.stage.classList.toggle('wall', u.look.id === 'glass' && !u.app);
     u.stage.classList.toggle('dk', dark);
-    $('.sw', u.sec).innerHTML = ROLES.map(([r]) => `<span title="${r}" style="background:${P[r]}"></span>`).join('');
+    const sw = $('.sw', u.sec); if (sw) sw.innerHTML = ROLES.map(([r]) => `<span title="${r}" style="background:${P[r]}"></span>`).join('');
   }
   function render(u) {
-    u.win.innerHTML = u.view === 'nm' ? nmHTML() : OWN[u.look.id].html();
+    u.win.innerHTML = u.app ? u.app.html() : u.view === 'nm' ? nmHTML() : OWN[u.look.id].html();
     u.drawn = false;
     draw(u);
   }
   function draw(u) {
-    if (u.view === 'nm') nmUpdate(u);
+    if (u.app) { if (u.app.draw) u.app.draw(u); }
+    else if (u.view === 'nm') nmUpdate(u);
     else if (OWN[u.look.id].draw) OWN[u.look.id].draw(u);
   }
   function setView(u, v) {
@@ -1050,7 +1430,7 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
 
   $$('#viewAll button').forEach(b => b.addEventListener('click', () => {
     $$('#viewAll button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    units.forEach(u => setView(u, b.dataset.v));
+    units.forEach(u => { if (!u.app) setView(u, b.dataset.v); });
   }));
   $$('#build button').forEach(b => b.addEventListener('click', () => {
     build = b.dataset.b;
@@ -1063,7 +1443,7 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
   const ro = new ResizeObserver(entries => {
     entries.forEach(e => {
       const u = units.find(x => x.stage === e.target); if (!u) return;
-      const s = e.contentRect.width / 640;
+      const s = e.contentRect.width / u.dw;
       if (Math.abs(s - u.s) > .001) { u.s = s; u.stage.style.setProperty('--s', s); draw(u); }
     });
   });
@@ -1081,8 +1461,8 @@ ul.fit { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 16px
   units.forEach(u => io.observe(u.stage));
   setInterval(() => {
     step();
-    visible.forEach(u => { if (u.view === 'nm' || OWN[u.look.id].live) draw(u); });
+    visible.forEach(u => { if (!u.app && (u.view === 'nm' || OWN[u.look.id].live)) draw(u); });
   }, reduce ? 4000 : 1000);
-  if (!reduce) setInterval(() => visible.forEach(u => { if (u.view === 'own' && OWN[u.look.id].fast) draw(u); }), 110);
+  if (!reduce) setInterval(() => visible.forEach(u => { if (u.app ? u.app.fast : u.view === 'own' && OWN[u.look.id].fast) draw(u); }), 110);
 })();
 </script>
