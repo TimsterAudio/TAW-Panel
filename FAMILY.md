@@ -70,3 +70,4 @@ Ideas suggested along the way, kept here for review later. Nothing here is sched
 - **More finishes** for the TAW look: Bronze, Cassette, Walnut, Studio and Spool (in `docs/finishes-review-v1.html`).
 - **Resizable columns and panes** (the Library first): drag a column divider or pane edge to resize, double-click to fit the contents, widths remembered per view; one flexible column (the title) takes the spare room.
 - **Panel skins**: 18 candidates reviewed 2026-10-13; see TAW-Panel's ROADMAP.md and `docs/skins-review.html`.
+- **Looks beyond the hi-fi** (2026-10-27): eight looks for apps outside the audio family (the Net Meter, Isobar, Waypoint, the Split-Flap Clock, Folder Sync, the SPL Calculator), sharing one set of colour roles; see `docs/looks-review.html`.

@@ -11,6 +11,7 @@ Sizes: S = one session, M = two or three, L = a release of its own.
 | 0.5.0 | **The resizable list:** drag a pane edge or column divider, double-click to fit, one flexible column takes the spare room, header right-click shows or hides columns, widths saved per view (serde, with defaults) | Library 0.4.0, then the Player | M |
 | 0.6.0 | **Meters, part 2:** Spool's meter scale (20 segments, 1 dB a step at the top) with four peak LEDs and hold; an analogue VU meter widget | Player's meters and VU window; the Equaliser and Analyser | M |
 | parked | More finishes (Bronze, Cassette, Walnut, Studio), then skins (below) | When the apps are settled | L |
+| proposed | **Looks beyond the hi-fi:** Isobar and Waypoint's look in the panel, plus Glass, Phosphor, Departures, Signalbox, Blueprint and Folio, all filling one set of colour roles; a page frame beside the faceplate; sparklines, scrolling graphs, pills, lamps and flap figures. Mock-ups in [`docs/looks-review.html`](docs/looks-review.html) (2026-10-27) | Net Meter, Isobar, Waypoint, Split-Flap Clock, Folder Sync, SPL Calculator | L |
 
 The Library, Equaliser and Analyser should move their pin to 0.3.2 in their next release, for the corner-resize fix.
 
