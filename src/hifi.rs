@@ -4,7 +4,7 @@
 //! and [`widgets`] stays for the Box instruments.
 //!
 //! - [`Look`]: the user's choice of finish, build and accent (saved by apps).
-//!   The default is Spool's look: its warm panels and seven colour themes.
+//!   The default is Linen: warm panels in any of seven colour themes.
 //! - [`Tokens`]: the colours a look resolves to, for drawing
 //! - [`install_fonts`]: Hanken Grotesk for text, Chivo Mono for numbers,
 //!   Michroma for the logo
@@ -33,21 +33,22 @@ use std::sync::Arc;
 /// The faceplate's material.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum Finish {
-    /// Spool's look (the default): warm panels tinted by the colour theme,
-    /// as in Spool's Dark and Light modes. Settings saved while this was
-    /// the brushed-aluminium "Anodised" finish load as Spool.
+    /// Linen (the default): warm panels tinted by the colour theme. It
+    /// started from the browser player Spool's Dark and Light modes and was
+    /// first called "Spool"; settings saved under that name, or as
+    /// the brushed-aluminium "Anodised" finish, load as Linen.
     #[default]
-    #[serde(alias = "Anodised")]
-    Spool,
+    #[serde(alias = "Spool", alias = "Anodised")]
+    Linen,
     /// Matte white, after Braun; Graphite in the dark build.
     Porcelain,
 }
 
 impl Finish {
-    pub const ALL: [Finish; 2] = [Finish::Spool, Finish::Porcelain];
+    pub const ALL: [Finish; 2] = [Finish::Linen, Finish::Porcelain];
     pub fn name(self) -> &'static str {
         match self {
-            Finish::Spool => "Spool",
+            Finish::Linen => "Linen",
             Finish::Porcelain => "Porcelain",
         }
     }
@@ -74,10 +75,10 @@ impl Build {
     }
 }
 
-/// The accent colour: the finish's own, or one of Spool's colour themes.
+/// The accent colour: the finish's own, or one of Linen's colour themes.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum Accent {
-    /// The finish's own: Porcelain's orange, or Spool's amber.
+    /// The finish's own: Porcelain's orange, or Linen's amber.
     Finish,
     Neutral,
     #[default]
@@ -100,11 +101,11 @@ impl Accent {
         Accent::Neutral,
         Accent::Finish,
     ];
-    /// The choices that make sense with `finish`: Spool's seven, plus
+    /// The choices that make sense with `finish`: Linen's seven, plus
     /// Porcelain's orange on Porcelain.
     pub fn choices(finish: Finish) -> &'static [Accent] {
         match finish {
-            Finish::Spool => &Accent::ALL[..7],
+            Finish::Linen => &Accent::ALL[..7],
             Finish::Porcelain => &Accent::ALL,
         }
     }
@@ -120,8 +121,8 @@ impl Accent {
             Accent::Teal => "Teal",
         }
     }
-    /// (dark build, light build), from Spool's colour themes.
-    fn spool(self) -> Option<(Color32, Color32)> {
+    /// (dark build, light build), from Linen's colour themes.
+    fn tint(self) -> Option<(Color32, Color32)> {
         Some(match self {
             Accent::Finish => return None,
             Accent::Neutral => (hex(0xbdb9b0), hex(0x6d6a63)),
@@ -135,14 +136,14 @@ impl Accent {
     }
 }
 
-/// One of Spool's palettes: background, panel, raised panel, line, text,
+/// One of Linen's palettes: background, panel, raised panel, line, text,
 /// dim text, accent and the accent's dim tint.
-struct SpoolPalette([u32; 8]);
+struct LinenPalette([u32; 8]);
 
 impl Accent {
-    /// Spool's palette for this colour theme, (dark, light).
-    fn palette(self) -> (SpoolPalette, SpoolPalette) {
-        let p = SpoolPalette;
+    /// Linen's palette for this colour theme, (dark, light).
+    fn palette(self) -> (LinenPalette, LinenPalette) {
+        let p = LinenPalette;
         match self {
             Accent::Amber | Accent::Finish => (
                 p([
@@ -271,9 +272,9 @@ impl Tokens {
         let white = |a| rgba(255, 255, 255, a);
         let oled = (hex(0x050607), hex(0xf2f5f7), white(0.22));
         let mut t = match (look.finish, dark) {
-            (Finish::Spool, _) => {
+            (Finish::Linen, _) => {
                 let (d, l) = look.accent.palette();
-                let SpoolPalette(c) = if dark { d } else { l };
+                let LinenPalette(c) = if dark { d } else { l };
                 let [bg, panel, raised, line, text, dim, accent, accent_dim] = c.map(hex);
                 Tokens {
                     dark,
@@ -294,7 +295,7 @@ impl Tokens {
                     thumb: if dark { text } else { Color32::WHITE },
                     bar: panel,
                     edge: line,
-                    // Spool's display: a panel with the readout in the accent.
+                    // Linen's display: a panel with the readout in the accent.
                     display_bg: panel,
                     ink: accent,
                     glow: Color32::TRANSPARENT,
@@ -354,7 +355,7 @@ impl Tokens {
             },
         };
         if look.finish == Finish::Porcelain {
-            if let Some((d, l)) = look.accent.spool() {
+            if let Some((d, l)) = look.accent.tint() {
                 t.accent = if dark { d } else { l };
                 t.on_accent = if dark { hex(0x15130f) } else { Color32::WHITE };
             }
@@ -1740,8 +1741,8 @@ pub fn look_settings(ui: &mut Ui, t: &Tokens, look: &mut Look) -> bool {
     let r = drawer_row(ui, t, "Colour", 170.0);
     let choices = Accent::choices(look.finish);
     let items: Vec<String> = choices.iter().map(|a| a.name().to_string()).collect();
-    // On Spool, "the finish's own" is amber.
-    let shown = if look.finish == Finish::Spool && look.accent == Accent::Finish {
+    // On Linen, "the finish's own" is amber.
+    let shown = if look.finish == Finish::Linen && look.accent == Accent::Finish {
         Accent::Amber
     } else {
         look.accent
@@ -1774,9 +1775,9 @@ mod tests {
     }
 
     #[test]
-    fn default_is_spool_light_amber() {
+    fn default_is_linen_light_amber() {
         let l = Look::default();
-        assert_eq!(l.finish, Finish::Spool);
+        assert_eq!(l.finish, Finish::Linen);
         assert_eq!(l.build, Build::Light);
         assert_eq!(l.accent, Accent::Amber);
         let t = Tokens::new(&l, true);
@@ -1786,7 +1787,7 @@ mod tests {
     }
 
     #[test]
-    fn spool_themes_tint_the_whole_panel() {
+    fn linen_themes_tint_the_whole_panel() {
         let green = Look {
             accent: Accent::Green,
             build: Build::Dark,
@@ -1798,10 +1799,21 @@ mod tests {
     }
 
     #[test]
-    fn anodised_settings_load_as_spool() {
+    fn spool_and_anodised_settings_load_as_linen() {
+        let l: Look = serde_json::from_str(r#"{"finish":"Spool","accent":"Green"}"#).unwrap();
+        assert_eq!(l.finish, Finish::Linen);
+        assert_eq!(l.accent, Accent::Green);
         let l: Look = serde_json::from_str(r#"{"finish":"Anodised","accent":"Neutral"}"#).unwrap();
-        assert_eq!(l.finish, Finish::Spool);
+        assert_eq!(l.finish, Finish::Linen);
         assert_eq!(l.accent, Accent::Neutral);
+    }
+
+    #[test]
+    fn linen_saves_as_linen() {
+        let l = Look::default();
+        assert!(serde_json::to_string(&l)
+            .unwrap()
+            .contains(r#""finish":"Linen""#));
     }
 
     #[test]

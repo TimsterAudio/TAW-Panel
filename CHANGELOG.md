@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **The warm finish is called Linen** (was Spool), so the browser player's name leaves the panel's colour schemes (the user's choice, 2026-10-27). It looks the same, keeps its seven colour themes, and is still the default. Settings saved as "Spool" (or the old "Anodised") load as Linen and save back as "Linen".
+- **For callers:** `Finish::Spool` is now `Finish::Linen`, and `Finish::name` says "Linen". None of the four apps names the variant, so they build unchanged; anything that does, change it to `Finish::Linen`. The gallery starts on it with `gallery linen` (`spool` still works).
+
 ## 0.4.0 – 2026-10-15
 
 Commit `d030ffdbc51c48e784cd74b20c5547a766461e5a`.

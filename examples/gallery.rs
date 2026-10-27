@@ -455,7 +455,7 @@ fn main() -> eframe::Result {
     let mut look = hifi::Look::default();
     for a in std::env::args().skip(1) {
         match a.as_str() {
-            "spool" => look.finish = Finish::Spool,
+            "linen" | "spool" => look.finish = Finish::Linen,
             "porcelain" => look.finish = Finish::Porcelain,
             "light" => look.build = Build::Light,
             "dark" => look.build = Build::Dark,

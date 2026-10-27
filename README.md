@@ -4,11 +4,11 @@ The panel look shared by Timster's Audio Works' native apps: the **Library**, **
 
 [FAMILY.md](FAMILY.md) describes the whole family: the apps, their names and model codes, how they fit together, and ideas parked for later. [ROADMAP.md](ROADMAP.md) is the panel's own plan, including the parked skins.
 
-![The gallery example in the TAW look: Spool, Light](docs/gallery.png)
+![The gallery example in the TAW look: Linen, Light](docs/gallery.png)
 
 Two looks, one crate:
 
-- **The TAW look** (`hifi`), for the hi-fi apps. Spool's warm panels by default (Light, Amber), tinted by any of Spool's seven colour themes, or Porcelain; each in Light, Dark or Automatic (following the computer). Hanken Grotesk and Chivo Mono (Michroma for the slanted name, `logo`, which the hi-fi nameplate no longer uses). The nameplate is the badge ("Timster's Audio Works - Player") with the model line under it. Apps draw their own title strip and window buttons.
+- **The TAW look** (`hifi`), for the hi-fi apps. Linen's warm panels by default (Light, Amber), tinted by any of its seven colour themes, or Porcelain; each in Light, Dark or Automatic (following the computer). Hanken Grotesk and Chivo Mono (Michroma for the slanted name, `logo`, which the hi-fi nameplate no longer uses). The nameplate is the badge ("Timster's Audio Works - Player") with the model line under it. Apps draw their own title strip and window buttons.
 - **The Jupiter look** (`theme`, `widgets`), for the Box instruments (Drone Box, Drum Box, EQ Box): Drone Box's panel language, with Black and Silver panels, coloured keys with LEDs, knurled knobs, faders, red LED displays and the red, orange, yellow and cream stripe.
 
 ![The gallery in Porcelain, Dark](docs/gallery-porcelain-dark.png)
