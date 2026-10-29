@@ -30,6 +30,7 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 
 ## Open with the user
 
+- Library and Analyser (next session each): "one of each at a time" (FAMILY.md). Clicking them in a family switcher while they're open starts a second copy. The Player and the Equaliser have it on their branches `claude/kind-johnson-du69z8` (2026-10-29), not yet released; each app's `instance.rs` there is the pattern to copy.
 - Agree or adjust each project's pipeline (in each repo's ROADMAP.md, marked "proposed").
 - Test Player 0.2.0 (the v0.2.0 release), especially media keys on Windows, MP3 gapless and the Library's M3U8.
 - Moving the Library, Equaliser and Analyser to TAW-Panel 0.4.0 changes their look (shorter nameplate, tighter corners): each app's session should tighten its top band and screenshot it.
