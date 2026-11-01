@@ -2,7 +2,7 @@
 
 Where each project stands, one line each, plus the handoffs between the family session and the app sessions. The detail lives in each repo's own `ROADMAP.md` (the release pipeline) and `HANDOFF.md` (where its session left off). TAW-Panel is public and the apps are private, so this file names releases and themes, not app internals.
 
-Last checked: **2026-11-01** by the family session, against `main` of all five repos: every commit an app pins is on TAW-Panel's `main`, and CI is green on every `main`.
+Last checked: **2026-11-01** by the family session, against `main` of all five repos: every commit an app pins is on TAW-Panel's `main`. Local checks passed in all four apps; CI on the new `main` commits wasn't checked from here.
 
 ## Projects
 
