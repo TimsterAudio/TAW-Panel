@@ -9,10 +9,10 @@ Last checked: **2026-10-16** by the family session, against `main` of all five r
 | Project | Released | Panel pin | Now | Waiting on | Next release |
 |---|---|---|---|---|---|
 | TAW-Panel | 0.4.0 | — | 0.3.2: corner-resize fix (every app until its pin moves); 0.3.3: `badge` and `logo`; 0.4.0: the hi-fi look tightened from the Player's feedback (nameplate without the big name, one corner radius, chosen segments stand out, meter colours, drawer sections) | — | 0.5.0: resizable list (renumbered from 0.4.0) |
-| Library (LB-001) | 0.3.0 | 0.3.0 | Released in the TAW look | The user's review of the look | 0.3.x: review fixes; pin to Panel 0.4.0 |
-| Player (PL-001) | 0.2.0 | 0.4.0 | 0.2.0 released: the Mint feedback brief plus two rounds of look feedback | The user's test of 0.2.0 (Windows media keys untested; MP3 gapless, M3U8) | 0.3.0: WASAPI exclusive mode |
-| Equaliser (EQ-001) | 0.3.0 | 0.3.0 | README screenshots updated (PR #3) | The user's test on real Windows | 0.3.x: Windows fixes; pin to Panel 0.4.0 |
-| Analyser (SP-001) | 0.2.0 | 0.3.0 | README screenshots updated | The user's feedback | 0.2.x: feedback fixes; pin to Panel 0.4.0 |
+| Library (LB-001) | 0.3.1 | 0.3.0 | 0.3.1: one Library at a time | The user's review of the look | 0.3.x: review fixes; pin to Panel 0.4.0 |
+| Player (PL-001) | 0.2.1 | 0.4.0 | 0.2.1: one Player at a time from anywhere; a macOS test build on `main` (run by hand, not released) | The user's test of 0.2.x (Windows media keys untested; MP3 gapless, M3U8); a friend's test of the Mac build | 0.3.0: WASAPI exclusive mode |
+| Equaliser (EQ-001) | 0.3.3 | 0.4.0 | 0.3.2: clip lights; 0.3.3: one Equaliser at a time | The user's test on real Windows | 0.3.x: Windows fixes |
+| Analyser (SP-001) | 0.2.2 | 0.4.0 | 0.2.1: the tighter look; 0.2.2: one Analyser at a time | The user's feedback | 0.2.x: feedback fixes |
 
 ## Handoffs
 
@@ -30,7 +30,6 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 
 ## Open with the user
 
-- Library and Analyser (next session each): "one of each at a time" (FAMILY.md). Clicking them in a family switcher while they're open starts a second copy. The Player and the Equaliser have it on their branches `claude/kind-johnson-du69z8` (2026-10-29), not yet released; each app's `instance.rs` there is the pattern to copy.
 - Agree or adjust each project's pipeline (in each repo's ROADMAP.md, marked "proposed").
 - Test Player 0.2.0 (the v0.2.0 release), especially media keys on Windows, MP3 gapless and the Library's M3U8.
 - Moving the Library, Equaliser and Analyser to TAW-Panel 0.4.0 changes their look (shorter nameplate, tighter corners): each app's session should tighten its top band and screenshot it.
@@ -39,6 +38,7 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 
 ## Decided
 
+- 2026-11-01: one of each app at a time (FAMILY.md), in all four apps, released together: Player 0.2.1, Equaliser 0.3.3, Library 0.3.1, Analyser 0.2.2. From the user's report that the family switcher started a second copy of an app that was already open.
 - 2026-10-16: every repo's default branch is `main` (the Analyser's switched by the user). The user deleted all 15 old `claude/…` branches, so every repo has only `main`; all were merged except the Equaliser's `claude/roadmap-pipeline` (ROADMAP.md only, superseded; last commit `b5b3f94`).
 - 2026-10-16: all five repos now run the Equaliser's cheaper CI (the family session ported it to TAW-Panel, the Library, the Player and the Analyser). Docs-only pushes don't run CI; Windows CI runs on `main`, pull requests and manual runs only; Release runs on `main` only. **Test packages of a branch** now come from a manual run: Actions > Release > Run workflow, on that branch.
 - 2026-10-15: from the user's feedback in the Player session, the hi-fi series drops the big slanted name from its nameplate (badge and model line only), uses one tighter corner radius, and offers classic or display meter colours: TAW-Panel 0.4.0, so the planned resizable list became 0.5.0 and meters part 2 0.6.0.
