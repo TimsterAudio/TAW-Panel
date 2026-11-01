@@ -2,17 +2,17 @@
 
 Where each project stands, one line each, plus the handoffs between the family session and the app sessions. The detail lives in each repo's own `ROADMAP.md` (the release pipeline) and `HANDOFF.md` (where its session left off). TAW-Panel is public and the apps are private, so this file names releases and themes, not app internals.
 
-Last checked: **2026-10-16** by the family session, against `main` of all five repos: every commit an app pins is on TAW-Panel's `main`, and CI is green on every `main`.
+Last checked: **2026-11-01** by the family session, against `main` of all five repos: every commit an app pins is on TAW-Panel's `main`, and CI is green on every `main`.
 
 ## Projects
 
 | Project | Released | Panel pin | Now | Waiting on | Next release |
 |---|---|---|---|---|---|
 | TAW-Panel | 0.5.0 | — | 0.4.0: the hi-fi look tightened from the Player's feedback (nameplate without the big name, one corner radius, chosen segments stand out, meter colours, drawer sections); 0.5.0: the warm finish renamed Linen (was Spool) | — | 0.6.0: resizable list (renumbered from 0.5.0) |
-| Library (LB-001) | 0.3.1 | 0.3.0 | 0.3.1: one Library at a time | The user's review of the look | 0.3.x: review fixes; pin to Panel 0.4.0 |
-| Player (PL-001) | 0.2.1 | 0.4.0 | 0.2.1: one Player at a time from anywhere; a macOS test build on `main` (run by hand, not released) | The user's test of 0.2.x (Windows media keys untested; MP3 gapless, M3U8); a friend's test of the Mac build | 0.3.0: WASAPI exclusive mode |
-| Equaliser (EQ-001) | 0.3.3 | 0.4.0 | 0.3.2: clip lights; 0.3.3: one Equaliser at a time | The user's test on real Windows | 0.3.x: Windows fixes |
-| Analyser (SP-001) | 0.2.2 | 0.4.0 | 0.2.1: the tighter look; 0.2.2: one Analyser at a time | The user's feedback | 0.2.x: feedback fixes |
+| Library (LB-001) | 0.3.1 | 0.5.0 (on `main`, unreleased) | 0.3.1: one Library at a time | The user's review of the look | 0.3.x: review fixes; release with Panel 0.5.0 |
+| Player (PL-001) | 0.2.1 | 0.5.0 (on `main`, unreleased) | 0.2.1: one Player at a time from anywhere; a macOS test build on `main` (run by hand, not released) | The user's test of 0.2.x (Windows media keys untested; MP3 gapless, M3U8); a friend's test of the Mac build | 0.3.0: WASAPI exclusive mode |
+| Equaliser (EQ-001) | 0.3.3 | 0.5.0 (on `main`, unreleased) | 0.3.2: clip lights; 0.3.3: one Equaliser at a time | The user's test on real Windows | 0.3.x: Windows fixes |
+| Analyser (SP-001) | 0.2.2 | 0.5.0 (on `main`, unreleased) | 0.2.1: the tighter look; 0.2.2: one Analyser at a time | The user's feedback | 0.2.x: feedback fixes |
 
 ## Handoffs
 
@@ -32,12 +32,13 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 
 - Agree or adjust each project's pipeline (in each repo's ROADMAP.md, marked "proposed").
 - Test Player 0.2.0 (the v0.2.0 release), especially media keys on Windows, MP3 gapless and the Library's M3U8.
-- Moving the Library, Equaliser and Analyser to TAW-Panel 0.4.0 changes their look (shorter nameplate, tighter corners): each app's session should tighten its top band and screenshot it.
+- All four apps moved to TAW-Panel 0.5.0 on `main` (2026-11-01), not yet released; their next release carries Linen. The Library came from 0.3.0, so it also gained 0.4.0's shorter nameplate: there's now a little spare room above its search bar, for the Library's session to tighten.
 - Player, next session (small hardening): with no D-Bus session bus, the media-controls thread panics inside `souvlaki` (zbus `unwrap`). The Player keeps playing, and real desktops always have a bus; check for the bus before starting media controls. Seen 2026-10-16 while screenshotting 0.2.0 under Xvfb.
 - Roadmap numbers to fix in each app's next session (the panel renumbering of 2026-10-15): the Library's resizable list needs TAW-Panel **0.6.0** (its ROADMAP says 0.4.0); the Analyser's VU comes from **0.7.0** (its ROADMAP says 0.5.0). Renumbered again on 2026-11-01, when the Linen rename took 0.5.0.
 
 ## Decided
 
+- 2026-11-01: all four apps pin TAW-Panel 0.5.0 (`41b1742`) on `main`, by the family session at the user's request; each app's CHANGELOG has it under Unreleased. Checks passed in all four, and each was looked at under Xvfb (the Player's Settings shows Linen | Porcelain).
 - 2026-11-01: TAW-Panel 0.5.0: the warm finish is called Linen (was Spool), the user's choice of name, so the browser player's name leaves the panel. Saved "Spool" settings load as Linen. The planned resizable list becomes 0.6.0 and meters part 2 0.7.0. The looks review (`docs/looks-review.html`) records the three families: Apps, Audio, Utilities & Fun.
 - 2026-11-01: one of each app at a time (FAMILY.md), in all four apps, released together: Player 0.2.1, Equaliser 0.3.3, Library 0.3.1, Analyser 0.2.2. From the user's report that the family switcher started a second copy of an app that was already open.
 - 2026-10-16: every repo's default branch is `main` (the Analyser's switched by the user). The user deleted all 15 old `claude/…` branches, so every repo has only `main`; all were merged except the Equaliser's `claude/roadmap-pipeline` (ROADMAP.md only, superseded; last commit `b5b3f94`).
