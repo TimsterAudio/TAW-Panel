@@ -4,7 +4,7 @@
 
 ## 0.6.0 – 2026-11-01
 
-Commit: see the next commit on `main` (recorded after pushing).
+Commit `efbded44e5438f17b142416db7d7d1d46232da06` (made on branch `claude/resizable-list`, for the Library's 0.4.0).
 
 - **`table`: resizable panes and columns** for the Library's lists, then the Player's (the user asked for variable-width columns). `table::pane` splits a view into a pane and the rest; drag the gap to resize the pane, double-click it to put it back. `table::header` draws a list's column titles with dividers: drag one to resize a column, double-click it to fit the column to what the list shows, right-click the titles to show or hide columns or reset the widths. One flexible column (`Col::flex`, the title) takes the room the others leave; when there isn't room the other columns give way down to their minimums. It returns a `Table`: where each column is (`get`), and `text` to draw a cell cut to its column. `table::Layout` holds pane widths and each list's columns, by name, for an app's saved settings (serde, every field defaulted).
 - The `gallery` example's list uses it.
