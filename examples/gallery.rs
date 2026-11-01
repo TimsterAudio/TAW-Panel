@@ -8,6 +8,7 @@
 
 use egui::{Align2, Id, Pos2, Rect, Vec2};
 use taw_panel::hifi::{self, Build, Finish, Seg, Tokens};
+use taw_panel::table::{self, Col};
 use taw_panel::widgets::Spec;
 
 const DESIGN: Vec2 = Vec2::new(1120.0, 680.0);
@@ -56,6 +57,7 @@ struct Gallery {
     position: f32,
     volume: f32,
     sel: usize,
+    layout: table::Layout,
 }
 
 const ROWS: [(&str, &str, &str); 5] = [
@@ -327,30 +329,18 @@ impl eframe::App for Gallery {
             }
         }
 
+        // A list with resizable columns (drag a divider, double-click to
+        // fit, right-click the titles to show or hide).
         let list = Rect::from_min_size(at(520.0, 290.0), Vec2::new(576.0, 34.0 + 30.0 * 5.0));
         hifi::well(ui.painter(), list, &t);
-        let p = ui.painter();
-        for (x, s) in [
-            (list.left() + 44.0, "TITLE"),
-            (list.left() + 300.0, "ARTIST"),
-        ] {
-            hifi::label(
-                p,
-                Pos2::new(x, list.top() + 16.0),
-                Align2::LEFT_CENTER,
-                s,
-                hifi::semi(10.5),
-                t.dim,
-            );
-        }
-        hifi::label(
-            p,
-            Pos2::new(list.right() - 16.0, list.top() + 16.0),
-            Align2::RIGHT_CENTER,
-            "TIME",
-            hifi::semi(10.5),
-            t.dim,
-        );
+        const COLS: [Col; 4] = [
+            Col::new("n", "#", 40.0).right().fixed(),
+            Col::new("title", "Title", 220.0).flex().min(120.0),
+            Col::new("artist", "Artist", 230.0).min(80.0),
+            Col::new("time", "Time", 64.0).right().min(52.0),
+        ];
+        let head = Rect::from_min_size(list.min, Vec2::new(list.width(), 32.0));
+        let cols = table::header(ui, head, "songs", &COLS, self.layout.list_mut("songs"), &t);
         for (i, (title, artist, time)) in ROWS.iter().enumerate() {
             let r = Rect::from_min_size(
                 Pos2::new(list.left() + 1.0, list.top() + 32.0 + i as f32 * 30.0),
@@ -368,38 +358,10 @@ impl eframe::App for Gallery {
             }
             let c = if self.sel == i { t.accent } else { t.text };
             let y = r.center().y;
-            hifi::label(
-                p,
-                Pos2::new(r.left() + 30.0, y),
-                Align2::RIGHT_CENTER,
-                &(i + 1).to_string(),
-                hifi::num(12.0),
-                t.dim,
-            );
-            hifi::label(
-                p,
-                Pos2::new(r.left() + 43.0, y),
-                Align2::LEFT_CENTER,
-                title,
-                hifi::ui_font(14.0),
-                c,
-            );
-            hifi::label(
-                p,
-                Pos2::new(r.left() + 299.0, y),
-                Align2::LEFT_CENTER,
-                artist,
-                hifi::ui_font(13.5),
-                t.dim,
-            );
-            hifi::label(
-                p,
-                Pos2::new(r.right() - 15.0, y),
-                Align2::RIGHT_CENTER,
-                time,
-                hifi::num(12.0),
-                t.dim,
-            );
+            cols.text(ui, p, "n", y, &(i + 1).to_string(), hifi::num(12.0), t.dim);
+            cols.text(ui, p, "title", y, title, hifi::ui_font(14.0), c);
+            cols.text(ui, p, "artist", y, artist, hifi::ui_font(13.5), t.dim);
+            cols.text(ui, p, "time", y, time, hifi::num(12.0), t.dim);
         }
 
         // A front-panel bar along the bottom, with a position slider.
@@ -487,6 +449,7 @@ fn main() -> eframe::Result {
                 position: 0.38,
                 volume: 0.8,
                 sel: 1,
+                layout: table::Layout::default(),
             }))
         }),
     )

@@ -9,6 +9,8 @@
 //! - [`frame`]: the panel background and fit-to-window scaling
 //! - [`hifi`]: the TAW look for the hi-fi apps: finishes (Anodised,
 //!   Porcelain), light and dark builds, accents, and its controls
+//! - [`table`]: resizable panes and list columns in the TAW look, and the
+//!   layout apps save
 //! - [`spectrum`]: drawing a spectrum in a colour scheme and style
 //! - [`analyzer`] (feature `analyser`): the FFT and ballistics behind a
 //!   spectrum display
@@ -19,5 +21,6 @@ pub mod frame;
 pub mod hifi;
 pub mod lists;
 pub mod spectrum;
+pub mod table;
 pub mod theme;
 pub mod widgets;

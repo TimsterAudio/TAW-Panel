@@ -8,7 +8,6 @@ Sizes: S = one session, M = two or three, L = a release of its own.
 
 | Release | What | For | Size |
 |---|---|---|---|
-| 0.6.0 | **The resizable list:** drag a pane edge or column divider, double-click to fit, one flexible column takes the spare room, header right-click shows or hides columns, widths saved per view (serde, with defaults) | Library 0.4.0, then the Player | M |
 | 0.7.0 | **Meters, part 2:** the browser player Spool's meter scale (20 segments, 1 dB a step at the top) with four peak LEDs and hold; an analogue VU meter widget | Player's meters and VU window; the Equaliser and Analyser | M |
 | parked | More finishes (Bronze, Cassette, Walnut, Studio), then skins (below) | When the apps are settled | L |
 | proposed | **Three families** (decided 2026-10-27): *Apps* get the App look (Isobar's and Waypoint's, locked as it is); *Audio* keeps the hi-fi look and its layouts, with the warm finish renamed **Linen** (done in 0.5.0; saved "Spool" settings still load), and the App look's colours, type and menus as a possible third finish, its accent selectable like the others (violet by default); *Utilities & Fun* get six looks to choose from (Glass, Phosphor, Departures, Signalbox, Blueprint, Folio), the Net Meter starting on Glass. Every family draws its own window buttons, with "Use the system title bar" as an option. Mock-ups in [`docs/looks-review.html`](docs/looks-review.html) | Net Meter, Isobar, Waypoint, Split-Flap Clock, Folder Sync, SPL Calculator; the audio apps for the rename | L |
@@ -46,4 +45,5 @@ Reviewed on 2026-10-13 and parked until the Equaliser is tested and the Player r
 - [x] 0.3.2: resizing frameless windows from the corners, and after a resize or move
 - [x] 0.3.3: `hifi::badge` and `hifi::logo`, for a centred badge
 - [x] 0.5.0: the warm finish renamed Linen (was Spool), so Spool's name leaves the panel; the looks review (`docs/looks-review.html`) for the three families (2026-11-01)
+- [x] 0.6.0: `table`, the resizable list: pane edges and column dividers to drag, double-click to fit, one flexible column, right-click to show or hide columns, the layout saved per view (for Library 0.4.0, then the Player; 2026-11-01)
 - [x] 0.4.0: the hi-fi nameplate without the big name; one tighter corner radius; chosen segments stand out; meter colours (classic or the display's); drawer sections (from the Player's feedback, 2026-10-15)
