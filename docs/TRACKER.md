@@ -13,7 +13,7 @@ Last checked: **2026-11-01** by the family session, against `main` of all five r
 | Player (PL-001) | 0.2.2 | 0.5.0 | 0.2.2: Linen; 0.2.1: one Player at a time from anywhere; a macOS test build on `main` (run by hand, not released) | The user's test of 0.2.x (Windows media keys untested; MP3 gapless, M3U8); a friend's test of the Mac build | 0.3.0: WASAPI exclusive mode |
 | Equaliser (EQ-001) | 0.3.4 | 0.5.0 | 0.3.3: one Equaliser at a time; 0.3.4: Linen | The user's test on real Windows | 0.3.x: Windows fixes |
 | Analyser (SP-001) | 0.2.3 | 0.5.0 | 0.2.2: one Analyser at a time; 0.2.3: Linen | The user's feedback | 0.2.x: feedback fixes |
-| Poly Box | — | — | Started 2026-11-03; on `main`: step 1 (one voice) and step 2 (five voices, Poly/Mono/Unison, Vintage, glide, LFOs, mod matrix); standalone, CLAP and VST3 | The user's listen to step 2 | Step 3: arpeggiator and 64-step sequencer |
+| Poly Box | — | 0.5.0 | On `main`: steps 1, 2 and 4: five voices, Poly/Mono/Unison, Vintage, glide, LFOs, mod matrix, and the app with its Jupiter-look front panel (after Drone Box) and its own sound; CLAP and VST3 plug-ins with a plain window | The user's first run of the app on a real machine (sound untested; the cloud has no audio device) | Step 3: arpeggiator and 64-step sequencer |
 
 ## Handoffs
 
@@ -39,7 +39,7 @@ Newest first. A handoff is a brief from the family session to an app's session. 
 
 ## Decided
 
-- 2026-11-03: a new Box instrument, **Poly Box** (TimsterAudio/poly-box): a five-voice SEM-style polysynth with the TEO-5 as the reference for sound and playing, voiced by ear (no reference unit), with no Oberheim names, panel or presets. The arpeggiator and 64-step sequencer are in the first release. Its ROADMAP.md has the pipeline and their specs. For the user's own use for now (so VST3 is built); MIDI beyond notes and pitch bend is on the back burner.
+- 2026-11-03: a new Box instrument, **Poly Box** (TimsterAudio/poly-box): a five-voice SEM-style polysynth with the TEO-5 as the reference for sound and playing, voiced by ear (no reference unit), with no Oberheim names, panel or presets. The arpeggiator and 64-step sequencer are in the first release. Its ROADMAP.md has the pipeline and their specs. For the user's own use for now (so VST3 is built); MIDI beyond notes and pitch bend is on the back burner. 2026-11-04: the user plays the app, not a DAW, so the standalone became an app on egui 0.36 with the Jupiter look (the panel came before the arpeggiator, at the user's request).
 - 2026-11-01: released together on TAW-Panel 0.5.0: Player 0.2.2, Equaliser 0.3.4, Analyser 0.2.3, Library 0.3.2 (the user's go-ahead, with every other branch stopped). All four use the panel's `resize_edges` and `drag_to_move`, so the 0.3.2 corner-resize fix comes with the pin; the Library gets it for the first time.
 - 2026-11-01: all four apps pin TAW-Panel 0.5.0 (`41b1742`) on `main`, by the family session at the user's request; each app's CHANGELOG has it under Unreleased. Checks passed in all four, and each was looked at under Xvfb (the Player's Settings shows Linen | Porcelain).
 - 2026-11-01: TAW-Panel 0.5.0: the warm finish is called Linen (was Spool), the user's choice of name, so the browser player's name leaves the panel. Saved "Spool" settings load as Linen. The planned resizable list becomes 0.6.0 and meters part 2 0.7.0. The looks review (`docs/looks-review.html`) records the three families: Apps, Audio, Utilities & Fun.
