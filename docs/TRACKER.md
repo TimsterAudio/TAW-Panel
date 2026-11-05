@@ -13,7 +13,7 @@ Last checked: **2026-11-01** by the family session, against `main` of all five r
 | Player (PL-001) | 0.2.2 | 0.5.0 | 0.2.2: Linen; 0.2.1: one Player at a time from anywhere; a macOS test build on `main` (run by hand, not released) | The user's test of 0.2.x (Windows media keys untested; MP3 gapless, M3U8); a friend's test of the Mac build | 0.3.0: WASAPI exclusive mode |
 | Equaliser (EQ-001) | 0.3.4 | 0.5.0 | 0.3.3: one Equaliser at a time; 0.3.4: Linen | The user's test on real Windows | 0.3.x: Windows fixes |
 | Analyser (SP-001) | 0.2.3 | 0.5.0 | 0.2.2: one Analyser at a time; 0.2.3: Linen | The user's feedback | 0.2.x: feedback fixes |
-| Poly Box | 0.1.0 | 0.5.0 | On `main`: steps 1, 2 and 4: five voices, Poly/Mono/Unison, Vintage, glide, LFOs, mod matrix, and the app with its Jupiter-look front panel (after Drone Box) and its own sound; CLAP and VST3 plug-ins with a plain window | The user's first run of 0.1.0 (released 2026-11-04: Linux, Windows, macOS universal; sound untested, the cloud has no audio device) | Step 3: arpeggiator and 64-step sequencer |
+| Poly Box | 0.1.1 | 0.5.0 | On `main`: steps 1, 2 and 4: five voices, Poly/Mono/Unison, Vintage, glide, LFOs, mod matrix, and the app with its Jupiter-look front panel (after Drone Box) and its own sound; CLAP and VST3 plug-ins with a plain window | The user's test of 0.1.1 (0.1.0's first test found the computer keys going silent after a click on a control; fixed in 0.1.1, 2026-11-05) | Step 3: arpeggiator and 64-step sequencer |
 
 ## Handoffs
 
